@@ -2,12 +2,13 @@
 
 <html lang="en">
 <head>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="yes" name="mobile-web-app-capable"/>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Clockthing v6.02</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clockthing v6.3</title>
 <style>
     :root {
       --bg-color: #121212;
@@ -682,34 +683,35 @@ body.rainbowgrid-bg {
 }
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
-  #currentTime {
-    display: none !important;
+  #displayContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    gap: 0;
   }
-  .clock-columns {
-    display: flex !important;
+  .time {
+    font-size: 20vh !important;
+    line-height: 1;
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 20vw;
-    font-weight: bold;
-    color: #ccff00;
-    font-family: Arial, sans-serif;
-    height: 100vh;
+    color: var(--accent-color);
   }
-  .clock-columns div {
-    line-height: 1;
+  .countdown {
+    font-size: 5vh !important;
+    margin-top: 1rem;
   }
-  .ampm-indicator {
-    position: absolute;
-    bottom: 2vh;
-    right: 4vw;
-    color: #ccff00;
-    font-size: 4vw;
-    font-weight: bold;
+  .day-list {
+    display: none !important;
   }
 }
+
 </style>
-</meta></meta></head>
+</head>
 <body>
 <div class="controls" id="controlsMenu">
 <details>
@@ -870,13 +872,6 @@ body.rainbowgrid-bg {
 <div class="lunch-indicator" id="lunchIndicator"></div>
 <div class="countdown" id="eventCountdown"></div>
 <div class="message" id="eventMessage"></div>
-
-<div class="clock-columns" id="mobileClock" style="display:none;">
-<div id="mobileHours">--</div>
-<div id="mobileMinutes">--</div>
-<div id="mobileSeconds">--</div>
-</div>
-<div class="ampm-indicator" id="mobileAmpm" style="display:none;">--</div>
 </div>
 <script>
     const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
@@ -885,26 +880,7 @@ body.rainbowgrid-bg {
       `<span class="day${i === new Date().getDay() ? ' today' : ''}">${day}</span>`).join('');
 
     function updateTime() {
-  const now = new Date();
-
-  let hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-  const ampm = hours >= 12 ? 'PM' : 'AM';
-  const hours12 = hours % 12 || 12;
-
-  const mobileHours = document.getElementById('mobileHours');
-  const mobileMinutes = document.getElementById('mobileMinutes');
-  const mobileSeconds = document.getElementById('mobileSeconds');
-  const mobileAmpm = document.getElementById('mobileAmpm');
-
-  if (mobileHours && mobileMinutes && mobileSeconds && mobileAmpm) {
-    mobileHours.textContent = String(hours12).padStart(2, '0');
-    mobileMinutes.textContent = String(minutes).padStart(2, '0');
-    mobileSeconds.textContent = String(seconds).padStart(2, '0');
-    mobileAmpm.textContent = ampm;
-  }
-
+      const now = new Date();
       document.getElementById('currentTime').textContent = now.toLocaleTimeString();
 
       
@@ -1242,8 +1218,6 @@ window.addEventListener('load', () => {
   updateFontSizes();
   bounceLoop();
 });
-
-setInterval(updateTime, 1000);
 </script>
 </body>
 </html>
