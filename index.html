@@ -671,6 +671,12 @@ body.rainbowgrid-bg {
     width: 100%;
   }
 }
+
+@media screen and (max-width: 768px), screen and (orientation: landscape) and (max-height: 500px) {
+  .day:not(.today) {
+    display: none !important;
+  }
+}
 </style>
 </head>
 <body>
