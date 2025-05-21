@@ -2,13 +2,12 @@
 
 <html lang="en">
 <head>
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="mobile-web-app-capable" content="yes">
-
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.01</title>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Clockthing v6.4 Beta</title>
 <style>
     :root {
       --bg-color: #121212;
@@ -681,8 +680,62 @@ body.rainbowgrid-bg {
     display: none !important;
   }
 }
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #displayContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    gap: 0;
+  }
+  .time {
+    font-size: 20vh !important;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+  }
+  .countdown {
+    font-size: 5vh !important;
+    margin-top: 1rem;
+  }
+  .day-list {
+    display: none !important;
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .time {
+    display: none !important;
+  }
+  .stacked-clock {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20vw;
+    color: var(--accent-color);
+    font-weight: bold;
+    height: 70vh;
+  }
+  .stacked-part {
+    line-height: 1;
+  }
+  .stacked-ampm {
+    font-size: 5vw;
+    position: absolute;
+    bottom: 2vh;
+    right: 4vw;
+  }
+}
 </style>
-</head>
+</meta></meta></head>
 <body>
 <div class="controls" id="controlsMenu">
 <details>
@@ -836,6 +889,13 @@ body.rainbowgrid-bg {
 </div>
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
 <div class="container" id="displayContainer">
+
+<div class="stacked-clock" id="stackedClock" style="display: none;">
+<div class="stacked-part" id="stackedHours">--</div>
+<div class="stacked-part" id="stackedMinutes">--</div>
+<div class="stacked-part" id="stackedSeconds">--</div>
+<div class="stacked-ampm" id="stackedAMPM">--</div>
+</div>
 <div class="day-list" id="dayList"></div>
 <div class="time" id="currentTime">--:--:--</div>
 <div class="countdown" id="countdown">--:--:--</div>
@@ -852,7 +912,21 @@ body.rainbowgrid-bg {
 
     function updateTime() {
       const now = new Date();
-      document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+      
+    document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+
+    // Update stacked clock too
+    const h = now.getHours();
+    const hours = String(h % 12 || 12).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+
+    document.getElementById('stackedHours').textContent = hours;
+    document.getElementById('stackedMinutes').textContent = minutes;
+    document.getElementById('stackedSeconds').textContent = seconds;
+    document.getElementById('stackedAMPM').textContent = ampm;
+    
 
       
       const startInput = document.getElementById('startTimeInput').value.split(':');
