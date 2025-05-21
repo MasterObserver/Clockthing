@@ -1076,6 +1076,55 @@ function updateEventCountdown() {
     updateTime();
     updateEventCountdown();
     bounceLoop();
-  </script>
+  
+function updateFontSizes() {
+  const fontSize = Number(document.getElementById('fontSizePicker').value);
+  document.querySelector('.time').style.fontSize = fontSize + 'rem';
+  document.querySelectorAll('.countdown').forEach(el => el.style.fontSize = (fontSize - 3) + 'rem');
+  document.querySelectorAll('.message').forEach(el => el.style.fontSize = (fontSize - 5) + 'rem');
+  document.querySelector('.lunch-indicator').style.fontSize = (fontSize - 6) + 'rem';
+}
+document.getElementById('fontSizePicker').addEventListener('change', updateFontSizes);
+
+function bounceLoop() {
+  const mode = document.getElementById('antiBurnMode').value;
+  const container = document.getElementById('displayContainer');
+  if (mode !== 'bounce') {
+    requestAnimationFrame(bounceLoop);
+    return;
+  }
+
+  const rect = container.getBoundingClientRect();
+  const maxX = window.innerWidth - rect.width;
+  const maxY = window.innerHeight - rect.height;
+
+  posX += velX * bounceSpeed * 0.1;
+  posY += velY * bounceSpeed * 0.1;
+
+  if (posX <= 0 || posX >= maxX) {
+    velX *= -1;
+    if (document.getElementById('randomColorToggle').checked) {
+      document.documentElement.style.setProperty('--accent-color', getRandomColor());
+    }
+  }
+  if (posY <= 0 || posY >= maxY) {
+    velY *= -1;
+    if (document.getElementById('randomColorToggle').checked) {
+      document.documentElement.style.setProperty('--accent-color', getRandomColor());
+    }
+  }
+
+  container.style.left = posX + 'px';
+  container.style.top = posY + 'px';
+  container.style.position = 'absolute';
+
+  requestAnimationFrame(bounceLoop);
+}
+
+window.addEventListener('load', () => {
+  updateFontSizes();
+  bounceLoop();
+});
+</script>
 </body>
 </html>
