@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.5</title>
+<title>Clockthing v6.5.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -750,6 +750,43 @@ body.rainbowgrid-bg {
   }
   .countdown {
     margin-top: 1vh;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .stacked-clock {
+    height: 100vh;
+    font-size: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-weight: bold;
+  }
+  .stacked-part {
+    margin: 0;
+    padding: 0;
+    line-height: 0.9;
+  }
+  .stacked-ampm {
+    position: absolute;
+    top: 1vh;
+    right: 4vw;
+    font-size: 3vh;
+  }
+  .time {
+    display: none !important;
+  }
+  .day-list {
+    display: none !important;
+  }
+  .countdown {
+    font-size: 3vh !important;
+    margin-top: 1vh;
+  }
+  .message {
+    font-size: 2.5vh !important;
   }
 }
 </style>
