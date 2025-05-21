@@ -5,10 +5,14 @@
 <meta content="yes" name="apple-mobile-web-app-capable"/>
 <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
 <meta content="yes" name="mobile-web-app-capable"/>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>Clockthing v6.4 Beta</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clockthing v6.4</title>
 <style>
+.stacked-clock {
+  display: none;
+}
+
     :root {
       --bg-color: #121212;
       --text-color: #ffffff;
@@ -735,7 +739,7 @@ body.rainbowgrid-bg {
   }
 }
 </style>
-</meta></meta></head>
+</head>
 <body>
 <div class="controls" id="controlsMenu">
 <details>
@@ -889,8 +893,7 @@ body.rainbowgrid-bg {
 </div>
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
 <div class="container" id="displayContainer">
-
-<div class="stacked-clock" id="stackedClock" style="display: none;">
+<div class="stacked-clock" id="stackedClock">
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
 <div class="stacked-part" id="stackedSeconds">--</div>
