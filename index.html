@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Workday Clock</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Workday Clock</title>
+<style>
     :root {
       --bg-color: #121212;
       --text-color: #ffffff;
@@ -573,187 +574,176 @@ body.rainbowgrid-bg {
   }
 }
 
+
+@media (max-width: 768px) {
+  .day:not(.today) {
+    display: none !important;
+  }
+}
 </style>
 </head>
 <body>
-  
 <div class="controls" id="controlsMenu">
-
 <details>
-  <summary>Settings</summary>
-  <label>Start Time:
-    <input type="time" id="startTimeInput" value="08:30">
-  </label>
-  <label>Lunch Start:
-    <input type="time" id="lunchStartInput" value="11:30">
-  </label>
-  <label>Lunch End:
-    <input type="time" id="lunchEndInput" value="12:30">
-  </label>
-  <label>End Time:
-    <input type="time" id="endTimeInput" value="17:30">
-  </label>
-  <label>Custom Message:
-    <input type="checkbox" id="customMessageToggle">
-  </label>
-  <label>
-    <input type="text" id="customMessageInput" value="PLEASE DO NOT DISTURB">
-  </label>
-  <label>Custom Event:
-    <input type="text" id="eventNameInput" placeholder="The Thing">
-  </label>
-  <label>Event Time:
-    <input type="time" id="eventTimeInput">
-  </label>
+<summary>Settings</summary>
+<label>Start Time:
+    <input id="startTimeInput" type="time" value="08:30"/>
+</label>
+<label>Lunch Start:
+    <input id="lunchStartInput" type="time" value="11:30"/>
+</label>
+<label>Lunch End:
+    <input id="lunchEndInput" type="time" value="12:30"/>
+</label>
+<label>End Time:
+    <input id="endTimeInput" type="time" value="17:30"/>
+</label>
+<label>Custom Message:
+    <input id="customMessageToggle" type="checkbox"/>
+</label>
+<label>
+<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/>
+</label>
+<label>Custom Event:
+    <input id="eventNameInput" placeholder="The Thing" type="text"/>
+</label>
+<label>Event Time:
+    <input id="eventTimeInput" type="time"/>
+</label>
 </details>
-
 <details>
-  <summary>System</summary>
-  <label>Font size:
+<summary>System</summary>
+<label>Font size:
     <select id="fontSizePicker">
-      <option value="3">XS</option>
-      <option value="4">S</option>
-      <option value="5">M</option>
-      <option value="6">L</option>
-      <option value="8" selected>XL</option>
-      <option value="10">XXL</option>
-      <option value="12">XXXL</option>
-      <option value="14">XXXXL</option>
-      <option value="18">MAX</option>
-    </select>
-  </label>
-  <label>Font:
+<option value="3">XS</option>
+<option value="4">S</option>
+<option value="5">M</option>
+<option value="6">L</option>
+<option selected="" value="8">XL</option>
+<option value="10">XXL</option>
+<option value="12">XXXL</option>
+<option value="14">XXXXL</option>
+<option value="18">MAX</option>
+</select>
+</label>
+<label>Font:
     <select id="fontFamilyPicker">
-      <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
-      <option value="Arial, sans-serif">Arial</option>
-      <option value="Helvetica, sans-serif">Helvetica</option>
-      <option value="Verdana, sans-serif">Verdana</option>
-      <option value="Tahoma, sans-serif">Tahoma</option>
-      <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-      <option value="'Times New Roman', serif">Times New Roman</option>
-      <option value="Georgia, serif">Georgia</option>
-      <option value="'Courier New', monospace">Courier New</option>
-      <option value="'Lucida Console', monospace">Lucida Console</option>
-      <option value="Consolas, monospace">Consolas</option>
-      <option value="Monaco, monospace">Monaco</option>
-      <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
-      <option value="Impact, fantasy">Impact</option>
-      <option value="Garamond, serif">Garamond</option>
-      <option value="'Palatino Linotype', serif">Palatino Linotype</option>
-      <option value="Calibri, sans-serif">Calibri</option>
-      <option value="Cambria, serif">Cambria</option>
-      <option value="Candara, sans-serif">Candara</option>
-      <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
-      <option value="'Gill Sans', sans-serif">Gill Sans</option>
-      <option value="Optima, sans-serif">Optima</option>
-      <option value="monospace" selected>Monospace</option>
-    </select>
-  </label>
-  <label>Color:
-    <input type="color" id="colorPicker" value="#ffff00">
-  </label>
-  <label>Anti-Burn:
+<option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+<option value="Arial, sans-serif">Arial</option>
+<option value="Helvetica, sans-serif">Helvetica</option>
+<option value="Verdana, sans-serif">Verdana</option>
+<option value="Tahoma, sans-serif">Tahoma</option>
+<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+<option value="'Times New Roman', serif">Times New Roman</option>
+<option value="Georgia, serif">Georgia</option>
+<option value="'Courier New', monospace">Courier New</option>
+<option value="'Lucida Console', monospace">Lucida Console</option>
+<option value="Consolas, monospace">Consolas</option>
+<option value="Monaco, monospace">Monaco</option>
+<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+<option value="Impact, fantasy">Impact</option>
+<option value="Garamond, serif">Garamond</option>
+<option value="'Palatino Linotype', serif">Palatino Linotype</option>
+<option value="Calibri, sans-serif">Calibri</option>
+<option value="Cambria, serif">Cambria</option>
+<option value="Candara, sans-serif">Candara</option>
+<option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
+<option value="'Gill Sans', sans-serif">Gill Sans</option>
+<option value="Optima, sans-serif">Optima</option>
+<option selected="" value="monospace">Monospace</option>
+</select>
+</label>
+<label>Color:
+    <input id="colorPicker" type="color" value="#ffff00"/>
+</label>
+<label>Anti-Burn:
     <select id="antiBurnMode">
-      <option value="off">Standard</option>
-      <option value="shift">Pixel Shift</option>
-      <option value="dim">Idle Dim</option>
-      <option value="bounce" selected>Bounce</option>
-    </select>
-  </label>
-  <label>Random Bounce Color:
-    <input type="checkbox" id="randomColorToggle">
-  </label>
-  <label>Bounce Speed:
+<option value="off">Standard</option>
+<option value="shift">Pixel Shift</option>
+<option value="dim">Idle Dim</option>
+<option selected="" value="bounce">Bounce</option>
+</select>
+</label>
+<label>Random Bounce Color:
+    <input id="randomColorToggle" type="checkbox"/>
+</label>
+<label>Bounce Speed:
     <select id="bounceSpeedPicker">
-      <option value="1">Slowest</option>
-      <option value="5">Slow</option>
-      <option value="10" selected>Normal</option>
-      <option value="15">Fast</option>
-      <option value="20">Fastest</option>
-    </select>
-  </label>
+<option value="1">Slowest</option>
+<option value="5">Slow</option>
+<option selected="" value="10">Normal</option>
+<option value="15">Fast</option>
+<option value="20">Fastest</option>
+</select>
+</label>
 </details>
-
 <details>
-  <summary>Effects</summary>
-  <label>Background Animation:
+<summary>Effects</summary>
+<label>Background Animation:
     <select id="backgroundAnimationPicker">
-      <option value="none">None</option>
-      <option value="gradient">Moving Gradient</option>
-      <option value="scanlineglow">Scanline Glow</option>
-      <option value="radialdark">Radial Pulse</option>
-      <option value="rgbshift">RGB Shift</option>
-      <option value="neonflow">Neon Flow</option>
-    
-      <option value="moondust">Moon Dust</option>
-      <option value="darkwaves">Dark Waves</option>
-      <option value="synthgrid">Synth Grid</option>
-
-    
-      <option value="auroradrift">Aurora Drift</option>
-      <option value="kaleidopulse">Kaleido Pulse</option>
-      <option value="circuitflow">Circuit Flow</option>
-      <option value="blackice">Black Ice Shards</option>
-      <option value="lasergrid">Laser Grid</option>
-
-    
-      <option value="kaleidoscope">Kaleidoscope</option>
-      <option value="infinitetunnel">Infinite Tunnel</option>
-      <option value="plasmawave">Static Plasma Waves</option>
-      <option value="pixelrain">Pixel Rain</option>
-      <option value="starfield">Starfield Parallax</option>
-      <option value="deepspaceclouds">Deep Space Clouds</option>
-      <option value="auroraborealis">Aurora Borealis</option>
-      <option value="blobmorph">Morphing Blobs</option>
-      <option value="nebulae">Color Shifting Nebulae</option>
-      <option value="filmgrain">Film Grain</option>
-      <option value="crtglow">CRT Glow</option>
-      <option value="dust">Animated Dust</option>
-      <option value="wireframe">Wireframe Grid</option>
-      <option value="hexagons">Flowing Hexagons</option>
-      <option value="rings">Concentric Rings</option>
-      <option value="glitchpulse">Glitch Pulse</option>
-      <option value="ledshimmer">LED Shimmer</option>
-      <option value="orbitals">Soft Glow Orbitals</option>
-      <option value="rainbowgrid">Rainbow Grid</option>
-
-    </select>
-  </label>
-  <label>Screen Effect:
+<option value="none">None</option>
+<option value="gradient">Moving Gradient</option>
+<option value="scanlineglow">Scanline Glow</option>
+<option value="radialdark">Radial Pulse</option>
+<option value="rgbshift">RGB Shift</option>
+<option value="neonflow">Neon Flow</option>
+<option value="moondust">Moon Dust</option>
+<option value="darkwaves">Dark Waves</option>
+<option value="synthgrid">Synth Grid</option>
+<option value="auroradrift">Aurora Drift</option>
+<option value="kaleidopulse">Kaleido Pulse</option>
+<option value="circuitflow">Circuit Flow</option>
+<option value="blackice">Black Ice Shards</option>
+<option value="lasergrid">Laser Grid</option>
+<option value="kaleidoscope">Kaleidoscope</option>
+<option value="infinitetunnel">Infinite Tunnel</option>
+<option value="plasmawave">Static Plasma Waves</option>
+<option value="pixelrain">Pixel Rain</option>
+<option value="starfield">Starfield Parallax</option>
+<option value="deepspaceclouds">Deep Space Clouds</option>
+<option value="auroraborealis">Aurora Borealis</option>
+<option value="blobmorph">Morphing Blobs</option>
+<option value="nebulae">Color Shifting Nebulae</option>
+<option value="filmgrain">Film Grain</option>
+<option value="crtglow">CRT Glow</option>
+<option value="dust">Animated Dust</option>
+<option value="wireframe">Wireframe Grid</option>
+<option value="hexagons">Flowing Hexagons</option>
+<option value="rings">Concentric Rings</option>
+<option value="glitchpulse">Glitch Pulse</option>
+<option value="ledshimmer">LED Shimmer</option>
+<option value="orbitals">Soft Glow Orbitals</option>
+<option value="rainbowgrid">Rainbow Grid</option>
+</select>
+</label>
+<label>Screen Effect:
     <select id="screenEffectPicker">
-      <option value="none">None</option>
-      <option value="matrix">Matrix Rain</option>
-      <option value="scanlines">Scanlines</option>
-      <option value="static">Static Noise</option>
-      <option value="vignette">Vignette Glow</option>
-      <option value="blur">Warped Blur</option>
-      <option value="grid">Retro Grid</option>
-      <option value="pulse">Pulsing Background</option>
-      <option value="cycle">Color Cycle</option>
-      <option value="glitch">Glitch Flicker</option>
-      <option value="glow">Halo Glow</option>
-    </select>
-  </label>
+<option value="none">None</option>
+<option value="matrix">Matrix Rain</option>
+<option value="scanlines">Scanlines</option>
+<option value="static">Static Noise</option>
+<option value="vignette">Vignette Glow</option>
+<option value="blur">Warped Blur</option>
+<option value="grid">Retro Grid</option>
+<option value="pulse">Pulsing Background</option>
+<option value="cycle">Color Cycle</option>
+<option value="glitch">Glitch Flicker</option>
+<option value="glow">Halo Glow</option>
+</select>
+</label>
 </details>
-
-
 </div>
-
-
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
-
-  <div class="container" id="displayContainer">
-    <div class="day-list" id="dayList"></div>
-    <div class="time" id="currentTime">--:--:--</div>
-    <div class="countdown" id="countdown">--:--:--</div>
-    <div class="message" id="statusMessage"></div>
-    <div class="lunch-indicator" id="lunchIndicator"></div>
+<div class="container" id="displayContainer">
+<div class="day-list" id="dayList"></div>
+<div class="time" id="currentTime">--:--:--</div>
+<div class="countdown" id="countdown">--:--:--</div>
+<div class="message" id="statusMessage"></div>
+<div class="lunch-indicator" id="lunchIndicator"></div>
 <div class="countdown" id="eventCountdown"></div>
 <div class="message" id="eventMessage"></div>
-
-  </div>
-
-  <script>
+</div>
+<script>
     const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
     const dayList = document.getElementById('dayList');
     dayList.innerHTML = days.map((day, i) =>
