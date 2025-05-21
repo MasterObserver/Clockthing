@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Workday Clock</title>
+  <style>
+    :root {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --accent-color: #ffff00;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: monospace;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow: hidden;
+    }
+    .container {
+      text-align: center;
+      position: absolute;
+    }
+    .time {
+      font-size: 8rem;
+      margin-bottom: 2rem;
+    }
+    .countdown {
+      font-size: 5rem;
+      color: var(--accent-color);
+    }
+    .message {
+      font-size: 3rem;
+      color: var(--accent-color);
+    }
+    .fullscreen-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      z-index: 10;
+      display: none;
+    }
+    .day-list {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .day {
+      font-size: 2rem;
+      color: grey;
+    }
+    .day.today {
+      color: var(--text-color);
+      font-weight: bold;
+    }
+    .controls {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: flex;
+      gap: 1rem;
+      z-index: 10;
+      flex-wrap: wrap;
+      display: none;
+    }
+    .controls input,
+    .controls select {
+      background: var(--bg-color);
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem;
+    }
+    body:fullscreen .controls,
+    body:-webkit-full-screen .controls,
+    body:fullscreen .fullscreen-btn,
+    body:-webkit-full-screen .fullscreen-btn {
+      display: none;
+    }
+    .lunch-indicator {
+      font-size: 2rem;
+      margin-top: 1rem;
+      color: orange;
+    }
+  
+.effect-matrix::before,
+.effect-static::before,
+.effect-scanlines::before,
+.effect-grid::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.effect-matrix::before {
+  background: repeating-linear-gradient(to bottom, #0f0 0px, #000 2px, #0f0 4px);
+  opacity: 0.2;
+  animation: matrix-fall 1s linear infinite;
+}
+
+.effect-static::before {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="2" height="2"><rect width="1" height="1" fill="black"/><rect x="1" y="1" width="1" height="1" fill="black"/></svg>') repeat;
+  opacity: 0.1;
+  animation: static-noise 0.2s steps(10) infinite;
+}
+
+.effect-scanlines::before {
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.2) 0, rgba(0,0,0,0.2) 2px, transparent 2px, transparent 4px);
+}
+
+.effect-grid::before {
+  background: linear-gradient(#0f0 1px, transparent 1px), linear-gradient(90deg, #0f0 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+@keyframes matrix-fall {
+  0% { background-position-y: 0; }
+  100% { background-position-y: 100%; }
+}
+
+@keyframes static-noise {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-1px, -1px); }
+}
+
+.effect-pulse {
+  animation: pulse-bg 3s infinite alternate;
+}
+@keyframes pulse-bg {
+  from { background-color: #121212; }
+  to { background-color: #333333; }
+}
+
+.effect-blur {
+  filter: blur(2px);
+}
+
+.effect-cycle {
+  animation: hue-rotate-bg 10s infinite linear;
+}
+@keyframes hue-rotate-bg {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+
+
+.effect-vignette::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 60%, rgba(0,0,0,0.5) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.effect-glitch::before {
+  content: "";
+  position: fixed;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 2px,
+    rgba(255,0,255,0.2) 3px
+  );
+  mix-blend-mode: screen;
+  animation: glitchy 0.2s steps(2) infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes glitchy {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(1px, -1px); }
+  40% { transform: translate(-1px, 1px); }
+  60% { transform: translate(1px, 1px); }
+  80% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.effect-glow::before {
+  content: "";
+  position: fixed;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  pointer-events: none;
+  animation: glowPulse 5s infinite ease-in-out;
+  z-index: 0;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.6; }
+}
+
+</style>
+</head>
+<body>
+  <div class="controls" id="controlsMenu">
+    <label>Font size:
+      <select id="fontSizePicker">
+        <option value="3">XS</option>
+        <option value="4">S</option>
+        <option value="5">M</option>
+        <option value="6">L</option>
+        <option value="8">XL</option>
+        <option value="10">XXL</option>
+        <option value="12">XXXL</option>
+        <option value="14" selected>XXXXL</option>
+        <option value="18">MAX</option>
+      </select>
+    </label>
+    <label>Font:
+      <select id="fontFamilyPicker">
+        <!-- options shortened for brevity -->
+        <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+        <option value="Arial, sans-serif">Arial</option>
+        <option value="Helvetica, sans-serif">Helvetica</option>
+        <option value="Verdana, sans-serif">Verdana</option>
+        <option value="Tahoma, sans-serif">Tahoma</option>
+        <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+        <option value="'Times New Roman', serif">Times New Roman</option>
+        <option value="Georgia, serif">Georgia</option>
+        <option value="'Courier New', monospace">Courier New</option>
+        <option value="'Lucida Console', monospace">Lucida Console</option>
+        <option value="Consolas, monospace">Consolas</option>
+        <option value="Monaco, monospace">Monaco</option>
+        <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+        <option value="Impact, fantasy">Impact</option>
+        <option value="Garamond, serif">Garamond</option>
+        <option value="'Palatino Linotype', serif">Palatino Linotype</option>
+        <option value="Calibri, sans-serif">Calibri</option>
+        <option value="Cambria, serif">Cambria</option>
+        <option value="Candara, sans-serif">Candara</option>
+        <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
+        <option value="'Gill Sans', sans-serif">Gill Sans</option>
+        <option value="Optima, sans-serif">Optima</option>
+        <option value="monospace" selected>Monospace</option>
+      </select>
+    </label>
+    <label>Color:
+      <input type="color" id="colorPicker" value="#ffff00">
+    </label>
+    <label>Anti-Burn:
+      <select id="antiBurnMode">
+        <option value="off">Standard</option>
+        <option value="shift">Pixel Shift</option>
+        <option value="dim">Idle Dim</option>
+        <option value="bounce" selected>Bounce</option>
+      </select>
+    </label>
+    <label>
+  Random Bounce Color:
+  <input type="checkbox" id="randomColorToggle">
+</label>
+<label>Bounce Speed:
+      <select id="bounceSpeedPicker">
+        <option value="1">Slowest</option>
+        <option value="5">Slow</option>
+        <option value="10" selected>Normal</option>
+        <option value="15">Fast</option>
+        <option value="20">Fastest</option>
+      </select>
+    </label>
+
+<label>Screen Effect:
+  <select id="screenEffectPicker">
+    <option value="none">None</option>
+    <option value="matrix">Matrix Rain</option>
+    <option value="scanlines">Scanlines</option>
+    <option value="static">Static Noise</option>
+    <option value="vignette">Vignette Glow</option>
+    <option value="blur">Warped Blur</option>
+    <option value="grid">Retro Grid</option>
+    <option value="pulse">Pulsing Background</option>
+    <option value="cycle">Color Cycle</option>
+    <option value="vignette">Vignette Glow</option>
+    <option value="glitch">Glitch Flicker</option>
+    <option value="glow">Halo Glow</option>
+  </select>
+</label>
+
+  </div>
+
+  <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
+
+  <div class="container" id="displayContainer">
+    <div class="day-list" id="dayList"></div>
+    <div class="time" id="currentTime">--:--:--</div>
+    <div class="countdown" id="countdown">--:--:--</div>
+    <div class="message" id="statusMessage"></div>
+    <div class="lunch-indicator" id="lunchIndicator"></div>
+  </div>
+
+  <script>
+    const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
+    const dayList = document.getElementById('dayList');
+    dayList.innerHTML = days.map((day, i) =>
+      `<span class="day${i === new Date().getDay() ? ' today' : ''}">${day}</span>`).join('');
+
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+
+      const start = new Date();
+      start.setHours(8, 30, 0, 0);
+      const end = new Date();
+      end.setHours(17, 30, 0, 0);
+      const lunchStart = new Date();
+      lunchStart.setHours(12, 0, 0, 0);
+      const lunchEnd = new Date();
+      lunchEnd.setHours(13, 0, 0, 0);
+
+      const messageEl = document.getElementById('statusMessage');
+      const countdownEl = document.getElementById('countdown');
+      const lunchEl = document.getElementById('lunchIndicator');
+
+      lunchEl.textContent = (now >= lunchStart && now < lunchEnd) ? 'LUNCH TIME' : '';
+
+      if (now >= start && now <= end && now.getDay() >= 1 && now.getDay() <= 5) {
+        const totalSeconds = Math.floor((end - now) / 1000);
+        const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+        const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+        const seconds = String(totalSeconds % 60).padStart(2, '0');
+        countdownEl.textContent = `${hours}:${minutes}:${seconds}`;
+        messageEl.textContent = 'Time left in workday';
+      } else {
+        countdownEl.textContent = '';
+        messageEl.textContent = 'OUT OF OFFICE';
+      }
+    }
+
+    document.getElementById('fontSizePicker').addEventListener('change', function () {
+      const fontSize = Number(this.value);
+      document.querySelector('.time').style.fontSize = `${fontSize}rem`;
+      document.querySelector('.countdown').style.fontSize = `${fontSize - 3}rem`;
+      document.querySelector('.message').style.fontSize = `${fontSize - 5}rem`;
+    });
+
+    document.getElementById('fontFamilyPicker').addEventListener('change', function () {
+      document.body.style.fontFamily = this.value;
+    });
+
+    document.getElementById('colorPicker').addEventListener('input', function () {
+      document.documentElement.style.setProperty('--accent-color', this.value);
+    });
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+
+    // Smooth bounce variables
+    let bounceSpeed = 10;
+    document.getElementById('bounceSpeedPicker').addEventListener('change', function () {
+      bounceSpeed = Number(this.value);
+    });
+
+    const container = document.getElementById('displayContainer');
+    let posX = 100, posY = 100;
+    let velX = 1, velY = 1;
+
+    function lerp(start, end, amt) {
+      return (1 - amt) * start + amt * end;
+    }
+
+    
+    function getRandomColor() {
+  const neonColors = [
+    '#39ff14', // Electric green
+    '#00ffff', // Aqua
+    '#ff00ff', // Fuchsia
+    '#ff073a', // Neon red
+    '#ffff00', // Bright yellow
+    '#ff69b4', // Hot pink
+    '#00ffcc', // Mint
+    '#ffb347', // Light orange
+    '#da70d6', // Orchid
+    '#00ff00'  // Lime
+  ];
+  return neonColors[Math.floor(Math.random() * neonColors.length)];
+}
+function bounceLoop() {
+      const mode = document.getElementById('antiBurnMode').value;
+      if (mode !== 'bounce') {
+        requestAnimationFrame(bounceLoop);
+        return;
+      }
+
+      const rect = container.getBoundingClientRect();
+      const maxX = window.innerWidth - rect.width;
+      const maxY = window.innerHeight - rect.height;
+
+      posX += velX * bounceSpeed * 0.1;
+      posY += velY * bounceSpeed * 0.1;
+
+      
+      if (posX <= 0 || posX >= maxX) {
+        velX *= -1;
+        if (document.getElementById('randomColorToggle').checked) {
+          document.documentElement.style.setProperty('--accent-color', getRandomColor());
+        }
+      }
+      if (posY <= 0 || posY >= maxY) {
+        velY *= -1;
+        if (document.getElementById('randomColorToggle').checked) {
+          document.documentElement.style.setProperty('--accent-color', getRandomColor());
+        }
+      }
+
+
+      const smoothX = lerp(parseFloat(container.style.left || 0), posX, 0.1);
+      const smoothY = lerp(parseFloat(container.style.top || 0), posY, 0.1);
+
+      container.style.left = smoothX + 'px';
+      container.style.top = smoothY + 'px';
+      container.style.position = 'absolute';
+
+      requestAnimationFrame(bounceLoop);
+    }
+
+    // Pixel shift + dim (still frame-based)
+    let offset = 0;
+    let idleTime = 0;
+    setInterval(() => {
+      
+const screenEffectPicker = document.getElementById('screenEffectPicker');
+screenEffectPicker.addEventListener('change', function () {
+  const value = this.value;
+  document.body.className = document.body.className.replace(/\beffect-\w+\b/g, '').trim(); // Remove existing effects
+  if (value !== 'none') {
+    document.body.classList.add('effect-' + value);
+  }
+});
+
+    updateTime();
+      const mode = document.getElementById('antiBurnMode').value;
+      if (mode === 'shift') {
+        offset += 0.05;
+        const x = Math.sin(offset) * 5;
+        const y = Math.cos(offset) * 5;
+        container.style.top = '50%';
+        container.style.left = '50%';
+        container.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        container.style.position = 'absolute';
+      } else if (mode === 'dim') {
+        idleTime++;
+        if (idleTime > 15) document.body.style.opacity = '0.3';
+      } else if (mode !== 'bounce') {
+        document.body.style.opacity = '1';
+        container.style.top = '50%';
+        container.style.left = '50%';
+        container.style.transform = 'translate(-50%, -50%)';
+        container.style.position = 'absolute';
+      }
+    }, 1000);
+
+    // UI visibility
+    let hideTimeout;
+    const controls = document.getElementById('controlsMenu');
+    const fullscreenBtn = document.getElementById('fullscreenBtn');
+
+    function showMenus() {
+      controls.style.display = 'flex';
+      fullscreenBtn.style.display = 'block';
+      clearTimeout(hideTimeout);
+      hideTimeout = setTimeout(() => {
+        controls.style.display = 'none';
+        fullscreenBtn.style.display = 'none';
+      }, 3000);
+    }
+
+    document.addEventListener('mousemove', showMenus);
+    showMenus();
+
+    ['mousemove', 'keypress', 'click'].forEach(evt =>
+      document.addEventListener(evt, () => {
+        idleTime = 0;
+        document.body.style.opacity = '1';
+      })
+    );
+
+    updateTime();
+    bounceLoop();
+  </script>
+</body>
+</html>
