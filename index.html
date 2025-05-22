@@ -1402,6 +1402,19 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+
+function handleResize() {
+  applyCustomFontSizes();
+  updateTime();
+  updateEventCountdown();
+  if (document.getElementById('antiBurnMode').value === 'bounce') {
+    posX = 100; posY = 100;
+  }
+}
+
+window.addEventListener('resize', handleResize);
+window.addEventListener('orientationchange', handleResize);
+
 </script>
 </body>
 </html>
