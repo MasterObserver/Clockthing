@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.5.3</title>
+<title>Clockthing v6.5.4</title>
 <style>
 .stacked-clock {
   display: none;
@@ -810,6 +810,21 @@ body.rainbowgrid-bg {
     text-align: center;
   }
 }
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .time {
+    font-size: 2rem !important;
+  }
+  .countdown {
+    font-size: 1.5rem !important;
+  }
+  .message {
+    font-size: 1.2rem !important;
+  }
+  .lunch-indicator {
+    font-size: 1rem !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -969,7 +984,6 @@ body.rainbowgrid-bg {
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
 <div class="stacked-part" id="stackedSeconds">--</div>
-
 </div>
 <div class="day-list" id="dayList"></div>
 <div class="time" id="currentTime">--:--:--</div>
@@ -1002,7 +1016,6 @@ if (isStandalone) {
     const hours = String(h % 12 || 12).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
 
     document.getElementById('stackedHours').textContent = hours;
     document.getElementById('stackedMinutes').textContent = minutes;
