@@ -886,7 +886,7 @@ body.rainbowgrid-bg {
 <body>
 <div class="controls" id="controlsMenu">
 <details>
-<summary>Settings</summary>
+<summary>Program</summary>
 <label>Start Time:
     <input id="startTimeInput" type="time" value="08:30"/>
 </label>
@@ -912,25 +912,8 @@ body.rainbowgrid-bg {
     <input id="eventTimeInput" type="time"/>
 </label>
 </details>
-
 <details>
-  <summary>Mobile Settings</summary>
-  <label>Portrait Clock Size:
-    <input id="portraitClockSize" type="number" min="1" max="10" step="0.1" value="3.5" />
-  </label>
-  <label>Portrait Message Size:
-    <input id="portraitMessageSize" type="number" min="1" max="10" step="0.1" value="2.2" />
-  </label>
-  <label>Portrait Top Padding:
-    <input id="portraitTopPadding" type="number" min="0" max="20" step="0.5" value="4" /> vh
-  </label>
-  <label>Portrait Bottom Padding:
-    <input id="portraitBottomPadding" type="number" min="0" max="20" step="0.5" value="10" /> vh
-  </label>
-</details>
-
-<details>
-<summary>System</summary>
+<summary>Settings</summary>
 <label>Font:
     <select id="fontFamilyPicker">
 <option value="Arial, sans-serif">Arial</option>
@@ -973,6 +956,21 @@ body.rainbowgrid-bg {
         <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="number" value="3"/> </label>
 <label>Lunch Size:
         <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="number" value="2"/> </label>
+</details>
+<details>
+  <summary>Mobile</summary>
+  <label>Portrait Clock Size:
+    <input id="portraitClockSize" type="number" min="1" max="25" step="0.1" value="16" />
+  </label>
+  <label>Portrait Message Size:
+    <input id="portraitMessageSize" type="number" min="1" max="10" step="0.1" value="2.2" />
+  </label>
+  <label>Portrait Top Padding:
+    <input id="portraitTopPadding" type="number" min="0" max="20" step="0.5" value="4" /> vh
+  </label>
+  <label>Portrait Bottom Padding:
+    <input id="portraitBottomPadding" type="number" min="0" max="20" step="0.5" value="10" /> vh
+  </label>
 </details>
 <details>
 <summary>Effects</summary>
