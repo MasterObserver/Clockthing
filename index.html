@@ -876,19 +876,6 @@ body.rainbowgrid-bg {
 </details>
 <details>
 <summary>System</summary>
-<label>Font size:
-    <select id="fontSizePicker">
-<option value="3">XS</option>
-<option value="4">S</option>
-<option value="5">M</option>
-<option value="6">L</option>
-<option selected="" value="8">XL</option>
-<option value="10">XXL</option>
-<option value="12">XXXL</option>
-<option value="14">XXXXL</option>
-<option value="18">MAX</option>
-</select>
-</label>
 <label>Font:
     <select id="fontFamilyPicker">
 <option value="Arial, sans-serif">Arial</option>
@@ -923,13 +910,13 @@ body.rainbowgrid-bg {
 
 
 
-<label>Clock Font Size:
+<label>Clock Size:
         <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="number" value="8"/> </label>
-<label>Countdown Font Size:
+<label>Countdown Size:
         <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="number" value="5"/> </label>
-<label>Message Font Size:
+<label>Message Size:
         <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="number" value="3"/> </label>
-<label>Lunch Font Size:
+<label>Lunch Size:
         <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="number" value="2"/> </label>
 </details>
 <details>
@@ -1089,13 +1076,6 @@ if (isStandalone) {
         messageEl.textContent = useCustom ? customMessage : '';
       }
     }
-
-    document.getElementById('fontSizePicker').addEventListener('change', function () {
-      const fontSize = Number(this.value);
-      document.querySelector('.time').style.fontSize = `${fontSize}rem`;
-      document.querySelector('.countdown').style.fontSize = `${fontSize - 3}rem`;
-      document.querySelector('.message').style.fontSize = `${fontSize - 5}rem`;
-    });
 
     document.getElementById('fontFamilyPicker').addEventListener('change', function () {
       document.body.style.fontFamily = this.value;
@@ -1350,55 +1330,6 @@ function updateEventCountdown() {
     updateEventCountdown();
     bounceLoop();
   
-function updateFontSizes() {
-  const fontSize = Number(document.getElementById('fontSizePicker').value);
-  document.querySelector('.time').style.fontSize = fontSize + 'rem';
-  document.querySelectorAll('.countdown').forEach(el => el.style.fontSize = (fontSize - 3) + 'rem');
-  document.querySelectorAll('.message').forEach(el => el.style.fontSize = (fontSize - 5) + 'rem');
-  document.querySelector('.lunch-indicator').style.fontSize = (fontSize - 6) + 'rem';
-}
-document.getElementById('fontSizePicker').addEventListener('change', updateFontSizes);
-
-function bounceLoop() {
-  const mode = document.getElementById('antiBurnMode').value;
-  const container = document.getElementById('displayContainer');
-  if (mode !== 'bounce') {
-    requestAnimationFrame(bounceLoop);
-    return;
-  }
-
-  const rect = container.getBoundingClientRect();
-  const maxX = window.innerWidth - rect.width;
-  const maxY = window.innerHeight - rect.height;
-
-  posX += velX * bounceSpeed * 0.1;
-  posY += velY * bounceSpeed * 0.1;
-
-  if (posX <= 0 || posX >= maxX) {
-    velX *= -1;
-    if (document.getElementById('randomColorToggle').checked) {
-      maybeChangeColor();
-    }
-  }
-  if (posY <= 0 || posY >= maxY) {
-    velY *= -1;
-    if (document.getElementById('randomColorToggle').checked) {
-      maybeChangeColor();
-    }
-  }
-
-  container.style.left = posX + 'px';
-  container.style.top = posY + 'px';
-  container.style.position = 'absolute';
-
-  requestAnimationFrame(bounceLoop);
-}
-
-window.addEventListener('load', () => {
-  updateFontSizes();
-  bounceLoop();
-});
-
 function applyCustomFontSizes() {
   document.querySelector('.time').style.fontSize = document.getElementById('clockFontSizePicker').value + 'rem';
   document.querySelectorAll('.countdown').forEach(el => el.style.fontSize = document.getElementById('countdownFontSizePicker').value + 'rem');
@@ -1421,7 +1352,6 @@ function saveSettings() {
     customMessageInput: document.getElementById('customMessageInput').value,
     eventNameInput: document.getElementById('eventNameInput').value,
     eventTimeInput: document.getElementById('eventTimeInput').value,
-    fontSize: document.getElementById('fontSizePicker').value,
     fontFamily: document.getElementById('fontFamilyPicker').value,
     color: document.getElementById('colorPicker').value,
     antiBurnMode: document.getElementById('antiBurnMode').value,
@@ -1450,7 +1380,6 @@ function loadSettings() {
   document.getElementById('customMessageInput').value = saved.customMessageInput || "";
   document.getElementById('eventNameInput').value = saved.eventNameInput || "";
   document.getElementById('eventTimeInput').value = saved.eventTimeInput || "";
-  document.getElementById('fontSizePicker').value = saved.fontSize || "8";
   document.getElementById('fontFamilyPicker').value = saved.fontFamily || "monospace";
   document.getElementById('colorPicker').value = saved.color || "#ffff00";
   document.getElementById('antiBurnMode').value = saved.antiBurnMode || "bounce";
