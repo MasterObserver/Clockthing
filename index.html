@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.5.4</title>
+<title>Clockthing v6.5.5</title>
 <style>
 .stacked-clock {
   display: none;
@@ -825,11 +825,52 @@ body.rainbowgrid-bg {
     font-size: 1rem !important;
   }
 }
+
+.menu-bar {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.menu-bar:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hover-zone {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2rem;
+  z-index: 999;
+}
+
+.menu-bar {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.hover-zone:hover + .menu-bar,
+.menu-bar:hover {
+  opacity: 1;
+  pointer-events: auto;
+}
 </style>
 </head>
 <body>
+<div class="hover-zone"></div><nav class="menu-bar controls" id="smartNav" style="position:fixed;top:0;left:0;width:100%;z-index:1000;background:var(--bg-color);color:var(--accent-color);display:flex;justify-content:space-around;padding:0.5rem;font-size:1rem;">
+<div class="menu-category" onclick="toggleMenu('displayMenu')">🕒 Display</div>
+<div class="menu-category" onclick="toggleMenu('systemMenu')">⚙️ System</div>
+<div class="menu-category" onclick="toggleMenu('themesMenu')">🎨 Themes</div>
+</nav>
 <div class="controls" id="controlsMenu">
-<details>
+<details id="displayMenu" style="display: none; margin-top: 3rem; padding: 1rem; background-color: #000000aa; border: 1px solid var(--accent-color);">
 <summary>Settings</summary>
 <label>Start Time:
     <input id="startTimeInput" type="time" value="08:30"/>
@@ -856,7 +897,7 @@ body.rainbowgrid-bg {
     <input id="eventTimeInput" type="time"/>
 </label>
 </details>
-<details>
+<details id="systemMenu" style="display: none; margin-top: 3rem; padding: 1rem; background-color: #000000aa; border: 1px solid var(--accent-color);">
 <summary>System</summary>
 <label>Font size:
     <select id="fontSizePicker">
@@ -921,8 +962,20 @@ body.rainbowgrid-bg {
 <option value="20">Fastest</option>
 </select>
 </label>
+<label>Clock Font Size:
+        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="number" value="8"/> rem
+    </label>
+<label>Countdown Font Size:
+        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="number" value="5"/> rem
+    </label>
+<label>Message Font Size:
+        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="number" value="3"/> rem
+    </label>
+<label>Lunch Font Size:
+        <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="number" value="2"/> rem
+    </label>
 </details>
-<details>
+<details id="themesMenu" style="display: none; margin-top: 3rem; padding: 1rem; background-color: #000000aa; border: 1px solid var(--accent-color);">
 <summary>Effects</summary>
 <label>Background Animation:
     <select id="backgroundAnimationPicker">
@@ -978,7 +1031,7 @@ body.rainbowgrid-bg {
 </label>
 </details>
 </div>
-<button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
+<button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()" style="top: 3rem;">Fullscreen</button>
 <div class="container" id="displayContainer">
 <div class="stacked-clock" id="stackedClock">
 <div class="stacked-part" id="stackedHours">--</div>
@@ -994,6 +1047,15 @@ body.rainbowgrid-bg {
 <div class="message" id="eventMessage"></div>
 </div>
 <script>
+function toggleMenu(id) {
+  const sections = ['displayMenu', 'systemMenu', 'themesMenu'];
+  sections.forEach(sec => {
+    const el = document.getElementById(sec);
+    if (el) el.style.display = (sec === id && el.style.display !== 'block') ? 'block' : 'none';
+  });
+}
+
+
 // Detect PWA mode and apply class for custom styling
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 if (isStandalone) {
@@ -1356,6 +1418,27 @@ function bounceLoop() {
 window.addEventListener('load', () => {
   updateFontSizes();
   bounceLoop();
-});</script>
+});
+
+document.getElementById('toolbarToggle').addEventListener('click', () => {
+  const menu = document.getElementById('controlsMenu');
+  if (menu.style.display === 'flex') {
+    menu.style.display = 'none';
+  } else {
+    menu.style.display = 'flex';
+  }
+});
+
+function applyCustomFontSizes() {
+  document.querySelector('.time').style.fontSize = document.getElementById('clockFontSizePicker').value + 'rem';
+  document.querySelectorAll('.countdown').forEach(el => el.style.fontSize = document.getElementById('countdownFontSizePicker').value + 'rem');
+  document.querySelectorAll('.message').forEach(el => el.style.fontSize = document.getElementById('messageFontSizePicker').value + 'rem');
+  document.querySelector('.lunch-indicator').style.fontSize = document.getElementById('lunchFontSizePicker').value + 'rem';
+}
+
+['clockFontSizePicker', 'countdownFontSizePicker', 'messageFontSizePicker', 'lunchFontSizePicker'].forEach(id => {
+  document.getElementById(id).addEventListener('input', applyCustomFontSizes);
+});
+</script>
 </body>
 </html>
