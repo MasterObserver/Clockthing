@@ -912,6 +912,23 @@ body.rainbowgrid-bg {
     <input id="eventTimeInput" type="time"/>
 </label>
 </details>
+
+<details>
+  <summary>Mobile Settings</summary>
+  <label>Portrait Clock Size:
+    <input id="portraitClockSize" type="number" min="1" max="10" step="0.1" value="3.5" />
+  </label>
+  <label>Portrait Message Size:
+    <input id="portraitMessageSize" type="number" min="1" max="10" step="0.1" value="2.2" />
+  </label>
+  <label>Portrait Top Padding:
+    <input id="portraitTopPadding" type="number" min="0" max="20" step="0.5" value="4" /> vh
+  </label>
+  <label>Portrait Bottom Padding:
+    <input id="portraitBottomPadding" type="number" min="0" max="20" step="0.5" value="10" /> vh
+  </label>
+</details>
+
 <details>
 <summary>System</summary>
 <label>Font:
@@ -1464,6 +1481,46 @@ window.addEventListener("DOMContentLoaded", () => {
   enforceWindowResizeAwareness();
   updateMobilePortraitFlag();
 });
+
+
+function applyPortraitStyles() {
+  if (!document.body.classList.contains("mobile-portrait")) return;
+
+  const clockSize = document.getElementById('portraitClockSize').value + 'rem';
+  const msgSize = document.getElementById('portraitMessageSize').value + 'vh';
+  const padTop = document.getElementById('portraitTopPadding').value + 'vh';
+  const padBottom = document.getElementById('portraitBottomPadding').value + 'vh';
+
+  const clock = document.querySelector('.stacked-clock');
+  const container = document.getElementById('displayContainer');
+  const msg1 = document.getElementById('statusMessage');
+  const msg2 = document.getElementById('eventMessage');
+
+  if (clock) clock.style.fontSize = clockSize;
+  if (container) {
+    container.style.paddingTop = padTop;
+    container.style.paddingBottom = padBottom;
+  }
+  if (msg1) msg1.style.fontSize = msgSize;
+  if (msg2) msg2.style.fontSize = msgSize;
+}
+
+function setupPortraitStyleListeners() {
+  const ids = ['portraitClockSize', 'portraitMessageSize', 'portraitTopPadding', 'portraitBottomPadding'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', applyPortraitStyles);
+    }
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  setupPortraitStyleListeners();
+  applyPortraitStyles();
+});
+window.addEventListener("resize", applyPortraitStyles);
+window.addEventListener("orientationchange", applyPortraitStyles);
 
 </script>
 </body>
