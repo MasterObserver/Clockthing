@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.5.2</title>
+<title>Clockthing v6.5.3</title>
 <style>
 .stacked-clock {
   display: none;
@@ -801,6 +801,15 @@ body.rainbowgrid-bg {
   font-size: 4vh;
   top: 1vh;
 }
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .message {
+    display: block !important;
+    font-size: 2.5vh !important;
+    margin-top: 1vh;
+    text-align: center;
+  }
+}
 </style>
 </head>
 <body>
@@ -960,7 +969,7 @@ body.rainbowgrid-bg {
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
 <div class="stacked-part" id="stackedSeconds">--</div>
-<div class="stacked-ampm" id="stackedAMPM">--</div>
+
 </div>
 <div class="day-list" id="dayList"></div>
 <div class="time" id="currentTime">--:--:--</div>
@@ -998,7 +1007,6 @@ if (isStandalone) {
     document.getElementById('stackedHours').textContent = hours;
     document.getElementById('stackedMinutes').textContent = minutes;
     document.getElementById('stackedSeconds').textContent = seconds;
-    document.getElementById('stackedAMPM').textContent = ampm;
     
 
       
@@ -1335,7 +1343,6 @@ function bounceLoop() {
 window.addEventListener('load', () => {
   updateFontSizes();
   bounceLoop();
-});
-</script>
+});</script>
 </body>
 </html>
