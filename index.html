@@ -1273,7 +1273,7 @@ function updateEventCountdown() {
       hideTimeout = setTimeout(() => {
         controls.style.display = 'none';
         fullscreenBtn.style.display = 'none';
-      }, 9999); // <-- This number controls how soon the menu disappears (6000ms = 6 seconds)
+      }, 30000); // <-- This number controls how soon the menu disappears (6000ms = 6 seconds)
     }
 
     document.addEventListener('mousemove', showMenus);
