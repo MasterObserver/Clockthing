@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.6.5</title>
+<title>Clockthing v6.6.6</title>
 <style>
 .stacked-clock {
   display: none;
@@ -830,6 +830,16 @@ body.rainbowgrid-bg {
 @media screen and (max-width: 768px) and (orientation: portrait) {
   #displayContainer {
     padding-bottom: 6vh;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .message {
+    max-height: 5vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
