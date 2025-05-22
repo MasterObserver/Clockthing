@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.6.2</title>
+<title>Clockthing v6.6.4</title>
 <style>
 .stacked-clock {
   display: none;
@@ -885,7 +885,7 @@ body.rainbowgrid-bg {
 <option value="Calibri, sans-serif">Calibri</option>
 <option value="Cambria, serif">Cambria</option>
 <option value="Candara, sans-serif">Candara</option>
-<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+<option value="'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif">Comic Sans MS</option>
 <option value="Consolas, monospace">Consolas</option>
 <option value="'Courier New', monospace">Courier New</option>
 <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
@@ -913,13 +913,13 @@ body.rainbowgrid-bg {
 
 
 
-<label>Clock Size:
+<label>Clock Font Size:
         <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="number" value="8"/> </label>
-<label>Countdown Size:
+<label>Countdown Font Size:
         <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="number" value="5"/> </label>
-<label>Message Size:
+<label>Message Font Size:
         <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="number" value="3"/> </label>
-<label>Lunch Size:
+<label>Lunch Font Size:
         <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="number" value="2"/> </label>
 </details>
 <details>
@@ -1388,6 +1388,70 @@ function applyCustomFontSizes() {
 ['clockFontSizePicker', 'countdownFontSizePicker', 'messageFontSizePicker', 'lunchFontSizePicker'].forEach(id => {
   document.getElementById(id).addEventListener('input', applyCustomFontSizes);
 });
+
+// Save settings to localStorage
+function saveSettings() {
+  const settings = {
+    startTime: document.getElementById('startTimeInput').value,
+    lunchStart: document.getElementById('lunchStartInput').value,
+    lunchEnd: document.getElementById('lunchEndInput').value,
+    endTime: document.getElementById('endTimeInput').value,
+    customMessageToggle: document.getElementById('customMessageToggle').checked,
+    customMessageInput: document.getElementById('customMessageInput').value,
+    eventNameInput: document.getElementById('eventNameInput').value,
+    eventTimeInput: document.getElementById('eventTimeInput').value,
+    fontSize: document.getElementById('fontSizePicker').value,
+    fontFamily: document.getElementById('fontFamilyPicker').value,
+    color: document.getElementById('colorPicker').value,
+    antiBurnMode: document.getElementById('antiBurnMode').value,
+    bounceSpeed: document.getElementById('bounceSpeedPicker').value,
+    randomColorToggle: document.getElementById('randomColorToggle').checked,
+    clockFontSize: document.getElementById('clockFontSizePicker').value,
+    countdownFontSize: document.getElementById('countdownFontSizePicker').value,
+    messageFontSize: document.getElementById('messageFontSizePicker').value,
+    lunchFontSize: document.getElementById('lunchFontSizePicker').value,
+    screenEffect: document.getElementById('screenEffectPicker').value,
+    backgroundAnimation: document.getElementById('backgroundAnimationPicker').value
+  };
+  localStorage.setItem('clockthingSettings', JSON.stringify(settings));
+}
+
+// Load settings from localStorage
+function loadSettings() {
+  const saved = JSON.parse(localStorage.getItem('clockthingSettings'));
+  if (!saved) return;
+
+  document.getElementById('startTimeInput').value = saved.startTime || "08:30";
+  document.getElementById('lunchStartInput').value = saved.lunchStart || "11:30";
+  document.getElementById('lunchEndInput').value = saved.lunchEnd || "12:30";
+  document.getElementById('endTimeInput').value = saved.endTime || "17:30";
+  document.getElementById('customMessageToggle').checked = saved.customMessageToggle || false;
+  document.getElementById('customMessageInput').value = saved.customMessageInput || "";
+  document.getElementById('eventNameInput').value = saved.eventNameInput || "";
+  document.getElementById('eventTimeInput').value = saved.eventTimeInput || "";
+  document.getElementById('fontSizePicker').value = saved.fontSize || "8";
+  document.getElementById('fontFamilyPicker').value = saved.fontFamily || "monospace";
+  document.getElementById('colorPicker').value = saved.color || "#ffff00";
+  document.getElementById('antiBurnMode').value = saved.antiBurnMode || "bounce";
+  document.getElementById('bounceSpeedPicker').value = saved.bounceSpeed || "10";
+  document.getElementById('randomColorToggle').checked = saved.randomColorToggle || false;
+  document.getElementById('clockFontSizePicker').value = saved.clockFontSize || "8";
+  document.getElementById('countdownFontSizePicker').value = saved.countdownFontSize || "5";
+  document.getElementById('messageFontSizePicker').value = saved.messageFontSize || "3";
+  document.getElementById('lunchFontSizePicker').value = saved.lunchFontSize || "2";
+  document.getElementById('screenEffectPicker').value = saved.screenEffect || "none";
+  document.getElementById('backgroundAnimationPicker').value = saved.backgroundAnimation || "none";
+}
+
+// Hook into inputs to trigger saving
+window.addEventListener('DOMContentLoaded', () => {
+  loadSettings();
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('change', saveSettings);
+    el.addEventListener('input', saveSettings);
+  });
+});
+
 </script>
 </body>
 </html>
