@@ -1399,6 +1399,10 @@ function applyCustomFontSizes() {
 // Save settings to localStorage
 function saveSettings() {
   const settings = {
+    portraitClockSize: document.getElementById('portraitClockSize').value,
+    portraitMessageSize: document.getElementById('portraitMessageSize').value,
+    portraitTopPadding: document.getElementById('portraitTopPadding').value,
+    portraitBottomPadding: document.getElementById('portraitBottomPadding').value,
     startTime: document.getElementById('startTimeInput').value,
     lunchStart: document.getElementById('lunchStartInput').value,
     lunchEnd: document.getElementById('lunchEndInput').value,
@@ -1426,6 +1430,10 @@ function saveSettings() {
 function loadSettings() {
   const saved = JSON.parse(localStorage.getItem('clockthingSettings'));
   if (!saved) return;
+  document.getElementById('portraitClockSize').value = saved.portraitClockSize || "3.5";
+  document.getElementById('portraitMessageSize').value = saved.portraitMessageSize || "2.2";
+  document.getElementById('portraitTopPadding').value = saved.portraitTopPadding || "4";
+  document.getElementById('portraitBottomPadding').value = saved.portraitBottomPadding || "10";
 
   document.getElementById('startTimeInput').value = saved.startTime || "08:30";
   document.getElementById('lunchStartInput').value = saved.lunchStart || "11:30";
