@@ -867,6 +867,31 @@ body.rainbowgrid-bg {
   }
 }
 
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #eventMessage,
+  #statusMessage {
+    display: block !important;
+    font-size: 2.2vh !important;
+    white-space: normal !important;
+    text-align: center;
+    margin: 1.2vh 0 !important;
+    padding: 0 1rem;
+  }
+
+  #displayContainer {
+    padding-top: 3.5vh !important;
+    padding-bottom: 9vh !important;
+  }
+
+  body.mobile-portrait .stacked-clock {
+    padding-top: 2vh !important;
+    padding-bottom: 2vh !important;
+    height: auto !important;
+    max-height: 60vh;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1425,6 +1450,16 @@ window.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('input', saveSettings);
   });
 });
+
+
+function updateMobilePortraitFlag() {
+  const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+  const isMobile = window.innerWidth <= 768;
+  document.body.classList.toggle("mobile-portrait", isPortrait && isMobile);
+}
+window.addEventListener("resize", updateMobilePortraitFlag);
+window.addEventListener("orientationchange", updateMobilePortraitFlag);
+window.addEventListener("DOMContentLoaded", updateMobilePortraitFlag);
 
 </script>
 </body>
