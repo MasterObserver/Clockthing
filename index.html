@@ -1235,7 +1235,7 @@ function updateEventCountdown() {
   const s = String(diffSeconds % 60).padStart(2, '0');
 
   eventCountdown.textContent = `${h}:${m}:${s}`;
-  eventMessage.textContent = name ? `${name}` : 'event';
+  eventMessage.textContent = name ? `${name}` : 'The Thing';
 }
 
     updateTime();
