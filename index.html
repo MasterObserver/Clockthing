@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.6</title>
+<title>Clockthing v6.6.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -881,54 +881,37 @@ body.rainbowgrid-bg {
 </label>
 <label>Font:
     <select id="fontFamilyPicker">
-<option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
 <option value="Arial, sans-serif">Arial</option>
-<option value="Helvetica, sans-serif">Helvetica</option>
-<option value="Verdana, sans-serif">Verdana</option>
-<option value="Tahoma, sans-serif">Tahoma</option>
-<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-<option value="'Times New Roman', serif">Times New Roman</option>
-<option value="Georgia, serif">Georgia</option>
-<option value="'Courier New', monospace">Courier New</option>
-<option value="'Lucida Console', monospace">Lucida Console</option>
-<option value="Consolas, monospace">Consolas</option>
-<option value="Monaco, monospace">Monaco</option>
-<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
-<option value="Impact, fantasy">Impact</option>
-<option value="Garamond, serif">Garamond</option>
-<option value="'Palatino Linotype', serif">Palatino Linotype</option>
 <option value="Calibri, sans-serif">Calibri</option>
 <option value="Cambria, serif">Cambria</option>
 <option value="Candara, sans-serif">Candara</option>
+<option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+<option value="Consolas, monospace">Consolas</option>
+<option value="'Courier New', monospace">Courier New</option>
 <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
+<option value="Garamond, serif">Garamond</option>
+<option value="Georgia, serif">Georgia</option>
 <option value="'Gill Sans', sans-serif">Gill Sans</option>
-<option value="Optima, sans-serif">Optima</option>
+<option value="Helvetica, sans-serif">Helvetica</option>
+<option value="Impact, fantasy">Impact</option>
+<option value="'Lucida Console', monospace">Lucida Console</option>
+<option value="Monaco, monospace">Monaco</option>
 <option selected="" value="monospace">Monospace</option>
+<option value="Optima, sans-serif">Optima</option>
+<option value="'Palatino Linotype', serif">Palatino Linotype</option>
+<option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+<option value="Tahoma, sans-serif">Tahoma</option>
+<option value="'Times New Roman', serif">Times New Roman</option>
+<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+<option value="Verdana, sans-serif">Verdana</option>
 </select>
 </label>
 <label>Color:
     <input id="colorPicker" type="color" value="#ffff00"/>
 </label>
-<label>Anti-Burn:
-    <select id="antiBurnMode">
-<option value="off">Standard</option>
-<option value="shift">Pixel Shift</option>
-<option value="dim">Idle Dim</option>
-<option selected="" value="bounce">Bounce</option>
-</select>
-</label>
-<label>Random Bounce Color:
-    <input id="randomColorToggle" type="checkbox"/>
-</label>
-<label>Bounce Speed:
-    <select id="bounceSpeedPicker">
-<option value="1">Slowest</option>
-<option value="5">Slow</option>
-<option selected="" value="10">Normal</option>
-<option value="15">Fast</option>
-<option value="20">Fastest</option>
-</select>
-</label>
+
+
+
 
 <label>Clock Font Size:
         <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="number" value="8"/> rem
@@ -945,6 +928,41 @@ body.rainbowgrid-bg {
 </details>
 <details>
 <summary>Effects</summary>
+<label>Anti-Burn:
+    <select id="antiBurnMode">
+<option value="off">Standard</option>
+<option value="shift">Pixel Shift</option>
+<option value="dim">Idle Dim</option>
+<option selected="" value="bounce">Bounce</option>
+</select>
+</label>
+<label>Bounce Speed:
+    <select id="bounceSpeedPicker">
+<option value="1">Slowest</option>
+<option value="5">Slow</option>
+<option selected="" value="10">Normal</option>
+<option value="15">Fast</option>
+<option value="20">Fastest</option>
+</select>
+</label>
+<label>Random Bounce Color:
+    <input id="randomColorToggle" type="checkbox"/>
+</label>
+<label>Screen Effect:
+    <select id="screenEffectPicker">
+<option value="none">None</option>
+<option value="matrix">Matrix Rain</option>
+<option value="scanlines">Scanlines</option>
+<option value="static">Static Noise</option>
+<option value="vignette">Vignette Glow</option>
+<option value="blur">Warped Blur</option>
+<option value="grid">Retro Grid</option>
+<option value="pulse">Pulsing Background</option>
+<option value="cycle">Color Cycle</option>
+<option value="glitch">Glitch Flicker</option>
+<option value="glow">Halo Glow</option>
+</select>
+</label>
 <label>Background Animation:
     <select id="backgroundAnimationPicker">
 <option value="none">None</option>
@@ -980,21 +998,6 @@ body.rainbowgrid-bg {
 <option value="ledshimmer">LED Shimmer</option>
 <option value="orbitals">Soft Glow Orbitals</option>
 <option value="rainbowgrid">Rainbow Grid</option>
-</select>
-</label>
-<label>Screen Effect:
-    <select id="screenEffectPicker">
-<option value="none">None</option>
-<option value="matrix">Matrix Rain</option>
-<option value="scanlines">Scanlines</option>
-<option value="static">Static Noise</option>
-<option value="vignette">Vignette Glow</option>
-<option value="blur">Warped Blur</option>
-<option value="grid">Retro Grid</option>
-<option value="pulse">Pulsing Background</option>
-<option value="cycle">Color Cycle</option>
-<option value="glitch">Glitch Flicker</option>
-<option value="glow">Halo Glow</option>
 </select>
 </label>
 </details>
