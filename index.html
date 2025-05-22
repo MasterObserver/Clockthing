@@ -843,6 +843,25 @@ body.rainbowgrid-bg {
   }
 }
 
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #eventMessage,
+  #statusMessage {
+    display: block !important;
+    font-size: 2.2vh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    white-space: normal !important;
+    text-align: center;
+    margin: 1vh 0 0 0 !important;
+    padding: 0 1rem;
+  }
+
+  #displayContainer {
+    padding-bottom: 8vh !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1401,19 +1420,6 @@ window.addEventListener('DOMContentLoaded', () => {
     el.addEventListener('input', saveSettings);
   });
 });
-
-
-function handleResize() {
-  applyCustomFontSizes();
-  updateTime();
-  updateEventCountdown();
-  if (document.getElementById('antiBurnMode').value === 'bounce') {
-    posX = 100; posY = 100;
-  }
-}
-
-window.addEventListener('resize', handleResize);
-window.addEventListener('orientationchange', handleResize);
 
 </script>
 </body>
