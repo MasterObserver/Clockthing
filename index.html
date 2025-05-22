@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.5.1</title>
+<title>Clockthing v6.5.2</title>
 <style>
 .stacked-clock {
   display: none;
@@ -789,6 +789,18 @@ body.rainbowgrid-bg {
     font-size: 2.5vh !important;
   }
 }
+
+.pwa-mode .stacked-clock {
+  height: 100vh;
+  font-size: 30vh;
+}
+.pwa-mode .stacked-part {
+  line-height: 0.9;
+}
+.pwa-mode .stacked-ampm {
+  font-size: 4vh;
+  top: 1vh;
+}
 </style>
 </head>
 <body>
@@ -959,6 +971,13 @@ body.rainbowgrid-bg {
 <div class="message" id="eventMessage"></div>
 </div>
 <script>
+// Detect PWA mode and apply class for custom styling
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+if (isStandalone) {
+  document.body.classList.add("pwa-mode");
+}
+
+
     const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
     const dayList = document.getElementById('dayList');
     dayList.innerHTML = days.map((day, i) =>
