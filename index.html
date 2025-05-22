@@ -845,43 +845,32 @@ body.rainbowgrid-bg {
 
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
-  #eventMessage,
-  #statusMessage {
+  .message {
     display: block !important;
-    font-size: 2.2vh !important;
+    font-size: 2.5vh !important;
+    max-height: none !important;
     white-space: normal !important;
     text-align: center;
-    margin: 1vh 0;
+    margin-top: 1vh;
     padding: 0 1rem;
-  }
-
-  #displayContainer {
-    padding-top: 3vh !important;
-    padding-bottom: 9vh !important;
-  }
-
-  .stacked-clock {
-    padding-top: 1.5vh;
-    max-height: 68vh !important;
-    height: auto !important;
   }
 }
 
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
+  #displayContainer {
+    padding-top: 4vh !important;
+    padding-bottom: 10vh !important;
+  }
+
   #eventMessage,
   #statusMessage {
     display: block !important;
     font-size: 2.2vh !important;
     white-space: normal !important;
     text-align: center;
-    margin: 1.2vh 0 !important;
+    margin: 1vh 0 !important;
     padding: 0 1rem;
-  }
-
-  #displayContainer {
-    padding-top: 3.5vh !important;
-    padding-bottom: 9vh !important;
   }
 
   body.mobile-portrait .stacked-clock {
@@ -1452,14 +1441,29 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+function enforceWindowResizeAwareness() {
+  document.documentElement.style.height = window.innerHeight + "px";
+  document.body.style.height = window.innerHeight + "px";
+}
+
 function updateMobilePortraitFlag() {
   const isPortrait = window.matchMedia("(orientation: portrait)").matches;
   const isMobile = window.innerWidth <= 768;
   document.body.classList.toggle("mobile-portrait", isPortrait && isMobile);
 }
-window.addEventListener("resize", updateMobilePortraitFlag);
-window.addEventListener("orientationchange", updateMobilePortraitFlag);
-window.addEventListener("DOMContentLoaded", updateMobilePortraitFlag);
+
+window.addEventListener("resize", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
+window.addEventListener("orientationchange", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
+window.addEventListener("DOMContentLoaded", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
 
 </script>
 </body>
