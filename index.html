@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clockthing v6.6.6</title>
+<title>ClockThing v7.4.4</title>
 <style>
 .stacked-clock {
   display: none;
@@ -687,14 +687,12 @@ body.rainbowgrid-bg {
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
   #displayContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    padding: 0 0 6vh 0;
-    gap: 0;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
   .time {
     font-size: 20vh !important;
     line-height: 1;
@@ -829,8 +827,12 @@ body.rainbowgrid-bg {
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
   #displayContainer {
-    padding-bottom: 6vh;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
 }
 
 
@@ -859,9 +861,12 @@ body.rainbowgrid-bg {
 
 @media screen and (max-width: 768px) and (orientation: portrait) {
   #displayContainer {
-    padding-top: 4vh !important;
-    padding-bottom: 10vh !important;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
 
   #eventMessage,
   #statusMessage {
@@ -881,9 +886,242 @@ body.rainbowgrid-bg {
   }
 }
 
+
+.controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #1e1e1e;
+  padding: 1rem;
+  overflow-y: auto;
+  display: block !important;
+  z-index: 1000;
+  font-family: system-ui, sans-serif;
+  border-right: 1px solid #333;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+
+.controls details {
+  margin-bottom: 1rem;
+  background: #2a2a2a;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #444;
+}
+
+.controls summary {
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.controls input,
+.controls select {
+  background: #121212;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+}
+
+#displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+
+#hamburger {
+  position: fixed;
+  top: 1rem;
+  
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: #1e1e1e;
+  border: 1px solid #444;
+  color: var(--accent-color);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2000;
+  border-radius: 0.3rem;
+}
+
+#hamburger.hidden {
+  display: none;
+}
+
+body.menu-hidden .controls {
+  transform: translateX(-100%);
+}
+
+.controls {
+  transition: transform 0.3s ease;
+}
+
+
+#hamburger {
+  transition: left 0.3s ease;
+  left: 310px; /* aligned near sidebar */
+}
+
+body.menu-hidden #hamburger {
+  left: 10px; /* back to edge when menu is hidden */
+}
+
+
+.controls input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  outline: none;
+  transition: background 0.3s;
+}
+.controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(255,255,255,0.3);
+  transition: background 0.3s;
+}
+.controls input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-color);
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(255,255,255,0.3);
+}
+
+
+@keyframes floatMove {
+  0% { transform:translate(-50%, -50%)  translate(-50%, -50%) translate(0, 0); }
+  50% { transform: translate(10px, 10px); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes wiggleMove {
+  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(2px, -1px); }
+  75% { transform: translate(-1px, 2px); }
+}
+@keyframes warpMove {
+  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) scale(1) skew(0deg, 0deg); }
+  50% { transform: scale(1.02) skew(1deg, -1deg); }
+}
+@keyframes twistMove {
+  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) rotate(0deg); }
+  50% { transform: rotate(1.5deg); }
+}
+100% { background-position: 100% 0; }
+}
+@keyframes pulseMove {
+  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) scale(1); }
+  50% { transform: scale(1.02); }
+}
+@keyframes slideMove {
+  0% { transform:translate(-50%, -50%)  translate(-50%, -50%) translateX(0); }
+  100% { transform: translateX(-20px); }
+}
+
+
+#displayWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+#displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+
+fieldset.control-group {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 0.5rem;
+}
+fieldset.control-group legend {
+  padding: 0 0.5rem;
+  font-weight: bold;
+  color: #ccc;
+}
+
+
+.effects-section {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: rgba(40, 40, 40, 0.6);
+  border-radius: 0.5rem;
+}
+.effects-section h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+}
+.effect-control {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.effect-control label {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+.effect-control select {
+  font-size: 1rem;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+
 </style>
 </head>
 <body>
+<button id="hamburger">&#9776;</button>
 <div class="controls" id="controlsMenu">
 <details>
 <summary>Program</summary>
@@ -939,6 +1177,13 @@ body.rainbowgrid-bg {
 <option value="'Times New Roman', serif">Times New Roman</option>
 <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
 <option value="Verdana, sans-serif">Verdana</option>
+
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
 </select>
 </label>
 <label>Color:
@@ -949,27 +1194,33 @@ body.rainbowgrid-bg {
 
 
 <label>Clock Size:
-        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="number" value="8"/> </label>
+        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"/> </label>
 <label>Countdown Size:
-        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="number" value="5"/> </label>
+        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="range" value="5"/> </label>
 <label>Message Size:
-        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="number" value="3"/> </label>
+        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="range" value="3"/> </label>
 <label>Lunch Size:
-        <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="number" value="2"/> </label>
+        <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="range" value="2"/> </label>
+
+<div class="control-group">
+  <label for="weekdayScaleSlider">Highlighted Weekday Scale:</label>
+  <input type="range" id="weekdayScaleSlider" min="0.5" max="2.5" step="0.1" value="1" />
+</div>
+
 </details>
 <details>
   <summary>Mobile</summary>
   <label>Portrait Clock Size:
-    <input id="portraitClockSize" type="number" min="1" max="25" step="0.1" value="16" />
+    <input id="portraitClockSize" type="range" min="1" max="25" step="0.1" value="16" />
   </label>
   <label>Portrait Message Size:
-    <input id="portraitMessageSize" type="number" min="1" max="10" step="0.1" value="2.2" />
+    <input id="portraitMessageSize" type="range" min="1" max="10" step="0.1" value="2.2" />
   </label>
   <label>Portrait Top Padding:
-    <input id="portraitTopPadding" type="number" min="0" max="20" step="0.5" value="4" /> vh
+    <input id="portraitTopPadding" type="range" min="0" max="20" step="0.5" value="4" />
   </label>
   <label>Portrait Bottom Padding:
-    <input id="portraitBottomPadding" type="number" min="0" max="20" step="0.5" value="10" /> vh
+    <input id="portraitBottomPadding" type="range" min="0" max="20" step="0.5" value="10" />
   </label>
 </details>
 <details>
@@ -980,17 +1231,38 @@ body.rainbowgrid-bg {
 <option value="shift">Pixel Shift</option>
 <option value="dim">Idle Dim</option>
 <option selected="" value="bounce">Bounce</option>
+
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
 </select>
 </label>
-<label>Bounce Speed:
+
+<label>Anti-Burn Intensity:
+  <input id="antiBurnIntensity" type="range" min="1" max="20" step="1" value="10" />
+</label>
+
+<div style="display:none;"><label>Bounce Speed:
     <select id="bounceSpeedPicker">
 <option value="1">Slowest</option>
 <option value="5">Slow</option>
 <option selected="" value="10">Normal</option>
 <option value="15">Fast</option>
 <option value="20">Fastest</option>
+
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
 </select>
-</label>
+</label></div>
 <label>Random Bounce Color:
     <input id="randomColorToggle" type="checkbox"/>
 </label>
@@ -1007,6 +1279,14 @@ body.rainbowgrid-bg {
 <option value="cycle">Color Cycle</option>
 <option value="glitch">Glitch Flicker</option>
 <option value="glow">Halo Glow</option>
+
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
 </select>
 </label>
 <label>Background Animation:
@@ -1044,12 +1324,20 @@ body.rainbowgrid-bg {
 <option value="ledshimmer">LED Shimmer</option>
 <option value="orbitals">Soft Glow Orbitals</option>
 <option value="rainbowgrid">Rainbow Grid</option>
+
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
 </select>
 </label>
 </details>
 </div>
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
-<div class="container" id="displayContainer">
+<div id="displayWrapper"><div class="container" id="displayContainer">
 <div class="stacked-clock" id="stackedClock">
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
@@ -1062,7 +1350,7 @@ body.rainbowgrid-bg {
 <div class="lunch-indicator" id="lunchIndicator"></div>
 <div class="countdown" id="eventCountdown"></div>
 <div class="message" id="eventMessage"></div>
-</div>
+</div></div>
 <script>
 // Detect PWA mode and apply class for custom styling
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -1199,7 +1487,7 @@ function maybeChangeColor() {
 }
 
 function bounceLoop() {
-      const mode = document.getElementById('antiBurnMode').value;
+      const mode = document.getElementById('antiBurnMode')?.value || 'off';
       if (mode !== 'bounce') {
         requestAnimationFrame(bounceLoop);
         return;
@@ -1209,8 +1497,9 @@ function bounceLoop() {
       const maxX = window.innerWidth - rect.width;
       const maxY = window.innerHeight - rect.height;
 
-      posX += velX * bounceSpeed * 0.1;
-      posY += velY * bounceSpeed * 0.1;
+      const intensity = parseFloat(document.getElementById("antiBurnIntensity").value);
+      posX += velX * intensity * 0.1;
+      posY += velY * intensity * 0.1;
 
       
       if (posX <= 0 || posX >= maxX) {
@@ -1292,8 +1581,9 @@ function updateEventCountdown() {
 }
 
     updateTime();
+setInterval(updateTime, 1000);
     updateEventCountdown();
-      const mode = document.getElementById('antiBurnMode').value;
+      const mode = document.getElementById('antiBurnMode')?.value || 'off';
       if (mode === 'shift') {
         offset += 0.05;
         const x = Math.sin(offset) * 5;
@@ -1380,6 +1670,7 @@ function updateEventCountdown() {
 }
 
     updateTime();
+setInterval(updateTime, 1000);
     updateEventCountdown();
     bounceLoop();
   
@@ -1396,6 +1687,7 @@ function applyCustomFontSizes() {
 
 // Save settings to localStorage
 function saveSettings() {
+  const weekdayScale = document.getElementById("weekdayScaleSlider")?.value;
   const settings = {
     portraitClockSize: document.getElementById('portraitClockSize').value,
     portraitMessageSize: document.getElementById('portraitMessageSize').value,
@@ -1452,6 +1744,7 @@ function loadSettings() {
   document.getElementById('lunchFontSizePicker').value = saved.lunchFontSize || "2";
   document.getElementById('screenEffectPicker').value = saved.screenEffect || "none";
   document.getElementById('backgroundAnimationPicker').value = saved.backgroundAnimation || "none";
+  if (saved.weekdayScale) document.getElementById("weekdayScaleSlider").value = saved.weekdayScale;
 }
 
 // Hook into inputs to trigger saving
@@ -1527,6 +1820,141 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 window.addEventListener("resize", applyPortraitStyles);
 window.addEventListener("orientationchange", applyPortraitStyles);
+
+
+const hamburger = document.getElementById("hamburger");
+let hideMenuTimeout;
+
+function toggleMenu() {
+  document.body.classList.toggle("menu-hidden");
+  resetHamburgerTimeout();
+}
+
+function resetHamburgerTimeout() {
+  hamburger.classList.remove("hidden");
+  clearTimeout(hideMenuTimeout);
+  hideMenuTimeout = setTimeout(() => {
+    hamburger.classList.add("hidden");
+  }, 30000);
+}
+
+hamburger.addEventListener("click", toggleMenu);
+document.addEventListener("mousemove", resetHamburgerTimeout);
+document.addEventListener("click", resetHamburgerTimeout);
+resetHamburgerTimeout();
+
+
+function applyAntiBurnEffect(mode, intensity) {
+  const container = document.getElementById('displayContainer');
+  container.style.animation = '';
+  container.style.transition = 'none';
+  container.style.transform = 'none';
+
+  const duration = (21 - intensity) / 2; // map 1-20 to 10s (slow) to 0.5s (fast)
+
+  switch (mode) {
+    case 'float':
+      container.style.animation = `floatMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'wiggle':
+      container.style.animation = `wiggleMove ${Math.max(duration * 0.5, 0.2)}s infinite`;
+      break;
+    case 'warp':
+      container.style.animation = `warpMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'twist':
+      container.style.animation = `twistMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'pulse':
+      container.style.animation = `pulseMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'slide':
+      container.style.animation = `slideMove ${duration}s linear infinite alternate`;
+      break;
+    default:
+      container.style.animation = '';
+      }
+}
+
+// Hook into effect change and intensity change
+const antiBurnModePicker = document.getElementById('antiBurnMode');
+const intensitySlider = document.getElementById('antiBurnIntensity');
+
+function updateAntiBurnVisuals() {
+  const mode = antiBurnModePicker.value;
+  const intensity = parseInt(intensitySlider.value);
+  applyAntiBurnEffect(mode, intensity);
+}
+
+antiBurnModePicker.addEventListener('change', updateAntiBurnVisuals);
+intensitySlider.addEventListener('input', updateAntiBurnVisuals);
+
+// Initial call on load
+window.addEventListener('DOMContentLoaded', updateAntiBurnVisuals);
+
+
+function updateCenteredEffectMode() {
+  const container = document.getElementById('displayContainer');
+  const mode = document.getElementById('antiBurnMode')?.value || 'off';
+
+  if (mode !== 'bounce') {
+    container.style.top = '50%';
+    container.style.left = '50%';
+    container.style.transform = 'translate(-50%, -50%)';
+    container.style.position = 'absolute';
+  }
+}
+
+document.getElementById('antiBurnMode').addEventListener('change', updateCenteredEffectMode);
+window.addEventListener('DOMContentLoaded', updateCenteredEffectMode);
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+window.addEventListener('load', () => {
+  const container = document.getElementById('displayContainer');
+  if (container) {
+    container.style.position = 'absolute';
+    container.style.top = '50%';
+    container.style.left = '50%';
+    container.style.transform = 'translate(-50%, -50%)';
+  }
+});
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const weekdays = document.querySelectorAll('.weekday');
+  weekdays.forEach(day => {
+    day.style.transform = `scale(${scale})`;
+    day.style.transformOrigin = 'center';
+  });
+});
+
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const spans = document.querySelectorAll('#dayList span.day');
+  spans.forEach(span => {
+    const text = span.textContent.trim().toLowerCase();
+    if (['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].includes(text)) {
+      span.style.fontSize = `${scale * 2}rem`;
+    }
+  });
+});
 
 </script>
 </body>
