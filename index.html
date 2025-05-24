@@ -986,142 +986,54 @@ body.menu-hidden #hamburger {
 }
 
 
+
 .controls input[type="range"] {
   -webkit-appearance: none;
+  appearance: none;
   width: 100%;
-  height: 6px;
-  background: #333;
-  border-radius: 3px;
+  height: 1px;
+  background: var(--accent-color);
+  border-radius: 1px;
   outline: none;
-  transition: background 0.3s;
+  margin: 0.5rem 0;
+  padding: 0;
+  border: none;
 }
+
 .controls input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--accent-color);
+  background: #fff;
   cursor: pointer;
-  box-shadow: 0 0 2px rgba(255,255,255,0.3);
-  transition: background 0.3s;
+  margin-top: -4.5px;
+  box-shadow: 0 0 2px rgba(255,255,255,0.5);
 }
+
+.controls input[type="range"]::-moz-range-track {
+  height: 1px;
+  background: var(--accent-color);
+  border-radius: 1px;
+}
+
 .controls input[type="range"]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  background: var(--accent-color);
+  background: #fff;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 0 2px rgba(255,255,255,0.3);
+  box-shadow: 0 0 2px rgba(255,255,255,0.5);
 }
 
-
-@keyframes floatMove {
-  0% { transform:translate(-50%, -50%)  translate(-50%, -50%) translate(0, 0); }
-  50% { transform: translate(10px, 10px); }
-  100% { transform: translate(0, 0); }
-}
-@keyframes wiggleMove {
-  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) translate(0, 0); }
-  25% { transform: translate(-2px, 1px); }
-  50% { transform: translate(2px, -1px); }
-  75% { transform: translate(-1px, 2px); }
-}
-@keyframes warpMove {
-  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) scale(1) skew(0deg, 0deg); }
-  50% { transform: scale(1.02) skew(1deg, -1deg); }
-}
-@keyframes twistMove {
-  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) rotate(0deg); }
-  50% { transform: rotate(1.5deg); }
-}
-100% { background-position: 100% 0; }
-}
-@keyframes pulseMove {
-  0%, 100% { transform:translate(-50%, -50%)  translate(-50%, -50%) scale(1); }
-  50% { transform: scale(1.02); }
-}
-@keyframes slideMove {
-  0% { transform:translate(-50%, -50%)  translate(-50%, -50%) translateX(0); }
-  100% { transform: translateX(-20px); }
-}
-
-
-#displayWrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-#displayContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: auto;
-}
-#displayContainer {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: auto;
-}
-
-
-fieldset.control-group {
-  margin-top: 1rem;
-  padding: 1rem;
-  border: 1px solid #444;
-  border-radius: 0.5rem;
-}
-fieldset.control-group legend {
-  padding: 0 0.5rem;
-  font-weight: bold;
-  color: #ccc;
-}
-
-
-.effects-section {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background-color: rgba(40, 40, 40, 0.6);
-  border-radius: 0.5rem;
-}
-.effects-section h2 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #ccc;
-}
-.effect-control {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-.effect-control label {
-  font-size: 0.95rem;
-  margin-bottom: 0.25rem;
-}
-.effect-control select {
-  font-size: 1rem;
-  padding: 0.25rem;
-  border-radius: 0.25rem;
-  background: #222;
-  color: #fff;
-  border: 1px solid #444;
-}
 
 
 </style>
 </head>
 <body>
-<button id="hamburger">&#9776;</button>
+<button id="hamburger">☰</button>
 <div class="controls" id="controlsMenu">
 <details>
 <summary>Program</summary>
@@ -1177,7 +1089,6 @@ fieldset.control-group legend {
 <option value="'Times New Roman', serif">Times New Roman</option>
 <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
 <option value="Verdana, sans-serif">Verdana</option>
-
 <option value="float">Float</option>
 <option value="wiggle">Wiggle</option>
 <option value="warp">Warp</option>
@@ -1186,13 +1097,6 @@ fieldset.control-group legend {
 <option value="slide">Slide</option>
 </select>
 </label>
-<label>Color:
-    <input id="colorPicker" type="color" value="#ffff00"/>
-</label>
-
-
-
-
 <label>Clock Size:
         <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"/> </label>
 <label>Countdown Size:
@@ -1201,28 +1105,26 @@ fieldset.control-group legend {
         <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="range" value="3"/> </label>
 <label>Lunch Size:
         <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="range" value="2"/> </label>
-
 <div class="control-group">
-  <label for="weekdayScaleSlider">Highlighted Weekday Scale:</label>
-  <input type="range" id="weekdayScaleSlider" min="0.5" max="2.5" step="0.1" value="1" />
+<label for="weekdayScaleSlider">Highlighted Weekday Scale:</label>
+<input id="weekdayScaleSlider" max="2.5" min="0.5" step="0.1" type="range" value="1"/>
 </div>
-
-</details>
+<label>Desktop Padding Between Sections:<input id="desktopSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label><fieldset class="control-group"><legend>Colors</legend><label>Font Color:<input id="fontColorPicker" type="color" value="#ffffff"/></label><label>Highlight Color:<input id="colorPicker" type="color" value="#ffff00"/></label><label>Background Color:<input id="bgColorPicker" type="color" value="#121212"/></label></fieldset></details>
 <details>
-  <summary>Mobile</summary>
-  <label>Portrait Clock Size:
-    <input id="portraitClockSize" type="range" min="1" max="25" step="0.1" value="16" />
-  </label>
-  <label>Portrait Message Size:
-    <input id="portraitMessageSize" type="range" min="1" max="10" step="0.1" value="2.2" />
-  </label>
-  <label>Portrait Top Padding:
-    <input id="portraitTopPadding" type="range" min="0" max="20" step="0.5" value="4" />
-  </label>
-  <label>Portrait Bottom Padding:
-    <input id="portraitBottomPadding" type="range" min="0" max="20" step="0.5" value="10" />
-  </label>
-</details>
+<summary>Mobile</summary>
+<label>Portrait Clock Size:
+    <input id="portraitClockSize" max="25" min="1" step="0.1" type="range" value="16"/>
+</label>
+<label>Portrait Message Size:
+    <input id="portraitMessageSize" max="10" min="1" step="0.1" type="range" value="2.2"/>
+</label>
+<label>Portrait Top Padding:
+    <input id="portraitTopPadding" max="20" min="0" step="0.5" type="range" value="4"/>
+</label>
+<label>Portrait Bottom Padding:
+    <input id="portraitBottomPadding" max="20" min="0" step="0.5" type="range" value="10"/>
+</label>
+<label>Vertical Padding Between Sections:<input id="mobileSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label></details>
 <details>
 <summary>Effects</summary>
 <label>Anti-Burn:
@@ -1231,7 +1133,6 @@ fieldset.control-group legend {
 <option value="shift">Pixel Shift</option>
 <option value="dim">Idle Dim</option>
 <option selected="" value="bounce">Bounce</option>
-
 <option value="float">Float</option>
 <option value="wiggle">Wiggle</option>
 <option value="warp">Warp</option>
@@ -1241,11 +1142,9 @@ fieldset.control-group legend {
 <option value="slide">Slide</option>
 </select>
 </label>
-
 <label>Anti-Burn Intensity:
-  <input id="antiBurnIntensity" type="range" min="1" max="20" step="1" value="10" />
+  <input id="antiBurnIntensity" max="20" min="1" step="1" type="range" value="10"/>
 </label>
-
 <div style="display:none;"><label>Bounce Speed:
     <select id="bounceSpeedPicker">
 <option value="1">Slowest</option>
@@ -1253,7 +1152,6 @@ fieldset.control-group legend {
 <option selected="" value="10">Normal</option>
 <option value="15">Fast</option>
 <option value="20">Fastest</option>
-
 <option value="float">Float</option>
 <option value="wiggle">Wiggle</option>
 <option value="warp">Warp</option>
@@ -1279,7 +1177,6 @@ fieldset.control-group legend {
 <option value="cycle">Color Cycle</option>
 <option value="glitch">Glitch Flicker</option>
 <option value="glow">Halo Glow</option>
-
 <option value="float">Float</option>
 <option value="wiggle">Wiggle</option>
 <option value="warp">Warp</option>
@@ -1324,7 +1221,6 @@ fieldset.control-group legend {
 <option value="ledshimmer">LED Shimmer</option>
 <option value="orbitals">Soft Glow Orbitals</option>
 <option value="rainbowgrid">Rainbow Grid</option>
-
 <option value="float">Float</option>
 <option value="wiggle">Wiggle</option>
 <option value="warp">Warp</option>
@@ -1338,19 +1234,11 @@ fieldset.control-group legend {
 </div>
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
 <div id="displayWrapper"><div class="container" id="displayContainer">
-<div class="stacked-clock" id="stackedClock">
+<div id="stackedContent" style="display: flex; flex-direction: column; align-items: center;"><div class="day-list" id="dayList"></div><div class="stacked-clock" id="stackedClock">
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
 <div class="stacked-part" id="stackedSeconds">--</div>
-</div>
-<div class="day-list" id="dayList"></div>
-<div class="time" id="currentTime">--:--:--</div>
-<div class="countdown" id="countdown">--:--:--</div>
-<div class="message" id="statusMessage"></div>
-<div class="lunch-indicator" id="lunchIndicator"></div>
-<div class="countdown" id="eventCountdown"></div>
-<div class="message" id="eventMessage"></div>
-</div></div>
+</div><div class="time" id="currentTime">--:--:--</div><div class="countdown" id="countdown">--:--:--</div><div class="message" id="statusMessage"></div><div class="lunch-indicator" id="lunchIndicator"></div><div class="countdown" id="eventCountdown"></div><div class="message" id="eventMessage"></div></div></div></div>
 <script>
 // Detect PWA mode and apply class for custom styling
 const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
@@ -1487,44 +1375,51 @@ function maybeChangeColor() {
 }
 
 function bounceLoop() {
-      const mode = document.getElementById('antiBurnMode')?.value || 'off';
-      if (mode !== 'bounce') {
-        requestAnimationFrame(bounceLoop);
-        return;
-      }
+  const mode = document.getElementById('antiBurnMode')?.value || 'off';
+  if (mode !== 'bounce') {
+    requestAnimationFrame(bounceLoop);
+    return;
+  }
 
-      const rect = container.getBoundingClientRect();
-      const maxX = window.innerWidth - rect.width;
-      const maxY = window.innerHeight - rect.height;
+  const intensity = parseFloat(document.getElementById("antiBurnIntensity").value);
+  const rect = container.getBoundingClientRect();
+  const containerWidth = rect.width || container.offsetWidth;
+  const containerHeight = rect.height || container.offsetHeight;
+  const maxX = window.innerWidth - containerWidth;
+  const maxY = window.innerHeight - containerHeight;
 
-      const intensity = parseFloat(document.getElementById("antiBurnIntensity").value);
-      posX += velX * intensity * 0.1;
-      posY += velY * intensity * 0.1;
+  posX += velX * intensity * 0.1;
+  posY += velY * intensity * 0.1;
 
-      
-      if (posX <= 0 || posX >= maxX) {
-        velX *= -1;
-        if (document.getElementById('randomColorToggle').checked) {
-          maybeChangeColor();
-        }
-      }
-      if (posY <= 0 || posY >= maxY) {
-        velY *= -1;
-        if (document.getElementById('randomColorToggle').checked) {
-          maybeChangeColor();
-        }
-      }
-
-
-      const smoothX = lerp(parseFloat(container.style.left || 0), posX, 0.1);
-      const smoothY = lerp(parseFloat(container.style.top || 0), posY, 0.1);
-
-      container.style.left = smoothX + 'px';
-      container.style.top = smoothY + 'px';
-      container.style.position = 'absolute';
-
-      requestAnimationFrame(bounceLoop);
+  if (posX <= 0 || posX >= maxX) {
+    velX *= -1;
+    posX = Math.max(0, Math.min(posX, maxX));
+    if (document.getElementById('randomColorToggle').checked) {
+      maybeChangeColor();
     }
+  }
+
+  if (posY <= 0 || posY >= maxY) {
+    velY *= -1;
+    posY = Math.max(0, Math.min(posY, maxY));
+    if (document.getElementById('randomColorToggle').checked) {
+      maybeChangeColor();
+    }
+  }
+
+  let smoothX = lerp(parseFloat(container.style.left) || posX, posX, 0.1);
+  let smoothY = lerp(parseFloat(container.style.top) || posY, posY, 0.1);
+
+  // Clamp smooth positions just in case
+  smoothX = Math.max(0, Math.min(smoothX, maxX));
+  smoothY = Math.max(0, Math.min(smoothY, maxY));
+
+  container.style.left = smoothX + 'px';
+  container.style.top = smoothY + 'px';
+  container.style.position = 'absolute';
+
+  requestAnimationFrame(bounceLoop);
+}
 
     // Pixel shift + dim (still frame-based)
     let offset = 0;
@@ -1884,6 +1779,24 @@ function updateAntiBurnVisuals() {
   const mode = antiBurnModePicker.value;
   const intensity = parseInt(intensitySlider.value);
   applyAntiBurnEffect(mode, intensity);
+
+  if (mode === "bounce") {
+    // Reset bounce positions inside screen
+    const rect = container.getBoundingClientRect();
+    const containerWidth = rect.width || container.offsetWidth;
+    const containerHeight = rect.height || container.offsetHeight;
+    const maxX = window.innerWidth - containerWidth;
+    const maxY = window.innerHeight - containerHeight;
+
+    posX = Math.min(Math.max(posX, 0), maxX);
+    posY = Math.min(Math.max(posY, 0), maxY);
+    velX = 1;
+    velY = 1;
+
+    container.style.left = posX + 'px';
+    container.style.top = posY + 'px';
+    container.style.position = 'absolute';
+  }
 }
 
 antiBurnModePicker.addEventListener('change', updateAntiBurnVisuals);
@@ -1956,6 +1869,192 @@ document.getElementById('weekdayScaleSlider')?.addEventListener('input', functio
   });
 });
 
+
+document.addEventListener("DOMContentLoaded", () => {
+  const spacingSlider = document.getElementById("mobileSpacingSlider");
+  const spacingValue = localStorage.getItem("mobileSpacing") || "1.5";
+  spacingSlider.value = spacingValue;
+
+  function applySpacing(val) {
+    const container = document.getElementById("displayContainer");
+    if (container) {
+      container.style.rowGap = val + "vh";
+    }
+  }
+
+  applySpacing(spacingValue);
+
+  spacingSlider.addEventListener("input", () => {
+    const val = spacingSlider.value;
+    localStorage.setItem("mobileSpacing", val);
+    applySpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const spacingSlider = document.getElementById("mobileSpacingSlider");
+  const spacingValue = localStorage.getItem("mobileSpacing") || "1.5";
+  spacingSlider.value = spacingValue;
+
+  function applySpacing(val) {
+    if (document.body.classList.contains("mobile-portrait")) {
+      const stackedClock = document.querySelector(".stacked-clock");
+      const statusMessage = document.getElementById("statusMessage");
+      const countdown = document.getElementById("countdown");
+      const lunchIndicator = document.getElementById("lunchIndicator");
+      const eventCountdown = document.getElementById("eventCountdown");
+      const eventMessage = document.getElementById("eventMessage");
+
+      const elements = [stackedClock, statusMessage, countdown, lunchIndicator, eventCountdown, eventMessage];
+      elements.forEach(el => {
+        if (el) {
+          el.style.marginBottom = val + "vh";
+        }
+      });
+    }
+  }
+
+  applySpacing(spacingValue);
+
+  spacingSlider.addEventListener("input", () => {
+    const val = spacingSlider.value;
+    localStorage.setItem("mobileSpacing", val);
+    applySpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const desktopSlider = document.getElementById("desktopSpacingSlider");
+  const desktopValue = localStorage.getItem("desktopSpacing") || "1.5";
+  desktopSlider.value = desktopValue;
+
+  function applyDesktopSpacing(val) {
+    if (!document.body.classList.contains("mobile-portrait")) {
+      const elements = [
+        document.getElementById("currentTime"),
+        document.getElementById("statusMessage"),
+        document.getElementById("countdown"),
+        document.getElementById("lunchIndicator"),
+        document.getElementById("eventCountdown"),
+        document.getElementById("eventMessage")
+      ];
+      elements.forEach(el => {
+        if (el) {
+          el.style.marginBottom = val + "vh";
+        }
+      });
+    }
+  }
+
+  applyDesktopSpacing(desktopValue);
+
+  desktopSlider.addEventListener("input", () => {
+    const val = desktopSlider.value;
+    localStorage.setItem("desktopSpacing", val);
+    applyDesktopSpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const fontColorPicker = document.getElementById("fontColorPicker");
+  const bgColorPicker = document.getElementById("bgColorPicker");
+
+  const savedFontColor = localStorage.getItem("fontColor") || "#ffffff";
+  const savedBgColor = localStorage.getItem("bgColor") || "#121212";
+
+  fontColorPicker.value = savedFontColor;
+  bgColorPicker.value = savedBgColor;
+
+  document.documentElement.style.setProperty('--text-color', savedFontColor);
+  document.body.style.backgroundColor = savedBgColor;
+
+  fontColorPicker.addEventListener("input", () => {
+    const color = fontColorPicker.value;
+    localStorage.setItem("fontColor", color);
+    document.documentElement.style.setProperty('--text-color', color);
+  });
+
+  bgColorPicker.addEventListener("input", () => {
+    const color = bgColorPicker.value;
+    localStorage.setItem("bgColor", color);
+    document.body.style.backgroundColor = color;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  function applyStackedSpacing() {
+    const gap = document.body.classList.contains("mobile-portrait")
+      ? localStorage.getItem("mobileSpacing") || "1.5"
+      : localStorage.getItem("desktopSpacing") || "1.5";
+
+    const stacked = document.getElementById("stackedContent");
+    if (stacked) {
+      stacked.style.gap = gap + "vh";
+    }
+  }
+
+  const sliders = ['mobileSpacingSlider', 'desktopSpacingSlider'];
+  sliders.forEach(id => {
+    const slider = document.getElementById(id);
+    if (slider) {
+      slider.addEventListener('input', applyStackedSpacing);
+    }
+  });
+
+  applyStackedSpacing();
+  window.addEventListener("resize", applyStackedSpacing);
+  window.addEventListener("orientationchange", applyStackedSpacing);
+});
+
+function applyStackedSpacing() {
+  const stacked = document.getElementById("stackedContent");
+  if (!stacked) return;
+  const mobile = document.body.classList.contains("mobile-portrait");
+  const gap = mobile
+    ? document.getElementById("mobileSpacingSlider")?.value || "1.5"
+    : document.getElementById("desktopSpacingSlider")?.value || "1.5";
+
+  stacked.style.gap = gap + "vh";
+  if (mobile) {
+    localStorage.setItem("mobileSpacing", gap);
+  } else {
+    localStorage.setItem("desktopSpacing", gap);
+  }
+}
+
+['mobileSpacingSlider', 'desktopSpacingSlider'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", applyStackedSpacing);
+  }
+});
+
+window.addEventListener("DOMContentLoaded", applyStackedSpacing);
+window.addEventListener("resize", applyStackedSpacing);
+window.addEventListener("orientationchange", applyStackedSpacing);
+
+function applyStackedSpacing() {
+  const stacked = document.getElementById("stackedContent");
+  if (!stacked) return;
+  const isMobile = document.body.classList.contains("mobile-portrait");
+  const val = isMobile
+    ? document.getElementById("mobileSpacingSlider")?.value || "1.5"
+    : document.getElementById("desktopSpacingSlider")?.value || "1.5";
+
+  stacked.style.gap = val + "vh";
+  localStorage.setItem(isMobile ? "mobileSpacing" : "desktopSpacing", val);
+}
+
+['mobileSpacingSlider', 'desktopSpacingSlider'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", applyStackedSpacing);
+  }
+});
+
+window.addEventListener("DOMContentLoaded", applyStackedSpacing);
+window.addEventListener("resize", applyStackedSpacing);
+window.addEventListener("orientationchange", applyStackedSpacing);
 </script>
 </body>
 </html>
