@@ -1069,6 +1069,26 @@ body.menu-hidden #hamburger {
   padding: 0 !important;
   line-height: 1 !important;
 }
+
+#dayList {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1 !important;
+}
+
+#statusMessage,
+#eventMessage,
+#countdown,
+#eventCountdown,
+#currentTime {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.1 !important;
+}
+
+#stackedContent > * {
+  margin: 0.1rem 0 !important;
+}
 </style>
 </head>
 <body>
@@ -1076,6 +1096,14 @@ body.menu-hidden #hamburger {
 <div class="controls" id="controlsMenu">
 <details>
 <summary>Program</summary>
+<div id="programToggles" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+  <label>24 Hour Clock:
+    <input type="checkbox" id="twentyFourHourToggle">
+  </label>
+</div>
+
+
+
 <label>Start Time:
     <input id="startTimeInput" type="time" value="08:30"/>
 </label>
@@ -1088,12 +1116,16 @@ body.menu-hidden #hamburger {
 <label>End Time:
     <input id="endTimeInput" type="time" value="17:30"/>
 </label>
+
 <label>Custom Message:
     <input id="customMessageToggle" type="checkbox"/>
 </label>
 <label>
 <input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/>
 </label>
+<label>Show Custom Events:
+    <input type="checkbox" id="customEventToggle" checked>
+  </label>
 <label>Custom Event:
     <input id="eventNameInput" placeholder="The Thing" type="text"/>
 </label>
@@ -1136,6 +1168,14 @@ body.menu-hidden #hamburger {
 <option value="slide">Slide</option>
 </select>
 </label>
+
+<label>
+  <input type="checkbox" id="boldToggle"> Bold
+</label>
+<label>
+  <input type="checkbox" id="italicToggle"> Italic
+</label>
+
 <label>Clock Size:
         <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"/> </label>
 <label>Countdown Size:
@@ -1286,7 +1326,7 @@ if (isStandalone) {
 }
 
 
-    const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
+    const days = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
     const dayList = document.getElementById('dayList');
     dayList.innerHTML = days.map((day, i) =>
       `<span class="day${i === new Date().getDay() ? ' today' : ''}">${day}</span>`).join('');
@@ -1902,7 +1942,7 @@ document.getElementById('weekdayScaleSlider')?.addEventListener('input', functio
   const spans = document.querySelectorAll('#dayList span.day');
   spans.forEach(span => {
     const text = span.textContent.trim().toLowerCase();
-    if (['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].includes(text)) {
+    if (['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',  'saturday', ].includes(text)) {
       span.style.fontSize = `${scale * 2}rem`;
     }
   });
@@ -2094,6 +2134,36 @@ function applyStackedSpacing() {
 window.addEventListener("DOMContentLoaded", applyStackedSpacing);
 window.addEventListener("resize", applyStackedSpacing);
 window.addEventListener("orientationchange", applyStackedSpacing);
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const container = document.getElementById('dayList');
+  container.style.transform = `scale(${scale})`;
+  container.style.transformOrigin = 'center';
+  container.style.transition = 'transform 0.2s ease';
+});
+
+
+document.getElementById('customEventToggle')?.addEventListener('change', function () {
+  const isVisible = this.checked;
+  const targets = ['eventCountdown', 'eventMessage', 'countdown'];
+  targets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = isVisible ? '' : 'none';
+    }
+  });
+});
+
+
+document.getElementById('boldToggle')?.addEventListener('change', () => {
+  document.body.style.fontWeight = document.getElementById('boldToggle').checked ? 'bold' : 'normal';
+});
+
+document.getElementById('italicToggle')?.addEventListener('change', () => {
+  document.body.style.fontStyle = document.getElementById('italicToggle').checked ? 'italic' : 'normal';
+});
+
 </script>
 </body>
 </html>
