@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing v8</title>
+<title>ClockThing v8.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1035,6 +1035,23 @@ body.menu-hidden #hamburger {
   background-color: rgba(30, 30, 30, 0.85) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px); /* For Safari support */
+}
+
+@media (max-width: 768px) {
+  .controls input[type="range"] {
+    height: 3px;
+  }
+
+  .controls input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    margin-top: -8.5px;
+  }
+
+  .controls input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
 }
 </style>
 </head>
