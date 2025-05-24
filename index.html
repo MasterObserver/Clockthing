@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing v8.1</title>
+<title>ClockThing 2025.05.24.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1206,6 +1206,11 @@ body.menu-hidden #hamburger {
 <label>Vertical Padding Between Sections:<input id="mobileSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label></details>
 <details>
 <summary>Effects</summary>
+
+<label>Berserker Mode:
+  <input type="checkbox" id="berserkerToggle">
+</label>
+
 <label>Anti-Burn:
     <select id="antiBurnMode">
 <option value="off">Standard</option>
@@ -2164,6 +2169,96 @@ document.getElementById('italicToggle')?.addEventListener('change', () => {
   document.body.style.fontStyle = document.getElementById('italicToggle').checked ? 'italic' : 'normal';
 });
 
+
+function applyBerserkerEffect(enabled) {
+  const targetIds = ['currentTime', 'statusMessage', 'eventMessage', 'eventCountdown', 'countdown'];
+  targetIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+
+    if (!enabled) {
+      el.textContent = text;
+      return;
+    }
+
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.textContent = text[i];
+      span.style.display = 'inline-block';
+      span.style.transition = 'transform 1s ease-in-out';
+      el.appendChild(span);
+    }
+
+    setTimeout(() => {
+      el.querySelectorAll('span').forEach(letter => {
+        const x = (Math.random() - 0.5) * 100;
+        const y = (Math.random() - 0.5) * 100;
+        letter.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+      });
+    }, 100);
+  });
+}
+
+document.getElementById('berserkerToggle')?.addEventListener('change', function () {
+  applyBerserkerEffect(this.checked);
+});
+
+
+let berserkerInterval;
+
+function applyBerserkerEffect(enabled) {
+  const targetIds = ['currentTime', 'statusMessage', 'eventMessage', 'eventCountdown', 'countdown'];
+
+  if (!enabled) {
+    clearInterval(berserkerInterval);
+    targetIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const text = el.textContent || Array.from(el.querySelectorAll('span')).map(span => span.textContent).join('');
+      el.textContent = text;
+    });
+    return;
+  }
+
+  targetIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.textContent = text[i];
+      span.style.display = 'inline-block';
+      span.style.transition = 'transform 0.5s ease-in-out';
+      el.appendChild(span);
+    }
+  });
+
+  berserkerInterval = setInterval(() => {
+    targetIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.querySelectorAll('span').forEach(letter => {
+        const x = (Math.random() - 0.5) * 400;
+        const y = (Math.random() - 0.5) * 400;
+        const r = Math.random() * 1080;
+        letter.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+      });
+    });
+  }, 800);
+}
+
+document.getElementById('berserkerToggle')?.addEventListener('change', function () {
+  applyBerserkerEffect(this.checked);
+});
+
 </script>
+
+<div style="position:fixed; bottom:0.5rem; right:1rem; font-size:0.75rem; opacity:0.6; z-index:10000;">
+  Version 2025.05.24.1
+</div>
 </body>
+
 </html>
