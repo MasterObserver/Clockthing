@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing v7.4.4</title>
+<title>ClockThing v8.2</title>
 <style>
 .stacked-clock {
   display: none;
@@ -76,16 +76,13 @@
       color: var(--text-color);
       font-weight: bold;
     }
-    .controls {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      display: flex;
-      gap: 1rem;
-      z-index: 10;
-      flex-wrap: wrap;
-      display: none;
-    }
+    
+.controls {
+  background-color: rgba(30, 30, 30, 0.85) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
     .controls input,
     .controls select {
       background: var(--bg-color);
@@ -987,6 +984,7 @@ body.menu-hidden #hamburger {
 
 
 
+
 .controls input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -1028,15 +1026,6 @@ body.menu-hidden #hamburger {
   box-shadow: 0 0 2px rgba(255,255,255,0.5);
 }
 
-
-
-
-.controls {
-  background-color: rgba(30, 30, 30, 0.85) !important;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px); /* For Safari support */
-}
-
 @media (max-width: 768px) {
   .controls input[type="range"] {
     height: 3px;
@@ -1054,22 +1043,64 @@ body.menu-hidden #hamburger {
   }
 }
 
-@media (max-width: 768px) {
-  .controls input[type="range"] {
-    height: 4px;
-    padding: 10px 0;
-  }
 
   .controls input[type="range"]::-webkit-slider-thumb {
-    width: 24px;
-    height: 24px;
-    margin-top: -10px;
+    width: 20px;
+    height: 20px;
+    margin-top: -8.5px;
   }
 
   .controls input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
+}
+
+#dayList {
+  margin-bottom: 0 !important;
+}
+
+#statusMessage,
+#eventMessage,
+#countdown,
+#eventCountdown,
+#currentTime {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+#displayContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#dayList,
+#currentTime,
+#countdown,
+#statusMessage,
+#lunchIndicator,
+#eventCountdown,
+#eventMessage {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  display: block;
+}
+
+#stackedContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 </style>
 </head>
