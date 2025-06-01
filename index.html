@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing 2025.06.01.1a</title>
+<title>ClockThing 2025.06.01.2</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1149,6 +1149,7 @@ body.menu-hidden #hamburger {
   <input id="eventTimeInput" type="time" style="flex:1.5; min-width:80px;" />
   <button type="button" id="addEventButton">Add</button>
 </div>
+<div id="daySelector" style="display:flex; flex-wrap:wrap; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="0" />S</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="1" />M</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="2" />T</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="3" />W</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="4" />T</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="5" />F</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="6" />S</label></div>
 <ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
     
 </details>
@@ -2330,7 +2331,8 @@ function addEvent() {
   const name = document.getElementById('eventNameInput')?.value.trim();
   const time = document.getElementById('eventTimeInput')?.value;
   if (!name || !time) return;
-  customEvents.push({ name, time });
+  const dayCheckboxes = Array.from(document.querySelectorAll('.event-day:checked')).map(cb => parseInt(cb.value));
+  customEvents.push({ name, time, days: dayCheckboxes });
   renderEventList();
   saveSettings();
 }
@@ -2341,23 +2343,48 @@ function removeEvent(index) {
   saveSettings();
 }
 
+
 function renderEventList() {
   const list = document.getElementById('eventList');
   if (!list) return;
   list.innerHTML = '';
-  customEvents.forEach((event, index) => {
+
+  const now = new Date();
+  const today = now.getDay();
+  const nowMs = now.getTime();
+
+  const sortedEvents = [...customEvents].sort((a, b) => {
+    const aToday = a.days?.includes(today);
+    const bToday = b.days?.includes(today);
+    if (aToday && bToday) {
+      const [ah, am] = a.time.split(':').map(Number);
+      const [bh, bm] = b.time.split(':').map(Number);
+      const aTime = new Date(now).setHours(ah, am, 0, 0);
+      const bTime = new Date(now).setHours(bh, bm, 0, 0);
+      return aTime - bTime;
+    }
+    if (aToday) return -1;
+    if (bToday) return 1;
+    return 0;
+  });
+
+  sortedEvents.forEach((event, index) => {
     const li = document.createElement('li');
-    li.innerHTML = `${event.name} @ ${event.time} <button onclick="removeEvent(${index})">✕</button>`;
+    const days = (event.days || []).map(d => "SMTWTFS"[d]).join("");
+    li.innerHTML = `<strong>${event.name}</strong> @ ${event.time} [${days}] <button onclick="removeEvent(${index})">✕</button>`;
     list.appendChild(li);
   });
 }
+
 
 function updateMultiEventCountdown() {
   const now = new Date();
   let soonest = null;
   let soonestDiff = Infinity;
 
+  const today = new Date().getDay();
   customEvents.forEach(ev => {
+    if (ev.days && !ev.days.includes(today)) return;
     const [h, m] = ev.time.split(':');
     const t = new Date();
     t.setHours(h, m, 0, 0);
