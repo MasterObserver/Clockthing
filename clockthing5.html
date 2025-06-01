@@ -1,10 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Workday Clock</title>
-  <style>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClockThing 2025.06.01.1</title>
+<style>
+.stacked-clock {
+  display: none;
+}
+
     :root {
       --bg-color: #121212;
       --text-color: #ffffff;
@@ -68,16 +76,13 @@
       color: var(--text-color);
       font-weight: bold;
     }
-    .controls {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      display: flex;
-      gap: 1rem;
-      z-index: 10;
-      flex-wrap: wrap;
-      display: none;
-    }
+    
+.controls {
+  background-color: rgba(30, 30, 30, 0.85) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
     .controls input,
     .controls select {
       background: var(--bg-color);
@@ -214,123 +219,1180 @@
   50% { opacity: 0.6; }
 }
 
+
+body.gradient-bg {
+  background: linear-gradient(-45deg, #1e3c72, #2a5298, #4b6cb7, #182848);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+body.scanlineglow-bg::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 2px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+body.radialdark-bg {
+  background: radial-gradient(circle, #0f0f0f 0%, #000000 100%);
+  animation: radialPulse 6s infinite alternate;
+}
+@keyframes radialPulse {
+  0% { background-color: #121212; }
+  100% { background-color: #1a1a1a; }
+}
+
+body.rgbshift-bg {
+  background: linear-gradient(90deg, #0ff, #f0f, #0f0, #00f);
+  background-size: 600% 600%;
+  animation: rgbShift 20s ease infinite;
+}
+@keyframes rgbShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body.neonflow-bg {
+  background: linear-gradient(120deg, #ff0080, #7928ca, #2c34c7);
+  background-size: 400% 400%;
+  animation: neonFlow 15s ease infinite;
+}
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+body.moondust-bg {
+  background: radial-gradient(circle, #2b2b2b 0%, #000000 100%);
+  background-size: cover;
+  animation: dustyPulse 10s ease-in-out infinite alternate;
+}
+@keyframes dustyPulse {
+  0% { filter: brightness(0.9); }
+  100% { filter: brightness(1.1); }
+}
+
+body.darkwaves-bg {
+  background: repeating-linear-gradient(45deg, #111 0, #111 2px, #1c1c1c 2px, #1c1c1c 4px);
+  animation: waveShift 6s linear infinite;
+}
+@keyframes waveShift {
+  from { background-position: 0 0; }
+  to { background-position: 100% 100%; }
+}
+
+body.synthgrid-bg {
+  background: linear-gradient(to bottom, #111 0%, #000 100%), url('https://www.transparenttextures.com/patterns/graphy.png');
+  background-blend-mode: overlay;
+  animation: gridFade 20s ease-in-out infinite alternate;
+}
+@keyframes gridFade {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; }
+}
+
+
+body.auroradrift-bg {
+  background: linear-gradient(120deg, #222, #0ff, #222);
+  background-size: 300% 300%;
+  animation: auroraDrift 10s ease infinite;
+}
+@keyframes auroraDrift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body.kaleidopulse-bg {
+  background: radial-gradient(circle, #111 30%, #222 70%);
+  animation: kaleidoPulse 8s ease-in-out infinite;
+}
+@keyframes kaleidoPulse {
+  0% { filter: hue-rotate(0deg); }
+  50% { filter: hue-rotate(180deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+body.circuitflow-bg {
+  background: repeating-linear-gradient(90deg, #0ff 0, #0ff 1px, #000 1px, #000 2px);
+  animation: circuitFlow 4s linear infinite;
+}
+@keyframes circuitFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+
+body.blackice-bg {
+  background: linear-gradient(135deg, #1a1a1a, #000);
+  background-size: 100% 100%;
+  animation: blackIceShards 6s ease-in-out infinite;
+}
+@keyframes blackIceShards {
+  0% { background-position: 0 0; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0 0; }
+}
+
+body.lasergrid-bg {
+  background: repeating-linear-gradient(to right, #0f0 0, #0f0 2px, transparent 2px, transparent 20px),
+              repeating-linear-gradient(to bottom, #0f0 0, #0f0 2px, transparent 2px, transparent 20px);
+  background-size: 100% 100%;
+  animation: laserGlow 1.5s ease-in-out infinite;
+}
+@keyframes laserGlow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+
+body.kaleidoscope-bg {
+  background: repeating-conic-gradient(from 0deg, #222 0deg 10deg, #333 10deg 20deg);
+  animation: kaleidoSpin 10s linear infinite;
+}
+@keyframes kaleidoSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+body.infinitetunnel-bg {
+  background: radial-gradient(circle, #000 0%, #222 40%, #000 80%);
+  animation: tunnelZoom 4s ease-in-out infinite;
+}
+@keyframes tunnelZoom {
+  0%, 100% { background-size: 100% 100%; }
+  50% { background-size: 120% 120%; }
+}
+
+body.plasmawave-bg {
+  background: linear-gradient(45deg, #111, #222, #111);
+  background-size: 200% 200%;
+  animation: plasmaFlow 3s ease-in-out infinite;
+}
+@keyframes plasmaFlow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+body.pixelrain-bg {
+  background: repeating-linear-gradient(to bottom, #0f0 0 1px, transparent 1px 3px);
+  animation: pixelFall 1s linear infinite;
+}
+@keyframes pixelFall {
+  from { background-position: 0 0; }
+  to { background-position: 0 100%; }
+}
+
+body.starfield-bg {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/2/28/Starsinthesky.gif') repeat center center;
+  background-size: cover;
+}
+
+body.deepspaceclouds-bg {
+  background: radial-gradient(ellipse at center, #1a1a1a, #000);
+  animation: cloudDrift 30s linear infinite;
+}
+@keyframes cloudDrift {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+body.auroraborealis-bg {
+  background: linear-gradient(60deg, #0ff, #00f, #f0f, #000);
+  background-size: 600% 600%;
+  animation: auroraShift 20s ease-in-out infinite;
+}
+@keyframes auroraShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body.blobmorph-bg {
+  background: radial-gradient(circle at 50% 50%, #222 20%, #000 80%);
+  animation: blobMorph 12s infinite alternate ease-in-out;
+}
+@keyframes blobMorph {
+  0% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+  100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+}
+
+body.nebulae-bg {
+  background: conic-gradient(from 0deg, #111, #222, #111, #000);
+  animation: nebulaeCycle 25s linear infinite;
+}
+@keyframes nebulaeCycle {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+body.filmgrain-bg::before {
+  content: "";
+  position: fixed;
+  width: 100%; height: 100%;
+  background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') repeat;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.crtglow-bg::before {
+  content: "";
+  position: fixed;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(to bottom, #fff1 1px, transparent 2px);
+  mix-blend-mode: screen;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+body.dust-bg::before {
+  content: "";
+  position: fixed;
+  width: 100%; height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/dark-mosaic.png') repeat;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+body.wireframe-bg {
+  background: radial-gradient(circle, #111 40%, #000 100%);
+  background-size: cover;
+  animation: wireRotate 8s linear infinite;
+}
+@keyframes wireRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+body.hexagons-bg {
+  background: url('https://www.transparenttextures.com/patterns/hexellence.png') repeat;
+  animation: hexMove 10s linear infinite;
+}
+@keyframes hexMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+body.rings-bg {
+  background: radial-gradient(circle, #0f0 5%, transparent 5.5%);
+  background-size: 20px 20px;
+  animation: ringSpin 12s linear infinite;
+}
+@keyframes ringSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+body.glitchpulse-bg {
+  background: #111;
+  animation: glitchFlash 1s steps(2, start) infinite;
+}
+@keyframes glitchFlash {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+body.ledshimmer-bg {
+  background: linear-gradient(to right, #000, #0f0, #000);
+  background-size: 200% 100%;
+  animation: ledSlide 2s linear infinite;
+}
+@keyframes ledSlide {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+body.orbitals-bg {
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  animation: orbitPulse 6s ease-in-out infinite;
+}
+@keyframes orbitPulse {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0.2; }
+}
+
+body.rainbowgrid-bg {
+  background: repeating-linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet, red);
+  background-size: 400% 100%;
+  animation: rainbowFlow 20s linear infinite;
+}
+@keyframes rainbowFlow {
+  0% { background-position: 0% 0; }
+  100% { background-position: 400% 0; }
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    padding: 1rem;
+    position: relative !important;
+  }
+
+  .time {
+    font-size: 4rem !important;
+  }
+
+  .countdown {
+    font-size: 3rem !important;
+  }
+
+  .message {
+    font-size: 2rem !important;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto;
+    max-height: 90vh;
+    font-size: 0.9rem;
+  }
+
+  .fullscreen-btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .day {
+    font-size: 1.2rem !important;
+  }
+
+  .lunch-indicator {
+    font-size: 1.5rem !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .day:not(.today) {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 100vw;
+    height: auto;
+    max-width: 100%;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    padding: 1rem;
+  }
+
+  .time {
+    font-size: 4rem !important;
+  }
+
+  .countdown {
+    font-size: 3rem !important;
+  }
+
+  .message {
+    font-size: 2rem !important;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+    overflow-y: auto;
+    max-height: 90vh;
+    font-size: 0.9rem;
+  }
+
+  .fullscreen-btn {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .day:not(.today) {
+    display: none !important;
+  }
+
+  .day.today {
+    font-size: 1.2rem !important;
+  }
+
+  .lunch-indicator {
+    font-size: 1.5rem !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .controls label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .controls input,
+  .controls select {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .day:not(.today) {
+    display: none !important;
+  }
+
+  .day.today {
+    font-size: 1.2rem !important;
+  }
+
+  summary {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
+
+  details {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px), screen and (orientation: landscape) and (max-height: 500px) {
+  .day:not(.today) {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+  .time {
+    font-size: 20vh !important;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+  }
+  .countdown {
+    font-size: 5vh !important;
+    margin-top: 1rem;
+  }
+  .day-list {
+    display: none !important;
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .time {
+    display: none !important;
+  }
+  .stacked-clock {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 20vw;
+    color: var(--accent-color);
+    font-weight: bold;
+    height: 70vh;
+  }
+  .stacked-part {
+    line-height: 1;
+  }
+  .stacked-ampm {
+    font-size: 5vw;
+    position: absolute;
+    bottom: 2vh;
+    right: 4vw;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .stacked-clock {
+    height: 80vh;
+    font-size: 24vw;
+  }
+  .stacked-ampm {
+    font-size: 5vw;
+    bottom: 1vh;
+  }
+  .countdown {
+    margin-top: 1vh;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .stacked-clock {
+    height: 100vh;
+    font-size: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    font-weight: bold;
+  }
+  .stacked-part {
+    margin: 0;
+    padding: 0;
+    line-height: 0.9;
+  }
+  .stacked-ampm {
+    position: absolute;
+    top: 1vh;
+    right: 4vw;
+    font-size: 3vh;
+  }
+  .time {
+    display: none !important;
+  }
+  .day-list {
+    display: none !important;
+  }
+  .countdown {
+    font-size: 3vh !important;
+    margin-top: 1vh;
+  }
+  .message {
+    font-size: 2.5vh !important;
+  }
+}
+
+.pwa-mode .stacked-clock {
+  height: 100vh;
+  font-size: 30vh;
+}
+.pwa-mode .stacked-part {
+  line-height: 0.9;
+}
+.pwa-mode .stacked-ampm {
+  font-size: 4vh;
+  top: 1vh;
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .message {
+    display: block !important;
+    font-size: 2.5vh !important;
+    margin-top: 1vh;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .time {
+    font-size: 2rem !important;
+  }
+  .countdown {
+    font-size: 1.5rem !important;
+  }
+  .message {
+    font-size: 1.2rem !important;
+  }
+  .lunch-indicator {
+    font-size: 1rem !important;
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+}
+
+
+@media screen and (max-width: 768px) {
+  .message {
+    max-height: 5vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  .message {
+    display: block !important;
+    font-size: 2.5vh !important;
+    max-height: none !important;
+    white-space: normal !important;
+    text-align: center;
+    margin-top: 1vh;
+    padding: 0 1rem;
+  }
+}
+
+
+@media screen and (max-width: 768px) and (orientation: portrait) {
+  #displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+  #eventMessage,
+  #statusMessage {
+    display: block !important;
+    font-size: 2.2vh !important;
+    white-space: normal !important;
+    text-align: center;
+    margin: 1vh 0 !important;
+    padding: 0 1rem;
+  }
+
+  body.mobile-portrait .stacked-clock {
+    padding-top: 2vh !important;
+    padding-bottom: 2vh !important;
+    height: auto !important;
+    max-height: 60vh;
+  }
+}
+
+
+.controls {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100vh;
+  background-color: #1e1e1e;
+  padding: 1rem;
+  overflow-y: auto;
+  display: block !important;
+  z-index: 1000;
+  font-family: system-ui, sans-serif;
+  border-right: 1px solid #333;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+
+.controls details {
+  margin-bottom: 1rem;
+  background: #2a2a2a;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #444;
+}
+
+.controls summary {
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.controls label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+.controls input,
+.controls select {
+  background: #121212;
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  padding: 0.4rem;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+}
+
+#displayContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+
+#hamburger {
+  position: fixed;
+  top: 1rem;
+  
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background: #1e1e1e;
+  border: 1px solid #444;
+  color: var(--accent-color);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 2000;
+  border-radius: 0.3rem;
+}
+
+#hamburger.hidden {
+  display: none;
+}
+
+body.menu-hidden .controls {
+  transform: translateX(-100%);
+}
+
+.controls {
+  transition: transform 0.3s ease;
+}
+
+
+#hamburger {
+  transition: left 0.3s ease;
+  left: 310px; /* aligned near sidebar */
+}
+
+body.menu-hidden #hamburger {
+  left: 10px; /* back to edge when menu is hidden */
+}
+
+
+
+
+.controls input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1px;
+  background: var(--accent-color);
+  border-radius: 1px;
+  outline: none;
+  margin: 0.5rem 0;
+  padding: 0;
+  border: none;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  margin-top: -4.5px;
+  box-shadow: 0 0 2px rgba(255,255,255,0.5);
+}
+
+.controls input[type="range"]::-moz-range-track {
+  height: 1px;
+  background: var(--accent-color);
+  border-radius: 1px;
+}
+
+.controls input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 2px rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+  .controls input[type="range"] {
+    height: 3px;
+  }
+
+  .controls input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    margin-top: -8.5px;
+  }
+
+  .controls input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+  .controls input[type="range"]::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    margin-top: -8.5px;
+  }
+
+  .controls input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+#dayList {
+  margin-bottom: 0 !important;
+}
+
+#statusMessage,
+#eventMessage,
+#countdown,
+#eventCountdown,
+#currentTime {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+#dayList {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 1 !important;
+}
+
+#statusMessage,
+#eventMessage,
+#countdown,
+#eventCountdown,
+#currentTime {
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.1 !important;
+}
+
+#stackedContent > * {
+  margin: 0.1rem 0 !important;
+}
+
+@keyframes floatChaos {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(1turn);
+    opacity: 0.75;
+  }
+}
+.berserker .berserker-char {
+  display: inline-block;
+  animation: floatChaos 3s infinite ease-in-out alternate;
+}
+
 </style>
 </head>
 <body>
-  <div class="controls" id="controlsMenu">
-    <label>Font size:
-      <select id="fontSizePicker">
-        <option value="3">XS</option>
-        <option value="4">S</option>
-        <option value="5">M</option>
-        <option value="6">L</option>
-        <option value="8">XL</option>
-        <option value="10">XXL</option>
-        <option value="12">XXXL</option>
-        <option value="14" selected>XXXXL</option>
-        <option value="18">MAX</option>
-      </select>
-    </label>
-    <label>Font:
-      <select id="fontFamilyPicker">
-        <!-- options shortened for brevity -->
-        <option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
-        <option value="Arial, sans-serif">Arial</option>
-        <option value="Helvetica, sans-serif">Helvetica</option>
-        <option value="Verdana, sans-serif">Verdana</option>
-        <option value="Tahoma, sans-serif">Tahoma</option>
-        <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
-        <option value="'Times New Roman', serif">Times New Roman</option>
-        <option value="Georgia, serif">Georgia</option>
-        <option value="'Courier New', monospace">Courier New</option>
-        <option value="'Lucida Console', monospace">Lucida Console</option>
-        <option value="Consolas, monospace">Consolas</option>
-        <option value="Monaco, monospace">Monaco</option>
-        <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
-        <option value="Impact, fantasy">Impact</option>
-        <option value="Garamond, serif">Garamond</option>
-        <option value="'Palatino Linotype', serif">Palatino Linotype</option>
-        <option value="Calibri, sans-serif">Calibri</option>
-        <option value="Cambria, serif">Cambria</option>
-        <option value="Candara, sans-serif">Candara</option>
-        <option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
-        <option value="'Gill Sans', sans-serif">Gill Sans</option>
-        <option value="Optima, sans-serif">Optima</option>
-        <option value="monospace" selected>Monospace</option>
-      </select>
-    </label>
-    <label>Color:
-      <input type="color" id="colorPicker" value="#ffff00">
-    </label>
-    <label>Anti-Burn:
-      <select id="antiBurnMode">
-        <option value="off">Standard</option>
-        <option value="shift">Pixel Shift</option>
-        <option value="dim">Idle Dim</option>
-        <option value="bounce" selected>Bounce</option>
-      </select>
-    </label>
-    <label>
-  Random Bounce Color:
-  <input type="checkbox" id="randomColorToggle">
-</label>
-<label>Bounce Speed:
-      <select id="bounceSpeedPicker">
-        <option value="1">Slowest</option>
-        <option value="5">Slow</option>
-        <option value="10" selected>Normal</option>
-        <option value="15">Fast</option>
-        <option value="20">Fastest</option>
-      </select>
-    </label>
+<button id="hamburger">☰</button>
+<div class="controls" id="controlsMenu">
+<details>
+<summary>Program</summary>
+<div id="programToggles" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+  <label>24 Hour Clock:
+    <input type="checkbox" id="twentyFourHourToggle">
+  </label>
+</div>
 
+
+
+<label>Start Time:
+    <input id="startTimeInput" type="time" value="08:30"/>
+</label>
+<label>Lunch Start:
+    <input id="lunchStartInput" type="time" value="11:30"/>
+</label>
+<label>Lunch End:
+    <input id="lunchEndInput" type="time" value="12:30"/>
+</label>
+<label>End Time:
+    <input id="endTimeInput" type="time" value="17:30"/>
+</label>
+
+<label>Custom Message:
+    <input id="customMessageToggle" type="checkbox"/>
+</label>
+<label>
+<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/>
+</label>
+<label>Show Custom Events:
+    <input type="checkbox" id="customEventToggle" checked>
+  </label>
+
+<label>Custom Events:</label>
+<div id="eventInputRow" style="display:flex; flex-wrap:wrap; gap: 0.5rem; margin-bottom:0.5rem;">
+  <input id="eventNameInput" type="text" placeholder="Event Name" style="flex:1.2; min-width:120px;" />
+  <input id="eventTimeInput" type="time" style="flex:1.5; min-width:80px;" />
+  <button type="button" id="addEventButton">Add</button>
+</div>
+<ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
+    
+</details>
+<details>
+<summary>Settings</summary>
+<label>Font:
+    <select id="fontFamilyPicker">
+<option value="Arial, sans-serif">Arial</option>
+<option value="Calibri, sans-serif">Calibri</option>
+<option value="Cambria, serif">Cambria</option>
+<option value="Candara, sans-serif">Candara</option>
+<option value="'Comic Sans MS', 'Arial Rounded MT Bold', sans-serif">Comic Sans MS</option>
+<option value="Consolas, monospace">Consolas</option>
+<option value="'Courier New', monospace">Courier New</option>
+<option value="'Franklin Gothic Medium', sans-serif">Franklin Gothic Medium</option>
+<option value="Garamond, serif">Garamond</option>
+<option value="Georgia, serif">Georgia</option>
+<option value="'Gill Sans', sans-serif">Gill Sans</option>
+<option value="Helvetica, sans-serif">Helvetica</option>
+<option value="Impact, fantasy">Impact</option>
+<option value="'Lucida Console', monospace">Lucida Console</option>
+<option value="Monaco, monospace">Monaco</option>
+<option selected="" value="monospace">Monospace</option>
+<option value="Optima, sans-serif">Optima</option>
+<option value="'Palatino Linotype', serif">Palatino Linotype</option>
+<option value="'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Segoe UI</option>
+<option value="Tahoma, sans-serif">Tahoma</option>
+<option value="'Times New Roman', serif">Times New Roman</option>
+<option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+<option value="Verdana, sans-serif">Verdana</option>
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
+</select>
+</label>
+
+<label>
+  <input type="checkbox" id="boldToggle"> Bold
+</label>
+<label>
+  <input type="checkbox" id="italicToggle"> Italic
+</label>
+
+<label>Clock Size:
+        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"/> </label>
+<label>Countdown Size:
+        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="range" value="5"/> </label>
+<label>Message Size:
+        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="range" value="3"/> </label>
+<label>Lunch Size:
+        <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="range" value="2"/> </label>
+<div class="control-group">
+<label for="weekdayScaleSlider">Highlighted Weekday Scale:</label>
+<input id="weekdayScaleSlider" max="2.5" min="0.5" step="0.1" type="range" value="1"/>
+</div>
+<label>Desktop Padding Between Sections:<input id="desktopSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label><fieldset class="control-group"><legend>Colors</legend><label>Font Color:<input id="fontColorPicker" type="color" value="#ffffff"/></label><label>Highlight Color:<input id="colorPicker" type="color" value="#ffff00"/></label><label>Background Color:<input id="bgColorPicker" type="color" value="#121212"/></label></fieldset></details>
+<details>
+<summary>Mobile</summary>
+<label>Portrait Clock Size:
+    <input id="portraitClockSize" max="25" min="1" step="0.1" type="range" value="16"/>
+</label>
+<label>Portrait Message Size:
+    <input id="portraitMessageSize" max="10" min="1" step="0.1" type="range" value="2.2"/>
+</label>
+<label>Portrait Top Padding:
+    <input id="portraitTopPadding" max="20" min="0" step="0.5" type="range" value="4"/>
+</label>
+<label>Portrait Bottom Padding:
+    <input id="portraitBottomPadding" max="20" min="0" step="0.5" type="range" value="10"/>
+</label>
+<label>Vertical Padding Between Sections:<input id="mobileSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label></details>
+<details>
+<summary>Effects</summary>
+
+<label>Berserker Mode:
+  <input type="checkbox" id="berserkerToggle">
+</label>
+
+<label>Anti-Burn:
+    <select id="antiBurnMode">
+<option value="off">Standard</option>
+<option value="shift">Pixel Shift</option>
+<option value="dim">Idle Dim</option>
+<option selected="" value="bounce">Bounce</option>
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
+</select>
+</label>
+<label>Anti-Burn Intensity:
+  <input id="antiBurnIntensity" max="20" min="1" step="1" type="range" value="10"/>
+</label>
+<div style="display:none;"><label>Bounce Speed:
+    <select id="bounceSpeedPicker">
+<option value="1">Slowest</option>
+<option value="5">Slow</option>
+<option selected="" value="10">Normal</option>
+<option value="15">Fast</option>
+<option value="20">Fastest</option>
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
+</select>
+</label></div>
+<label>Random Bounce Color:
+    <input id="randomColorToggle" type="checkbox"/>
+</label>
 <label>Screen Effect:
-  <select id="screenEffectPicker">
-    <option value="none">None</option>
-    <option value="matrix">Matrix Rain</option>
-    <option value="scanlines">Scanlines</option>
-    <option value="static">Static Noise</option>
-    <option value="vignette">Vignette Glow</option>
-    <option value="blur">Warped Blur</option>
-    <option value="grid">Retro Grid</option>
-    <option value="pulse">Pulsing Background</option>
-    <option value="cycle">Color Cycle</option>
-    <option value="vignette">Vignette Glow</option>
-    <option value="glitch">Glitch Flicker</option>
-    <option value="glow">Halo Glow</option>
-  </select>
+    <select id="screenEffectPicker">
+<option value="none">None</option>
+<option value="matrix">Matrix Rain</option>
+<option value="scanlines">Scanlines</option>
+<option value="static">Static Noise</option>
+<option value="vignette">Vignette Glow</option>
+<option value="blur">Warped Blur</option>
+<option value="grid">Retro Grid</option>
+<option value="pulse">Pulsing Background</option>
+<option value="cycle">Color Cycle</option>
+<option value="glitch">Glitch Flicker</option>
+<option value="glow">Halo Glow</option>
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
+</select>
 </label>
+<label>Background Animation:
+    <select id="backgroundAnimationPicker">
+<option value="none">None</option>
+<option value="gradient">Moving Gradient</option>
+<option value="scanlineglow">Scanline Glow</option>
+<option value="radialdark">Radial Pulse</option>
+<option value="rgbshift">RGB Shift</option>
+<option value="neonflow">Neon Flow</option>
+<option value="moondust">Moon Dust</option>
+<option value="darkwaves">Dark Waves</option>
+<option value="synthgrid">Synth Grid</option>
+<option value="auroradrift">Aurora Drift</option>
+<option value="kaleidopulse">Kaleido Pulse</option>
+<option value="circuitflow">Circuit Flow</option>
+<option value="blackice">Black Ice Shards</option>
+<option value="lasergrid">Laser Grid</option>
+<option value="kaleidoscope">Kaleidoscope</option>
+<option value="infinitetunnel">Infinite Tunnel</option>
+<option value="plasmawave">Static Plasma Waves</option>
+<option value="pixelrain">Pixel Rain</option>
+<option value="starfield">Starfield Parallax</option>
+<option value="deepspaceclouds">Deep Space Clouds</option>
+<option value="auroraborealis">Aurora Borealis</option>
+<option value="blobmorph">Morphing Blobs</option>
+<option value="nebulae">Color Shifting Nebulae</option>
+<option value="filmgrain">Film Grain</option>
+<option value="crtglow">CRT Glow</option>
+<option value="dust">Animated Dust</option>
+<option value="wireframe">Wireframe Grid</option>
+<option value="hexagons">Flowing Hexagons</option>
+<option value="rings">Concentric Rings</option>
+<option value="glitchpulse">Glitch Pulse</option>
+<option value="ledshimmer">LED Shimmer</option>
+<option value="orbitals">Soft Glow Orbitals</option>
+<option value="rainbowgrid">Rainbow Grid</option>
+<option value="float">Float</option>
+<option value="wiggle">Wiggle</option>
+<option value="warp">Warp</option>
+<option value="twist">Twist</option>
+<option value="shimmer">Shimmer</option>
+<option value="pulse">Pulse</option>
+<option value="slide">Slide</option>
+</select>
+</label>
+</details>
+</div>
+<button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
+<div id="displayWrapper"><div class="container" id="displayContainer">
+<div id="stackedContent" style="display: flex; flex-direction: column; align-items: center;"><div class="day-list" id="dayList"></div><div class="stacked-clock" id="stackedClock">
+<div class="stacked-part" id="stackedHours">--</div>
+<div class="stacked-part" id="stackedMinutes">--</div>
+<div class="stacked-part" id="stackedSeconds">--</div>
+</div><div class="time" id="currentTime">--:--:--</div><div class="countdown" id="countdown">--:--:--</div><div class="message" id="statusMessage"></div><div class="lunch-indicator" id="lunchIndicator"></div><div class="countdown" id="eventCountdown"></div><div class="message" id="eventMessage"></div></div></div></div>
+<script>
+// Detect PWA mode and apply class for custom styling
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+if (isStandalone) {
+  document.body.classList.add("pwa-mode");
+}
 
-  </div>
 
-  <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
-
-  <div class="container" id="displayContainer">
-    <div class="day-list" id="dayList"></div>
-    <div class="time" id="currentTime">--:--:--</div>
-    <div class="countdown" id="countdown">--:--:--</div>
-    <div class="message" id="statusMessage"></div>
-    <div class="lunch-indicator" id="lunchIndicator"></div>
-  </div>
-
-  <script>
-    const days = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', ''];
+    const days = ['SUN', 'MON', 'TUES', 'WED', 'THURS', 'FRI', 'SAT'];
     const dayList = document.getElementById('dayList');
     dayList.innerHTML = days.map((day, i) =>
       `<span class="day${i === new Date().getDay() ? ' today' : ''}">${day}</span>`).join('');
 
     function updateTime() {
       const now = new Date();
-      document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+      
+    const use24h = document.getElementById('twentyFourHourToggle')?.checked;
+const hNow = now.getHours();
+const hText = use24h ? String(hNow).padStart(2, '0') : String(hNow % 12 || 12).padStart(2, '0');
+const mText = String(now.getMinutes()).padStart(2, '0');
+const sText = String(now.getSeconds()).padStart(2, '0');
+const ampm = use24h ? '' : (hNow >= 12 ? ' PM' : ' AM');
+document.getElementById('currentTime').textContent = hText + ':' + mText + ':' + sText + ampm;
+
+    // Update stacked clock too
+    const h = now.getHours();
+const use24hStacked = document.getElementById('twentyFourHourToggle')?.checked;
+const hours = String(use24hStacked ? h : (h % 12 || 12)).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    document.getElementById('stackedHours').textContent = hours;
+    document.getElementById('stackedMinutes').textContent = minutes;
+    document.getElementById('stackedSeconds').textContent = seconds;
+    
+
+      
+      const startInput = document.getElementById('startTimeInput').value.split(':');
+      const endInput = document.getElementById('endTimeInput').value.split(':');
+      const lunchStartInput = document.getElementById('lunchStartInput').value.split(':');
+      const lunchEndInput = document.getElementById('lunchEndInput').value.split(':');
 
       const start = new Date();
-      start.setHours(8, 30, 0, 0);
+      start.setHours(parseInt(startInput[0]), parseInt(startInput[1]), 0, 0);
       const end = new Date();
-      end.setHours(17, 30, 0, 0);
+      end.setHours(parseInt(endInput[0]), parseInt(endInput[1]), 0, 0);
       const lunchStart = new Date();
-      lunchStart.setHours(12, 0, 0, 0);
+      lunchStart.setHours(parseInt(lunchStartInput[0]), parseInt(lunchStartInput[1]), 0, 0);
       const lunchEnd = new Date();
-      lunchEnd.setHours(13, 0, 0, 0);
+      lunchEnd.setHours(parseInt(lunchEndInput[0]), parseInt(lunchEndInput[1]), 0, 0);
+    
 
       const messageEl = document.getElementById('statusMessage');
       const countdownEl = document.getElementById('countdown');
@@ -338,25 +1400,21 @@
 
       lunchEl.textContent = (now >= lunchStart && now < lunchEnd) ? 'LUNCH TIME' : '';
 
+      const useCustom = document.getElementById('customMessageToggle').checked;
+      const customMessage = document.getElementById('customMessageInput').value;
+
       if (now >= start && now <= end && now.getDay() >= 1 && now.getDay() <= 5) {
         const totalSeconds = Math.floor((end - now) / 1000);
         const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
         const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
         const seconds = String(totalSeconds % 60).padStart(2, '0');
         countdownEl.textContent = `${hours}:${minutes}:${seconds}`;
-        messageEl.textContent = 'Time left in workday';
+        messageEl.textContent = useCustom ? customMessage : 'Time left in workday';
       } else {
         countdownEl.textContent = '';
-        messageEl.textContent = 'OUT OF OFFICE';
+        messageEl.textContent = useCustom ? customMessage : '';
       }
     }
-
-    document.getElementById('fontSizePicker').addEventListener('change', function () {
-      const fontSize = Number(this.value);
-      document.querySelector('.time').style.fontSize = `${fontSize}rem`;
-      document.querySelector('.countdown').style.fontSize = `${fontSize - 3}rem`;
-      document.querySelector('.message').style.fontSize = `${fontSize - 5}rem`;
-    });
 
     document.getElementById('fontFamilyPicker').addEventListener('change', function () {
       document.body.style.fontFamily = this.value;
@@ -366,10 +1424,24 @@
       document.documentElement.style.setProperty('--accent-color', this.value);
     });
 
-    function toggleFullScreen() {
-      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
-      else document.exitFullscreen();
+    
+function toggleFullScreen() {
+  const docEl = document.documentElement;
+  if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+    if (docEl.requestFullscreen) {
+      docEl.requestFullscreen();
+    } else if (docEl.webkitRequestFullscreen) {
+      docEl.webkitRequestFullscreen(); // Safari
     }
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen(); // Safari
+    }
+  }
+}
+
 
     // Smooth bounce variables
     let bounceSpeed = 10;
@@ -401,44 +1473,63 @@
   ];
   return neonColors[Math.floor(Math.random() * neonColors.length)];
 }
+let lastColorChange = 0;
+const colorChangeCooldown = 500; // milliseconds
+
+function maybeChangeColor() {
+  const now = Date.now();
+  if (now - lastColorChange > colorChangeCooldown) {
+    document.documentElement.style.setProperty('--accent-color', getRandomColor());
+    lastColorChange = now;
+  }
+}
+
 function bounceLoop() {
-      const mode = document.getElementById('antiBurnMode').value;
-      if (mode !== 'bounce') {
-        requestAnimationFrame(bounceLoop);
-        return;
-      }
+  const mode = document.getElementById('antiBurnMode')?.value || 'off';
+  if (mode !== 'bounce') {
+    requestAnimationFrame(bounceLoop);
+    return;
+  }
 
-      const rect = container.getBoundingClientRect();
-      const maxX = window.innerWidth - rect.width;
-      const maxY = window.innerHeight - rect.height;
+  const intensity = parseFloat(document.getElementById("antiBurnIntensity").value);
+  const rect = container.getBoundingClientRect();
+  const containerWidth = rect.width || container.offsetWidth;
+  const containerHeight = rect.height || container.offsetHeight;
+  const maxX = window.innerWidth - containerWidth;
+  const maxY = window.innerHeight - containerHeight;
 
-      posX += velX * bounceSpeed * 0.1;
-      posY += velY * bounceSpeed * 0.1;
+  posX += velX * intensity * 0.1;
+  posY += velY * intensity * 0.1;
 
-      
-      if (posX <= 0 || posX >= maxX) {
-        velX *= -1;
-        if (document.getElementById('randomColorToggle').checked) {
-          document.documentElement.style.setProperty('--accent-color', getRandomColor());
-        }
-      }
-      if (posY <= 0 || posY >= maxY) {
-        velY *= -1;
-        if (document.getElementById('randomColorToggle').checked) {
-          document.documentElement.style.setProperty('--accent-color', getRandomColor());
-        }
-      }
-
-
-      const smoothX = lerp(parseFloat(container.style.left || 0), posX, 0.1);
-      const smoothY = lerp(parseFloat(container.style.top || 0), posY, 0.1);
-
-      container.style.left = smoothX + 'px';
-      container.style.top = smoothY + 'px';
-      container.style.position = 'absolute';
-
-      requestAnimationFrame(bounceLoop);
+  if (posX <= 0 || posX >= maxX) {
+    velX *= -1;
+    posX = Math.max(0, Math.min(posX, maxX));
+    if (document.getElementById('randomColorToggle').checked) {
+      maybeChangeColor();
     }
+  }
+
+  if (posY <= 0 || posY >= maxY) {
+    velY *= -1;
+    posY = Math.max(0, Math.min(posY, maxY));
+    if (document.getElementById('randomColorToggle').checked) {
+      maybeChangeColor();
+    }
+  }
+
+  let smoothX = lerp(parseFloat(container.style.left) || posX, posX, 0.1);
+  let smoothY = lerp(parseFloat(container.style.top) || posY, posY, 0.1);
+
+  // Clamp smooth positions just in case
+  smoothX = Math.max(0, Math.min(smoothX, maxX));
+  smoothY = Math.max(0, Math.min(smoothY, maxY));
+
+  container.style.left = smoothX + 'px';
+  container.style.top = smoothY + 'px';
+  container.style.position = 'absolute';
+
+  requestAnimationFrame(bounceLoop);
+}
 
     // Pixel shift + dim (still frame-based)
     let offset = 0;
@@ -454,8 +1545,50 @@ screenEffectPicker.addEventListener('change', function () {
   }
 });
 
+    
+document.getElementById('backgroundAnimationPicker').addEventListener('change', function () {
+  document.body.classList.remove('gradient-bg', 'scanlineglow-bg', 'radialdark-bg', 'rgbshift-bg', 'neonflow-bg', 'moondust-bg', 'darkwaves-bg', 'synthgrid-bg', 'auroradrift-bg', 'kaleidopulse-bg', 'circuitflow-bg', 'blackice-bg', 'lasergrid-bg', 'kaleidoscope-bg', 'infinitetunnel-bg', 'plasmawave-bg', 'pixelrain-bg', 'starfield-bg', 'deepspaceclouds-bg', 'auroraborealis-bg', 'blobmorph-bg', 'nebulae-bg', 'filmgrain-bg', 'crtglow-bg', 'dust-bg', 'wireframe-bg', 'hexagons-bg', 'rings-bg', 'glitchpulse-bg', 'ledshimmer-bg', 'orbitals-bg', 'rainbowgrid-bg');
+  if (this.value !== 'none') {
+    document.body.classList.add(this.value + '-bg');
+  }
+});
+
+function updateEventCountdown() {
+  const name = document.getElementById('eventNameInput').value.trim();
+  const time = document.getElementById('eventTimeInput').value;
+  const eventCountdown = document.getElementById('eventCountdown');
+  const eventMessage = document.getElementById('eventMessage');
+
+  if (!time) {
+    eventCountdown.textContent = '';
+    eventMessage.textContent = '';
+    return;
+  }
+
+  const now = new Date();
+  const [hours, minutes] = time.split(':');
+  const eventTime = new Date();
+  eventTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+
+  if (eventTime < now) {
+    eventCountdown.textContent = '';
+    eventMessage.textContent = '';
+    return;
+  }
+
+  const diffSeconds = Math.floor((eventTime - now) / 1000);
+  const h = String(Math.floor(diffSeconds / 3600)).padStart(2, '0');
+  const m = String(Math.floor((diffSeconds % 3600) / 60)).padStart(2, '0');
+  const s = String(diffSeconds % 60).padStart(2, '0');
+
+  eventCountdown.textContent = `${h}:${m}:${s}`;
+  eventMessage.textContent = name ? `${name}` : 'The Thing';
+}
+
     updateTime();
-      const mode = document.getElementById('antiBurnMode').value;
+setInterval(updateTime, 1000);
+    
+      const mode = document.getElementById('antiBurnMode')?.value || 'off';
       if (mode === 'shift') {
         offset += 0.05;
         const x = Math.sin(offset) * 5;
@@ -488,7 +1621,7 @@ screenEffectPicker.addEventListener('change', function () {
       hideTimeout = setTimeout(() => {
         controls.style.display = 'none';
         fullscreenBtn.style.display = 'none';
-      }, 3000);
+      }, 30000); // <-- This number controls how soon the menu disappears (6000ms = 6 seconds)
     }
 
     document.addEventListener('mousemove', showMenus);
@@ -501,8 +1634,781 @@ screenEffectPicker.addEventListener('change', function () {
       })
     );
 
+    
+document.getElementById('backgroundAnimationPicker').addEventListener('change', function () {
+  document.body.classList.remove('gradient-bg', 'scanlineglow-bg', 'radialdark-bg', 'rgbshift-bg', 'neonflow-bg', 'moondust-bg', 'darkwaves-bg', 'synthgrid-bg', 'auroradrift-bg', 'kaleidopulse-bg', 'circuitflow-bg', 'blackice-bg', 'lasergrid-bg', 'kaleidoscope-bg', 'infinitetunnel-bg', 'plasmawave-bg', 'pixelrain-bg', 'starfield-bg', 'deepspaceclouds-bg', 'auroraborealis-bg', 'blobmorph-bg', 'nebulae-bg', 'filmgrain-bg', 'crtglow-bg', 'dust-bg', 'wireframe-bg', 'hexagons-bg', 'rings-bg', 'glitchpulse-bg', 'ledshimmer-bg', 'orbitals-bg', 'rainbowgrid-bg');
+  if (this.value !== 'none') {
+    document.body.classList.add(this.value + '-bg');
+  }
+});
+
+function updateEventCountdown() {
+  const name = document.getElementById('eventNameInput').value.trim();
+  const time = document.getElementById('eventTimeInput').value;
+  const eventCountdown = document.getElementById('eventCountdown');
+  const eventMessage = document.getElementById('eventMessage');
+
+  if (!time) {
+    eventCountdown.textContent = '';
+    eventMessage.textContent = '';
+    return;
+  }
+
+  const now = new Date();
+  const [hours, minutes] = time.split(':');
+  const eventTime = new Date();
+  eventTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
+
+  if (eventTime < now) {
+    eventCountdown.textContent = '';
+    eventMessage.textContent = '';
+    return;
+  }
+
+  const diffSeconds = Math.floor((eventTime - now) / 1000);
+  const h = String(Math.floor(diffSeconds / 3600)).padStart(2, '0');
+  const m = String(Math.floor((diffSeconds % 3600) / 60)).padStart(2, '0');
+  const s = String(diffSeconds % 60).padStart(2, '0');
+
+  eventCountdown.textContent = `${h}:${m}:${s}`;
+  eventMessage.textContent = name ? `${name}` : 'event';
+}
+
     updateTime();
+setInterval(updateTime, 1000);
+    
     bounceLoop();
-  </script>
+  
+function applyCustomFontSizes() {
+  document.querySelector('.time').style.fontSize = document.getElementById('clockFontSizePicker').value + 'rem';
+  document.querySelectorAll('.countdown').forEach(el => el.style.fontSize = document.getElementById('countdownFontSizePicker').value + 'rem');
+  document.querySelectorAll('.message').forEach(el => el.style.fontSize = document.getElementById('messageFontSizePicker').value + 'rem');
+  document.querySelector('.lunch-indicator').style.fontSize = document.getElementById('lunchFontSizePicker').value + 'rem';
+}
+
+['clockFontSizePicker', 'countdownFontSizePicker', 'messageFontSizePicker', 'lunchFontSizePicker'].forEach(id => {
+  document.getElementById(id).addEventListener('input', applyCustomFontSizes);
+});
+
+// Save settings to localStorage
+function saveSettings() {
+  const weekdayScale = document.getElementById("weekdayScaleSlider")?.value;
+  const settings = {
+    portraitClockSize: document.getElementById('portraitClockSize').value,
+    portraitMessageSize: document.getElementById('portraitMessageSize').value,
+    portraitTopPadding: document.getElementById('portraitTopPadding').value,
+    portraitBottomPadding: document.getElementById('portraitBottomPadding').value,
+    startTime: document.getElementById('startTimeInput').value,
+    lunchStart: document.getElementById('lunchStartInput').value,
+    lunchEnd: document.getElementById('lunchEndInput').value,
+    endTime: document.getElementById('endTimeInput').value,
+    customMessageToggle: document.getElementById('customMessageToggle').checked,
+    customMessageInput: document.getElementById('customMessageInput').value,
+    eventNameInput: document.getElementById('eventNameInput').value,
+    eventTimeInput: document.getElementById('eventTimeInput').value,
+    fontFamily: document.getElementById('fontFamilyPicker').value,
+    color: document.getElementById('colorPicker').value,
+    antiBurnMode: document.getElementById('antiBurnMode').value,
+    bounceSpeed: document.getElementById('bounceSpeedPicker').value,
+    randomColorToggle: document.getElementById('randomColorToggle').checked,
+    clockFontSize: document.getElementById('clockFontSizePicker').value,
+    countdownFontSize: document.getElementById('countdownFontSizePicker').value,
+    messageFontSize: document.getElementById('messageFontSizePicker').value,
+    lunchFontSize: document.getElementById('lunchFontSizePicker').value,
+    screenEffect: document.getElementById('screenEffectPicker').value,
+    backgroundAnimation: document.getElementById('backgroundAnimationPicker').value
+  };
+  localStorage.setItem('clockthingSettings', JSON.stringify(settings));
+}
+
+// Load settings from localStorage
+function loadSettings() {
+  const saved = JSON.parse(localStorage.getItem('clockthingSettings'));
+  if (!saved) return;
+  document.getElementById('portraitClockSize').value = saved.portraitClockSize || "3.5";
+  document.getElementById('portraitMessageSize').value = saved.portraitMessageSize || "2.2";
+  document.getElementById('portraitTopPadding').value = saved.portraitTopPadding || "4";
+  document.getElementById('portraitBottomPadding').value = saved.portraitBottomPadding || "10";
+
+  document.getElementById('startTimeInput').value = saved.startTime || "08:30";
+  document.getElementById('lunchStartInput').value = saved.lunchStart || "11:30";
+  document.getElementById('lunchEndInput').value = saved.lunchEnd || "12:30";
+  document.getElementById('endTimeInput').value = saved.endTime || "17:30";
+  document.getElementById('customMessageToggle').checked = saved.customMessageToggle || false;
+  document.getElementById('customMessageInput').value = saved.customMessageInput || "";
+  document.getElementById('eventNameInput').value = saved.eventNameInput || "";
+  document.getElementById('eventTimeInput').value = saved.eventTimeInput || "";
+  document.getElementById('fontFamilyPicker').value = saved.fontFamily || "monospace";
+  document.getElementById('colorPicker').value = saved.color || "#ffff00";
+  document.getElementById('antiBurnMode').value = saved.antiBurnMode || "bounce";
+  document.getElementById('bounceSpeedPicker').value = saved.bounceSpeed || "10";
+  document.getElementById('randomColorToggle').checked = saved.randomColorToggle || false;
+  document.getElementById('clockFontSizePicker').value = saved.clockFontSize || "8";
+  document.getElementById('countdownFontSizePicker').value = saved.countdownFontSize || "5";
+  document.getElementById('messageFontSizePicker').value = saved.messageFontSize || "3";
+  document.getElementById('lunchFontSizePicker').value = saved.lunchFontSize || "2";
+  document.getElementById('screenEffectPicker').value = saved.screenEffect || "none";
+  document.getElementById('backgroundAnimationPicker').value = saved.backgroundAnimation || "none";
+  if (saved.weekdayScale) document.getElementById("weekdayScaleSlider").value = saved.weekdayScale;
+}
+
+// Hook into inputs to trigger saving
+window.addEventListener('DOMContentLoaded', () => {
+  loadSettings();
+  document.querySelectorAll('input, select').forEach(el => {
+    el.addEventListener('change', saveSettings);
+    el.addEventListener('input', saveSettings);
+  });
+});
+
+
+function enforceWindowResizeAwareness() {
+  document.documentElement.style.height = window.innerHeight + "px";
+  document.body.style.height = window.innerHeight + "px";
+}
+
+function updateMobilePortraitFlag() {
+  const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+  const isMobile = window.innerWidth <= 768;
+  document.body.classList.toggle("mobile-portrait", isPortrait && isMobile);
+}
+
+window.addEventListener("resize", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
+window.addEventListener("orientationchange", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
+window.addEventListener("DOMContentLoaded", () => {
+  enforceWindowResizeAwareness();
+  updateMobilePortraitFlag();
+});
+
+
+function applyPortraitStyles() {
+  if (!document.body.classList.contains("mobile-portrait")) return;
+
+  const clockSize = document.getElementById('portraitClockSize').value + 'rem';
+  const msgSize = document.getElementById('portraitMessageSize').value + 'vh';
+  const padTop = document.getElementById('portraitTopPadding').value + 'vh';
+  const padBottom = document.getElementById('portraitBottomPadding').value + 'vh';
+
+  const clock = document.querySelector('.stacked-clock');
+  const container = document.getElementById('displayContainer');
+  const msg1 = document.getElementById('statusMessage');
+  const msg2 = document.getElementById('eventMessage');
+
+  if (clock) clock.style.fontSize = clockSize;
+  if (container) {
+    container.style.paddingTop = padTop;
+    container.style.paddingBottom = padBottom;
+  }
+  if (msg1) msg1.style.fontSize = msgSize;
+  if (msg2) msg2.style.fontSize = msgSize;
+}
+
+function setupPortraitStyleListeners() {
+  const ids = ['portraitClockSize', 'portraitMessageSize', 'portraitTopPadding', 'portraitBottomPadding'];
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener('input', applyPortraitStyles);
+    }
+  });
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  setupPortraitStyleListeners();
+  applyPortraitStyles();
+});
+window.addEventListener("resize", applyPortraitStyles);
+window.addEventListener("orientationchange", applyPortraitStyles);
+
+
+const hamburger = document.getElementById("hamburger");
+let hideMenuTimeout;
+
+function toggleMenu() {
+  document.body.classList.toggle("menu-hidden");
+  resetHamburgerTimeout();
+}
+
+function resetHamburgerTimeout() {
+  hamburger.classList.remove("hidden");
+  clearTimeout(hideMenuTimeout);
+  hideMenuTimeout = setTimeout(() => {
+    hamburger.classList.add("hidden");
+  }, 30000);
+}
+
+hamburger.addEventListener("click", toggleMenu);
+document.addEventListener("mousemove", resetHamburgerTimeout);
+document.addEventListener("click", resetHamburgerTimeout);
+resetHamburgerTimeout();
+
+
+function applyAntiBurnEffect(mode, intensity) {
+  const container = document.getElementById('displayContainer');
+  container.style.animation = '';
+  container.style.transition = 'none';
+  container.style.transform = 'none';
+
+  const duration = (21 - intensity) / 2; // map 1-20 to 10s (slow) to 0.5s (fast)
+
+  switch (mode) {
+    case 'float':
+      container.style.animation = `floatMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'wiggle':
+      container.style.animation = `wiggleMove ${Math.max(duration * 0.5, 0.2)}s infinite`;
+      break;
+    case 'warp':
+      container.style.animation = `warpMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'twist':
+      container.style.animation = `twistMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'pulse':
+      container.style.animation = `pulseMove ${duration}s ease-in-out infinite`;
+      break;
+    case 'slide':
+      container.style.animation = `slideMove ${duration}s linear infinite alternate`;
+      break;
+    default:
+      container.style.animation = '';
+      }
+}
+
+// Hook into effect change and intensity change
+const antiBurnModePicker = document.getElementById('antiBurnMode');
+const intensitySlider = document.getElementById('antiBurnIntensity');
+
+function updateAntiBurnVisuals() {
+  const mode = antiBurnModePicker.value;
+  const intensity = parseInt(intensitySlider.value);
+  applyAntiBurnEffect(mode, intensity);
+
+  if (mode === "bounce") {
+    // Reset bounce positions inside screen
+    const rect = container.getBoundingClientRect();
+    const containerWidth = rect.width || container.offsetWidth;
+    const containerHeight = rect.height || container.offsetHeight;
+    const maxX = window.innerWidth - containerWidth;
+    const maxY = window.innerHeight - containerHeight;
+
+    posX = Math.min(Math.max(posX, 0), maxX);
+    posY = Math.min(Math.max(posY, 0), maxY);
+    velX = 1;
+    velY = 1;
+
+    container.style.left = posX + 'px';
+    container.style.top = posY + 'px';
+    container.style.position = 'absolute';
+  }
+}
+
+antiBurnModePicker.addEventListener('change', updateAntiBurnVisuals);
+intensitySlider.addEventListener('input', updateAntiBurnVisuals);
+
+// Initial call on load
+window.addEventListener('DOMContentLoaded', updateAntiBurnVisuals);
+
+
+function updateCenteredEffectMode() {
+  const container = document.getElementById('displayContainer');
+  const mode = document.getElementById('antiBurnMode')?.value || 'off';
+
+  if (mode !== 'bounce') {
+    container.style.top = '50%';
+    container.style.left = '50%';
+    container.style.transform = 'translate(-50%, -50%)';
+    container.style.position = 'absolute';
+  }
+}
+
+document.getElementById('antiBurnMode').addEventListener('change', updateCenteredEffectMode);
+window.addEventListener('DOMContentLoaded', updateCenteredEffectMode);
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+window.addEventListener('load', () => {
+  const container = document.getElementById('displayContainer');
+  if (container) {
+    container.style.position = 'absolute';
+    container.style.top = '50%';
+    container.style.left = '50%';
+    container.style.transform = 'translate(-50%, -50%)';
+  }
+});
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+document.getElementById('backgroundColorPicker')?.addEventListener('input', (e) => {
+  document.body.style.backgroundColor = e.target.value;
+});
+
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const weekdays = document.querySelectorAll('.weekday');
+  weekdays.forEach(day => {
+    day.style.transform = `scale(${scale})`;
+    day.style.transformOrigin = 'center';
+  });
+});
+
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const spans = document.querySelectorAll('#dayList span.day');
+  spans.forEach(span => {
+    const text = span.textContent.trim().toLowerCase();
+    if (['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday',  'saturday', ].includes(text)) {
+      span.style.fontSize = `${scale * 2}rem`;
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const spacingSlider = document.getElementById("mobileSpacingSlider");
+  const spacingValue = localStorage.getItem("mobileSpacing") || "1.5";
+  spacingSlider.value = spacingValue;
+
+  function applySpacing(val) {
+    const container = document.getElementById("displayContainer");
+    if (container) {
+      container.style.rowGap = val + "vh";
+    }
+  }
+
+  applySpacing(spacingValue);
+
+  spacingSlider.addEventListener("input", () => {
+    const val = spacingSlider.value;
+    localStorage.setItem("mobileSpacing", val);
+    applySpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const spacingSlider = document.getElementById("mobileSpacingSlider");
+  const spacingValue = localStorage.getItem("mobileSpacing") || "1.5";
+  spacingSlider.value = spacingValue;
+
+  function applySpacing(val) {
+    if (document.body.classList.contains("mobile-portrait")) {
+      const stackedClock = document.querySelector(".stacked-clock");
+      const statusMessage = document.getElementById("statusMessage");
+      const countdown = document.getElementById("countdown");
+      const lunchIndicator = document.getElementById("lunchIndicator");
+      const eventCountdown = document.getElementById("eventCountdown");
+      const eventMessage = document.getElementById("eventMessage");
+
+      const elements = [stackedClock, statusMessage, countdown, lunchIndicator, eventCountdown, eventMessage];
+      elements.forEach(el => {
+        if (el) {
+          el.style.marginBottom = val + "vh";
+        }
+      });
+    }
+  }
+
+  applySpacing(spacingValue);
+
+  spacingSlider.addEventListener("input", () => {
+    const val = spacingSlider.value;
+    localStorage.setItem("mobileSpacing", val);
+    applySpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const desktopSlider = document.getElementById("desktopSpacingSlider");
+  const desktopValue = localStorage.getItem("desktopSpacing") || "1.5";
+  desktopSlider.value = desktopValue;
+
+  function applyDesktopSpacing(val) {
+    if (!document.body.classList.contains("mobile-portrait")) {
+      const elements = [
+        document.getElementById("currentTime"),
+        document.getElementById("statusMessage"),
+        document.getElementById("countdown"),
+        document.getElementById("lunchIndicator"),
+        document.getElementById("eventCountdown"),
+        document.getElementById("eventMessage")
+      ];
+      elements.forEach(el => {
+        if (el) {
+          el.style.marginBottom = val + "vh";
+        }
+      });
+    }
+  }
+
+  applyDesktopSpacing(desktopValue);
+
+  desktopSlider.addEventListener("input", () => {
+    const val = desktopSlider.value;
+    localStorage.setItem("desktopSpacing", val);
+    applyDesktopSpacing(val);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const fontColorPicker = document.getElementById("fontColorPicker");
+  const bgColorPicker = document.getElementById("bgColorPicker");
+
+  const savedFontColor = localStorage.getItem("fontColor") || "#ffffff";
+  const savedBgColor = localStorage.getItem("bgColor") || "#121212";
+
+  fontColorPicker.value = savedFontColor;
+  bgColorPicker.value = savedBgColor;
+
+  document.documentElement.style.setProperty('--text-color', savedFontColor);
+  document.body.style.backgroundColor = savedBgColor;
+
+  fontColorPicker.addEventListener("input", () => {
+    const color = fontColorPicker.value;
+    localStorage.setItem("fontColor", color);
+    document.documentElement.style.setProperty('--text-color', color);
+  });
+
+  bgColorPicker.addEventListener("input", () => {
+    const color = bgColorPicker.value;
+    localStorage.setItem("bgColor", color);
+    document.body.style.backgroundColor = color;
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  function applyStackedSpacing() {
+    const gap = document.body.classList.contains("mobile-portrait")
+      ? localStorage.getItem("mobileSpacing") || "1.5"
+      : localStorage.getItem("desktopSpacing") || "1.5";
+
+    const stacked = document.getElementById("stackedContent");
+    if (stacked) {
+      stacked.style.gap = gap + "vh";
+    }
+  }
+
+  const sliders = ['mobileSpacingSlider', 'desktopSpacingSlider'];
+  sliders.forEach(id => {
+    const slider = document.getElementById(id);
+    if (slider) {
+      slider.addEventListener('input', applyStackedSpacing);
+    }
+  });
+
+  applyStackedSpacing();
+  window.addEventListener("resize", applyStackedSpacing);
+  window.addEventListener("orientationchange", applyStackedSpacing);
+});
+
+function applyStackedSpacing() {
+  const stacked = document.getElementById("stackedContent");
+  if (!stacked) return;
+  const mobile = document.body.classList.contains("mobile-portrait");
+  const gap = mobile
+    ? document.getElementById("mobileSpacingSlider")?.value || "1.5"
+    : document.getElementById("desktopSpacingSlider")?.value || "1.5";
+
+  stacked.style.gap = gap + "vh";
+  if (mobile) {
+    localStorage.setItem("mobileSpacing", gap);
+  } else {
+    localStorage.setItem("desktopSpacing", gap);
+  }
+}
+
+['mobileSpacingSlider', 'desktopSpacingSlider'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", applyStackedSpacing);
+  }
+});
+
+window.addEventListener("DOMContentLoaded", applyStackedSpacing);
+window.addEventListener("resize", applyStackedSpacing);
+window.addEventListener("orientationchange", applyStackedSpacing);
+
+function applyStackedSpacing() {
+  const stacked = document.getElementById("stackedContent");
+  if (!stacked) return;
+  const isMobile = document.body.classList.contains("mobile-portrait");
+  const val = isMobile
+    ? document.getElementById("mobileSpacingSlider")?.value || "1.5"
+    : document.getElementById("desktopSpacingSlider")?.value || "1.5";
+
+  stacked.style.gap = val + "vh";
+  localStorage.setItem(isMobile ? "mobileSpacing" : "desktopSpacing", val);
+}
+
+['mobileSpacingSlider', 'desktopSpacingSlider'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("input", applyStackedSpacing);
+  }
+});
+
+window.addEventListener("DOMContentLoaded", applyStackedSpacing);
+window.addEventListener("resize", applyStackedSpacing);
+window.addEventListener("orientationchange", applyStackedSpacing);
+
+document.getElementById('weekdayScaleSlider')?.addEventListener('input', function (e) {
+  const scale = parseFloat(e.target.value);
+  const container = document.getElementById('dayList');
+  container.style.transform = `scale(${scale})`;
+  container.style.transformOrigin = 'center';
+  container.style.transition = 'transform 0.2s ease';
+});
+
+
+document.getElementById('customEventToggle')?.addEventListener('change', function () {
+  const isVisible = this.checked;
+  const targets = ['eventCountdown', 'eventMessage', 'countdown'];
+  targets.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.style.display = isVisible ? '' : 'none';
+    }
+  });
+});
+
+
+document.getElementById('boldToggle')?.addEventListener('change', () => {
+  document.body.style.fontWeight = document.getElementById('boldToggle').checked ? 'bold' : 'normal';
+});
+
+document.getElementById('italicToggle')?.addEventListener('change', () => {
+  document.body.style.fontStyle = document.getElementById('italicToggle').checked ? 'italic' : 'normal';
+});
+
+
+function applyBerserkerEffect(enabled) {
+  const targetIds = ['currentTime', 'statusMessage', 'eventMessage', 'eventCountdown', 'countdown'];
+  targetIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+
+    if (!enabled) {
+      el.textContent = text;
+      return;
+    }
+
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.textContent = text[i];
+      span.style.display = 'inline-block';
+      span.style.transition = 'transform 1s ease-in-out';
+      el.appendChild(span);
+    }
+
+    setTimeout(() => {
+      el.querySelectorAll('span').forEach(letter => {
+        const x = (Math.random() - 0.5) * 100;
+        const y = (Math.random() - 0.5) * 100;
+        letter.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random() * 360}deg)`;
+      });
+    }, 100);
+  });
+}
+
+document.getElementById('berserkerToggle')?.addEventListener('change', function () {
+  applyBerserkerEffect(this.checked);
+});
+
+
+let berserkerInterval;
+
+function applyBerserkerEffect(enabled) {
+  const targetIds = ['currentTime', 'statusMessage', 'eventMessage', 'eventCountdown', 'countdown'];
+
+  if (!enabled) {
+    clearInterval(berserkerInterval);
+    targetIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const text = el.textContent || Array.from(el.querySelectorAll('span')).map(span => span.textContent).join('');
+      el.textContent = text;
+    });
+    return;
+  }
+
+  targetIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const text = el.textContent;
+    el.innerHTML = '';
+    for (let i = 0; i < text.length; i++) {
+      const span = document.createElement('span');
+      span.textContent = text[i];
+      span.style.display = 'inline-block';
+      span.style.transition = 'transform 0.5s ease-in-out';
+      el.appendChild(span);
+    }
+  });
+
+  berserkerInterval = setInterval(() => {
+    targetIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.querySelectorAll('span').forEach(letter => {
+        const x = (Math.random() - 0.5) * 400;
+        const y = (Math.random() - 0.5) * 400;
+        const r = Math.random() * 1080;
+        letter.style.transform = `translate(${x}px, ${y}px) rotate(${r}deg)`;
+      });
+    });
+  }, 800);
+}
+
+document.getElementById('berserkerToggle')?.addEventListener('change', function () {
+  applyBerserkerEffect(this.checked);
+});
+
+
+document.getElementById('berserkerToggle').addEventListener('change', function () {
+  const elements = document.querySelectorAll('.time, .countdown, .message, .day');
+  if (this.checked) {
+    elements.forEach(el => {
+      wrapCharacters(el);
+      el.classList.add('berserker');
+    });
+  } else {
+    elements.forEach(el => {
+      unwrapCharacters(el);
+      el.classList.remove('berserker');
+    });
+  }
+});
+
+function wrapCharacters(el) {
+  if (el.dataset.wrapped === "true") return;
+  const text = el.textContent;
+  el.innerHTML = '';
+  text.split('').forEach(char => {
+    const span = document.createElement('span');
+    span.className = 'berserker-char';
+    span.textContent = char;
+    const x = (Math.random() - 0.5) * 40;
+    const y = (Math.random() - 0.5) * 40;
+    const delay = Math.random() * 2;
+    span.style.setProperty('--dx', `${x}px`);
+    span.style.setProperty('--dy', `${y}px`);
+    span.style.animationDelay = `${delay}s`;
+    el.appendChild(span);
+  });
+  el.dataset.wrapped = "true";
+}
+
+function unwrapCharacters(el) {
+  if (el.dataset.wrapped !== "true") return;
+  const chars = Array.from(el.querySelectorAll('.berserker-char')).map(span => span.textContent).join('');
+  el.textContent = chars;
+  el.dataset.wrapped = "false";
+}
+
+
+// === MULTI EVENT SUPPORT ===
+let customEvents = [];
+
+function addEvent() {
+  const name = document.getElementById('eventNameInput')?.value.trim();
+  const time = document.getElementById('eventTimeInput')?.value;
+  if (!name || !time) return;
+  customEvents.push({ name, time });
+  renderEventList();
+  saveSettings();
+}
+
+function removeEvent(index) {
+  customEvents.splice(index, 1);
+  renderEventList();
+  saveSettings();
+}
+
+function renderEventList() {
+  const list = document.getElementById('eventList');
+  if (!list) return;
+  list.innerHTML = '';
+  customEvents.forEach((event, index) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${event.name} @ ${event.time} <button onclick="removeEvent(${index})">✕</button>`;
+    list.appendChild(li);
+  });
+}
+
+function updateMultiEventCountdown() {
+  const now = new Date();
+  let soonest = null;
+  let soonestDiff = Infinity;
+
+  customEvents.forEach(ev => {
+    const [h, m] = ev.time.split(':');
+    const t = new Date();
+    t.setHours(h, m, 0, 0);
+    const diff = t - now;
+    if (diff > 0 && diff < soonestDiff) {
+      soonestDiff = diff;
+      soonest = ev;
+    }
+  });
+
+  const eventCountdown = document.getElementById('eventCountdown');
+  const eventMessage = document.getElementById('eventMessage');
+
+  if (soonest) {
+    const secs = Math.floor(soonestDiff / 1000);
+    const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    if (eventCountdown) eventCountdown.textContent = `${h}:${m}:${s}`;
+    if (eventMessage) eventMessage.textContent = soonest.name;
+  } else {
+    if (eventCountdown) eventCountdown.textContent = '';
+    if (eventMessage) eventMessage.textContent = '';
+  }
+}
+
+// Patch existing saveSettings
+const originalSaveSettings = saveSettings;
+saveSettings = function () {
+  const settings = JSON.parse(localStorage.getItem('clockthingSettings')) || {};
+  settings.customEvents = customEvents;
+  localStorage.setItem('clockthingSettings', JSON.stringify(settings));
+  originalSaveSettings();
+};
+
+// Load on DOM ready
+window.addEventListener('DOMContentLoaded', () => {
+  const settings = JSON.parse(localStorage.getItem('clockthingSettings'));
+  if (settings?.customEvents) {
+    customEvents = settings.customEvents;
+    renderEventList();
+  }
+
+  const btn = document.getElementById("addEventButton");
+  if (btn) btn.addEventListener("click", addEvent);
+});
+
+// Add interval safely
+setInterval(updateMultiEventCountdown, 1000);
+
+</script>
 </body>
+
 </html>
