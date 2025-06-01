@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing 2025.06.01.3</title>
+<title>ClockThing 2025.06.01.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1159,7 +1159,7 @@ body.menu-hidden #hamburger {
     <input id="customMessageToggle" type="checkbox"/>
 </label>
 <label>
-<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/>
+<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/><br><button onclick="generateRandomMessage()" style="margin-top:6px; font-size:0.9rem;">🎲 Generate Message</button>
 </label>
 <label>Show Custom Events:
     <input type="checkbox" id="customEventToggle" checked>
@@ -2503,6 +2503,23 @@ function importEvents(event) {
   reader.readAsText(file);
 }
 
+
+
+const quotes = [
+  "Do. Or do not. There is no try.",
+  "I find your lack of faith disturbing.",
+  "Time is an illusion. Lunchtime doubly so.",
+  "One does not simply walk into Mordor.",
+  "Why do we fall? So we can learn to pick ourselves back up.",
+  "Your future is created by what you do today, not tomorrow.",
+  "Life's too short to remove USB safely."
+];
+
+function generateRandomMessage() {
+  const random = quotes[Math.floor(Math.random() * quotes.length)];
+  const input = document.getElementById('customMessageInput');
+  if (input) input.value = random;
+}
 
 </script>
 </body>
