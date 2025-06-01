@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing 2025.06.01.2</title>
+<title>ClockThing 2025.06.01.1</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1106,6 +1106,28 @@ body.menu-hidden #hamburger {
 }
 
 </style>
+
+<style>
+#daySelector {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+#daySelector label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.8rem;
+  min-width: 1.8em;
+}
+#daySelector input[type="checkbox"] {
+  margin-bottom: 0.1rem;
+}
+</style>
+
 </head>
 <body>
 <button id="hamburger">☰</button>
@@ -1149,7 +1171,7 @@ body.menu-hidden #hamburger {
   <input id="eventTimeInput" type="time" style="flex:1.5; min-width:80px;" />
   <button type="button" id="addEventButton">Add</button>
 </div>
-<div id="daySelector" style="display:flex; flex-wrap:wrap; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="0" />S</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="1" />M</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="2" />T</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="3" />W</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="4" />T</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="5" />F</label><label style="font-size:0.85rem;"><input type="checkbox" class="event-day" value="6" />S</label></div>
+<div id="daySelector" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; align-items:center; width:100%; max-width:100%; overflow-x:auto;" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="0" /><span style="display:inline-block; width:1.25em;">S</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="1" /><span style="display:inline-block; width:1.25em;">M</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="2" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="3" /><span style="display:inline-block; width:1.25em;">W</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="4" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="5" /><span style="display:inline-block; width:1.25em;">F</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="6" /><span style="display:inline-block; width:1.25em;">S</span></label></div>
 <ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
     
 </details>
