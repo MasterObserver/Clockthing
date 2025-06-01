@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing 2025.06.01.1</title>
+<title>ClockThing 2025.06.01.3</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1172,6 +1172,12 @@ body.menu-hidden #hamburger {
   <button type="button" id="addEventButton">Add</button>
 </div>
 <div id="daySelector" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; align-items:center; width:100%; max-width:100%; overflow-x:auto;" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="0" /><span style="display:inline-block; width:1.25em;">S</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="1" /><span style="display:inline-block; width:1.25em;">M</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="2" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="3" /><span style="display:inline-block; width:1.25em;">W</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="4" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="5" /><span style="display:inline-block; width:1.25em;">F</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="6" /><span style="display:inline-block; width:1.25em;">S</span></label></div>
+
+<div style="margin-bottom: 0.5rem;">
+  <button onclick="exportEvents()">📤 Export Events</button>
+  <input type="file" id="importFile" style="display:none" accept=".json" onchange="importEvents(event)">
+  <button onclick="document.getElementById('importFile').click()">📥 Import Events</button>
+</div>
 <ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
     
 </details>
@@ -2456,6 +2462,47 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Add interval safely
 setInterval(updateMultiEventCountdown, 1000);
+
+
+function exportEvents() {
+  const blob = new Blob([JSON.stringify(customEvents, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "custom_events.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+
+function importEvents(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (Array.isArray(data) && data.every(ev => ev.name && ev.time)) {
+        customEvents = data.map(ev => ({
+          name: ev.name,
+          time: ev.time,
+          days: Array.isArray(ev.days) ? ev.days : []
+        }));
+        renderEventList();
+        saveCustomEvents();
+        console.log("Imported events successfully:", customEvents);
+      } else {
+        console.warn("Invalid structure", data);
+        alert("Invalid format: expected an array of event objects.");
+      }
+    } catch (err) {
+      console.error("Import failed", err);
+      alert("Failed to import events.");
+    }
+  };
+  reader.readAsText(file);
+}
+
 
 </script>
 </body>
