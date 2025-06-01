@@ -7,7 +7,7 @@
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>ClockThing 2025.05.24.1</title>
+<title>ClockThing 2025.06.01.1a</title>
 <style>
 .stacked-clock {
   display: none;
@@ -1089,6 +1089,22 @@ body.menu-hidden #hamburger {
 #stackedContent > * {
   margin: 0.1rem 0 !important;
 }
+
+@keyframes floatChaos {
+  from {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(1turn);
+    opacity: 0.75;
+  }
+}
+.berserker .berserker-char {
+  display: inline-block;
+  animation: floatChaos 3s infinite ease-in-out alternate;
+}
+
 </style>
 </head>
 <body>
@@ -1126,12 +1142,15 @@ body.menu-hidden #hamburger {
 <label>Show Custom Events:
     <input type="checkbox" id="customEventToggle" checked>
   </label>
-<label>Custom Event:
-    <input id="eventNameInput" placeholder="The Thing" type="text"/>
-</label>
-<label>Event Time:
-    <input id="eventTimeInput" type="time"/>
-</label>
+
+<label>Custom Events:</label>
+<div id="eventInputRow" style="display:flex; flex-wrap:wrap; gap: 0.5rem; margin-bottom:0.5rem;">
+  <input id="eventNameInput" type="text" placeholder="Event Name" style="flex:1.2; min-width:120px;" />
+  <input id="eventTimeInput" type="time" style="flex:1.5; min-width:80px;" />
+  <button type="button" id="addEventButton">Add</button>
+</div>
+<ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
+    
 </details>
 <details>
 <summary>Settings</summary>
@@ -1339,11 +1358,18 @@ if (isStandalone) {
     function updateTime() {
       const now = new Date();
       
-    document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+    const use24h = document.getElementById('twentyFourHourToggle')?.checked;
+const hNow = now.getHours();
+const hText = use24h ? String(hNow).padStart(2, '0') : String(hNow % 12 || 12).padStart(2, '0');
+const mText = String(now.getMinutes()).padStart(2, '0');
+const sText = String(now.getSeconds()).padStart(2, '0');
+const ampm = use24h ? '' : (hNow >= 12 ? ' PM' : ' AM');
+document.getElementById('currentTime').textContent = hText + ':' + mText + ':' + sText + ampm;
 
     // Update stacked clock too
     const h = now.getHours();
-    const hours = String(h % 12 || 12).padStart(2, '0');
+const use24hStacked = document.getElementById('twentyFourHourToggle')?.checked;
+const hours = String(use24hStacked ? h : (h % 12 || 12)).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
@@ -1561,7 +1587,7 @@ function updateEventCountdown() {
 
     updateTime();
 setInterval(updateTime, 1000);
-    updateEventCountdown();
+    
       const mode = document.getElementById('antiBurnMode')?.value || 'off';
       if (mode === 'shift') {
         offset += 0.05;
@@ -1650,7 +1676,7 @@ function updateEventCountdown() {
 
     updateTime();
 setInterval(updateTime, 1000);
-    updateEventCountdown();
+    
     bounceLoop();
   
 function applyCustomFontSizes() {
@@ -2253,6 +2279,134 @@ function applyBerserkerEffect(enabled) {
 document.getElementById('berserkerToggle')?.addEventListener('change', function () {
   applyBerserkerEffect(this.checked);
 });
+
+
+document.getElementById('berserkerToggle').addEventListener('change', function () {
+  const elements = document.querySelectorAll('.time, .countdown, .message, .day');
+  if (this.checked) {
+    elements.forEach(el => {
+      wrapCharacters(el);
+      el.classList.add('berserker');
+    });
+  } else {
+    elements.forEach(el => {
+      unwrapCharacters(el);
+      el.classList.remove('berserker');
+    });
+  }
+});
+
+function wrapCharacters(el) {
+  if (el.dataset.wrapped === "true") return;
+  const text = el.textContent;
+  el.innerHTML = '';
+  text.split('').forEach(char => {
+    const span = document.createElement('span');
+    span.className = 'berserker-char';
+    span.textContent = char;
+    const x = (Math.random() - 0.5) * 40;
+    const y = (Math.random() - 0.5) * 40;
+    const delay = Math.random() * 2;
+    span.style.setProperty('--dx', `${x}px`);
+    span.style.setProperty('--dy', `${y}px`);
+    span.style.animationDelay = `${delay}s`;
+    el.appendChild(span);
+  });
+  el.dataset.wrapped = "true";
+}
+
+function unwrapCharacters(el) {
+  if (el.dataset.wrapped !== "true") return;
+  const chars = Array.from(el.querySelectorAll('.berserker-char')).map(span => span.textContent).join('');
+  el.textContent = chars;
+  el.dataset.wrapped = "false";
+}
+
+
+// === MULTI EVENT SUPPORT ===
+let customEvents = [];
+
+function addEvent() {
+  const name = document.getElementById('eventNameInput')?.value.trim();
+  const time = document.getElementById('eventTimeInput')?.value;
+  if (!name || !time) return;
+  customEvents.push({ name, time });
+  renderEventList();
+  saveSettings();
+}
+
+function removeEvent(index) {
+  customEvents.splice(index, 1);
+  renderEventList();
+  saveSettings();
+}
+
+function renderEventList() {
+  const list = document.getElementById('eventList');
+  if (!list) return;
+  list.innerHTML = '';
+  customEvents.forEach((event, index) => {
+    const li = document.createElement('li');
+    li.innerHTML = `${event.name} @ ${event.time} <button onclick="removeEvent(${index})">✕</button>`;
+    list.appendChild(li);
+  });
+}
+
+function updateMultiEventCountdown() {
+  const now = new Date();
+  let soonest = null;
+  let soonestDiff = Infinity;
+
+  customEvents.forEach(ev => {
+    const [h, m] = ev.time.split(':');
+    const t = new Date();
+    t.setHours(h, m, 0, 0);
+    const diff = t - now;
+    if (diff > 0 && diff < soonestDiff) {
+      soonestDiff = diff;
+      soonest = ev;
+    }
+  });
+
+  const eventCountdown = document.getElementById('eventCountdown');
+  const eventMessage = document.getElementById('eventMessage');
+
+  if (soonest) {
+    const secs = Math.floor(soonestDiff / 1000);
+    const h = String(Math.floor(secs / 3600)).padStart(2, '0');
+    const m = String(Math.floor((secs % 3600) / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    if (eventCountdown) eventCountdown.textContent = `${h}:${m}:${s}`;
+    if (eventMessage) eventMessage.textContent = soonest.name;
+  } else {
+    if (eventCountdown) eventCountdown.textContent = '';
+    if (eventMessage) eventMessage.textContent = '';
+  }
+}
+
+// Patch existing saveSettings
+const originalSaveSettings = saveSettings;
+saveSettings = function () {
+  const settings = JSON.parse(localStorage.getItem('clockthingSettings')) || {};
+  settings.customEvents = customEvents;
+  localStorage.setItem('clockthingSettings', JSON.stringify(settings));
+  originalSaveSettings();
+};
+
+// Load on DOM ready
+window.addEventListener('DOMContentLoaded', () => {
+  const settings = JSON.parse(localStorage.getItem('clockthingSettings'));
+  if (settings?.customEvents) {
+    customEvents = settings.customEvents;
+    renderEventList();
+  }
+
+  const btn = document.getElementById("addEventButton");
+  if (btn) btn.addEventListener("click", addEvent);
+});
+
+// Add interval safely
+setInterval(updateMultiEventCountdown, 1000);
 
 </script>
 </body>
