@@ -1106,7 +1106,6 @@ body.menu-hidden #hamburger {
 }
 
 </style>
-
 <style>
 #daySelector {
   display: flex;
@@ -1127,7 +1126,6 @@ body.menu-hidden #hamburger {
   margin-bottom: 0.1rem;
 }
 </style>
-
 </head>
 <body>
 <button id="hamburger">☰</button>
@@ -1135,16 +1133,13 @@ body.menu-hidden #hamburger {
 <details>
 <summary>Program</summary>
 <div id="programToggles" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-  <label>24 Hour Clock:
-    <input type="checkbox" id="twentyFourHourToggle">
-  </label>
-</div>
-
-
-
-<label>Start Time:
-    <input id="startTimeInput" type="time" value="08:30"/>
+<label>24 Hour Clock:
+    <input id="twentyFourHourToggle" type="checkbox"/>
 </label>
+</div>
+<label>Start Time:
+    <input id="startTimeInput" type="time" value="08:30">
+</input></label>
 <label>Lunch Start:
     <input id="lunchStartInput" type="time" value="11:30"/>
 </label>
@@ -1154,32 +1149,28 @@ body.menu-hidden #hamburger {
 <label>End Time:
     <input id="endTimeInput" type="time" value="17:30"/>
 </label>
-
 <label>Custom Message:
     <input id="customMessageToggle" type="checkbox"/>
 </label>
 <label>
-<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/><br><button onclick="generateRandomMessage()" style="margin-top:6px; font-size:0.9rem;">🎲 Generate Message</button>
+<input id="customMessageInput" type="text" value="PLEASE DO NOT DISTURB"/><br/><button onclick="generateRandomMessage()" style="margin-top:6px; font-size:0.9rem;">🎲 Generate Message</button>
 </label>
 <label>Show Custom Events:
-    <input type="checkbox" id="customEventToggle" checked>
-  </label>
-
+    <input checked="" id="customEventToggle" type="checkbox"/>
+</label>
 <label>Custom Events:</label>
 <div id="eventInputRow" style="display:flex; flex-wrap:wrap; gap: 0.5rem; margin-bottom:0.5rem;">
-  <input id="eventNameInput" type="text" placeholder="Event Name" style="flex:1.2; min-width:120px;" />
-  <input id="eventTimeInput" type="time" style="flex:1.5; min-width:80px;" />
-  <button type="button" id="addEventButton">Add</button>
-</div>
-<div id="daySelector" style="display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; align-items:center; width:100%; max-width:100%; overflow-x:auto;" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="0" /><span style="display:inline-block; width:1.25em;">S</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="1" /><span style="display:inline-block; width:1.25em;">M</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="2" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="3" /><span style="display:inline-block; width:1.25em;">W</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="4" /><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="5" /><span style="display:inline-block; width:1.25em;">F</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input type="checkbox" class="event-day" value="6" /><span style="display:inline-block; width:1.25em;">S</span></label></div>
-
+<input id="eventNameInput" placeholder="Event Name" style="flex:1.2; min-width:120px;" type="text">
+<input id="eventTimeInput" style="flex:1.5; min-width:80px;" type="time"/>
+<button id="addEventButton" type="button">Add</button>
+</input></div>
+<div id="daySelector" style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:0.25rem; margin-bottom:0.5rem;"><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="0"/><span style="display:inline-block; width:1.25em;">S</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="1"/><span style="display:inline-block; width:1.25em;">M</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="2"/><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="3"/><span style="display:inline-block; width:1.25em;">W</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="4"/><span style="display:inline-block; width:1.25em;">T</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="5"/><span style="display:inline-block; width:1.25em;">F</span></label><label style="font-size:0.85rem; display:flex; flex-direction:column; align-items:center; min-width:1.8em;"><input class="event-day" type="checkbox" value="6"/><span style="display:inline-block; width:1.25em;">S</span></label></div>
 <div style="margin-bottom: 0.5rem;">
-  <button onclick="exportEvents()">📤 Export Events</button>
-  <input type="file" id="importFile" style="display:none" accept=".json" onchange="importEvents(event)">
-  <button onclick="document.getElementById('importFile').click()">📥 Import Events</button>
+<button onclick="exportEvents()">📤 Export Events</button>
+<input accept=".json" id="importFile" onchange="importEvents(event)" style="display:none" type="file"/>
+<button onclick="document.getElementById('importFile').click()">📥 Import Events</button>
 </div>
 <ul id="eventList" style="list-style:none; padding-left:0; color:#ccc; font-size:0.85rem;"></ul>
-    
 </details>
 <details>
 <summary>Settings</summary>
@@ -1216,20 +1207,18 @@ body.menu-hidden #hamburger {
 <option value="slide">Slide</option>
 </select>
 </label>
-
 <label>
-  <input type="checkbox" id="boldToggle"> Bold
+<input id="boldToggle" type="checkbox"/> Bold
 </label>
 <label>
-  <input type="checkbox" id="italicToggle"> Italic
+<input id="italicToggle" type="checkbox"/> Italic
 </label>
-
 <label>Clock Size:
-        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"/> </label>
+        <input id="clockFontSizePicker" max="20" min="1" step="0.5" type="range" value="8"> </input></label>
 <label>Countdown Size:
-        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="range" value="5"/> </label>
+        <input id="countdownFontSizePicker" max="20" min="1" step="0.5" type="range" value="5"> </input></label>
 <label>Message Size:
-        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="range" value="3"/> </label>
+        <input id="messageFontSizePicker" max="20" min="1" step="0.5" type="range" value="3"> </input></label>
 <label>Lunch Size:
         <input id="lunchFontSizePicker" max="20" min="1" step="0.5" type="range" value="2"/> </label>
 <div class="control-group">
@@ -1254,11 +1243,9 @@ body.menu-hidden #hamburger {
 <label>Vertical Padding Between Sections:<input id="mobileSpacingSlider" max="10" min="0" step="0.1" type="range" value="1.5"/></label></details>
 <details>
 <summary>Effects</summary>
-
 <label>Berserker Mode:
-  <input type="checkbox" id="berserkerToggle">
+  <input id="berserkerToggle" type="checkbox"/>
 </label>
-
 <label>Anti-Burn:
     <select id="antiBurnMode">
 <option value="off">Standard</option>
@@ -1275,8 +1262,8 @@ body.menu-hidden #hamburger {
 </select>
 </label>
 <label>Anti-Burn Intensity:
-  <input id="antiBurnIntensity" max="20" min="1" step="1" type="range" value="10"/>
-</label>
+  <input id="antiBurnIntensity" max="20" min="1" step="1" type="range" value="10">
+</input></label>
 <div style="display:none;"><label>Bounce Speed:
     <select id="bounceSpeedPicker">
 <option value="1">Slowest</option>
@@ -1366,7 +1353,8 @@ body.menu-hidden #hamburger {
 </div>
 <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullScreen()">Fullscreen</button>
 <div id="displayWrapper"><div class="container" id="displayContainer">
-<div id="stackedContent" style="display: flex; flex-direction: column; align-items: center;"><div class="day-list" id="dayList"></div><div class="stacked-clock" id="stackedClock">
+<div id="stackedContent" style="display: flex; flex-direction: column; align-items: center;"><div id="monthDayDisplay" style="font-size: 2rem; margin-bottom: 0.5rem;"></div>
+<div class="day-list" id="dayList"></div><div class="stacked-clock" id="stackedClock">
 <div class="stacked-part" id="stackedHours">--</div>
 <div class="stacked-part" id="stackedMinutes">--</div>
 <div class="stacked-part" id="stackedSeconds">--</div>
@@ -1563,7 +1551,15 @@ function bounceLoop() {
     // Pixel shift + dim (still frame-based)
     let offset = 0;
     let idleTime = 0;
-    setInterval(() => {
+    
+  const monthDayEl = document.getElementById("monthDayDisplay");
+  if (monthDayEl) {
+    const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+    const nowDate = new Date();
+    const formattedMonthDay = `${monthNames[nowDate.getMonth()]} ${String(nowDate.getDate()).padStart(2, '0')}`;
+    monthDayEl.textContent = formattedMonthDay;
+  }
+setInterval(() => {
       
 const screenEffectPicker = document.getElementById('screenEffectPicker');
 screenEffectPicker.addEventListener('change', function () {
@@ -1839,7 +1835,7 @@ function applyPortraitStyles() {
 }
 
 function setupPortraitStyleListeners() {
-  const ids = ['portraitClockSize', 'portraitMessageSize', 'portraitTopPadding', 'portraitBottomPadding'];
+  const ids = ['portraitClockSize', 'portraitMessageSize', 'portraitTopPadding', 'portraitBottomPadding', 'mobileClockMessageSpacing'];
   ids.forEach(id => {
     const el = document.getElementById(id);
     if (el) {
@@ -2475,33 +2471,37 @@ function exportEvents() {
 }
 
 
+
 function importEvents(event) {
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
   reader.onload = function(e) {
+    let parsed = null;
     try {
-      const data = JSON.parse(e.target.result);
-      if (Array.isArray(data) && data.every(ev => ev.name && ev.time)) {
-        customEvents = data.map(ev => ({
-          name: ev.name,
-          time: ev.time,
-          days: Array.isArray(ev.days) ? ev.days : []
-        }));
-        renderEventList();
-        saveCustomEvents();
-        console.log("Imported events successfully:", customEvents);
-      } else {
-        console.warn("Invalid structure", data);
-        alert("Invalid format: expected an array of event objects.");
-      }
+      parsed = JSON.parse(e.target.result);
     } catch (err) {
-      console.error("Import failed", err);
+      console.error("Import failed to parse JSON", err);
       alert("Failed to import events.");
+      return;
+    }
+    if (Array.isArray(parsed) && parsed.every(ev => ev.name && ev.time)) {
+      customEvents = parsed.map(ev => ({
+        name: ev.name,
+        time: ev.time,
+        days: Array.isArray(ev.days) ? ev.days : []
+      }));
+      renderEventList();
+      saveCustomEvents();
+      console.log("Imported events successfully:", customEvents);
+    } else {
+      console.warn("Invalid structure", parsed);
+      alert("Invalid format: expected an array of event objects.");
     }
   };
   reader.readAsText(file);
 }
+
 
 
 
@@ -2522,6 +2522,35 @@ function generateRandomMessage() {
 }
 
 </script>
-</body>
+<script>
+function applyMonthDayStyle() {
+  const scale = document.getElementById('monthDaySizeSlider')?.value;
+  const display = document.getElementById('monthDayDisplay');
+  if (display) display.style.fontSize = scale + 'rem';
+}
 
+function calculateStardate(date) {
+  const start = new Date('2323-01-01T00:00:00Z');
+  const diff = date.getTime() - start.getTime();
+  const days = diff / (1000 * 60 * 60 * 24);
+  return (1000 + days * 0.036525).toFixed(2);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  applyMonthDayStyle();
+  const slider = document.getElementById("monthDaySizeSlider");
+  if (slider) slider.addEventListener("input", applyMonthDayStyle);
+});
+
+const originalUpdateTime = updateTime;
+updateTime = function() {
+  const monthDayEl = document.getElementById("monthDayDisplay");
+  const useMonthStardate = document.getElementById("monthDayStardateToggle")?.checked;
+  if (monthDayEl && useMonthStardate) {
+    monthDayEl.textContent = 'Stardate ' + calculateStardate(new Date());
+  } else {
+    originalUpdateTime();
+  }
+}
+</script></body>
 </html>
