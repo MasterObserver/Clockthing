@@ -1646,7 +1646,7 @@ setInterval(updateTime, 1000);
       hideTimeout = setTimeout(() => {
         controls.style.display = 'none';
         fullscreenBtn.style.display = 'none';
-      }, 30000); // <-- This number controls how soon the menu disappears (6000ms = 6 seconds)
+      }, 20000); // <-- This number controls how soon the menu disappears (6000ms = 6 seconds)
     }
 
     document.addEventListener('mousemove', showMenus);
@@ -2506,14 +2506,73 @@ function importEvents(event) {
 
 
 const quotes = [
-  "Do. Or do not. There is no try.",
-  "I find your lack of faith disturbing.",
-  "Time is an illusion. Lunchtime doubly so.",
-  "One does not simply walk into Mordor.",
-  "Why do we fall? So we can learn to pick ourselves back up.",
-  "Your future is created by what you do today, not tomorrow.",
-  "Life's too short to remove USB safely."
+  "Do. Or do not. There is no try. – Yoda",
+  "Life's too short to remove USB safely.",
+  "I aim to misbehave. – Malcolm Reynolds",
+  "This is the way. – The Mandalorian",
+  "Trust is cheaper than surveillance.",
+  "The greatest teacher, failure is. – Yoda",
+  "Meetings: because this could’ve been an email.",
+  "The cake is a lie. – Portal",
+  "I don't need a manager. I need more RAM.",
+  "Work smarter. Or automate it.",
+  "I can do it fast, cheap, or right. Pick two.",
+  "Khajiit has wares if you have coin. – Skyrim",
+  "You have no power here. – Gandalf",
+  "I know kung fu. – Neo, The Matrix",
+  "Some men just want to watch the world burn. – Alfred Pennyworth",
+  "Freedom is the right of all sentient beings. – Optimus Prime",
+  "I’ve got a bad feeling about this. – Star Wars",
+  "Never half-ass two things. Whole-ass one thing. – Ron Swanson",
+  "The world is changed by your example, not by your opinion. – Paulo Coelho",
+  "It’s not a bug. It’s a feature. – Developer proverb",
+  "Sometimes the only winning move is not to play. – WarGames",
+  "In the middle of difficulty lies opportunity. – Albert Einstein",
+  "I reject your reality and substitute my own. – Adam Savage, MythBusters",
+  "Resistance is futile. – The Borg",
+  "It’s dangerous to go alone! Take this. – The Legend of Zelda",
+  "All your base are belong to us. – Zero Wing",
+  "You either die a hero, or live long enough to see yourself become the villain. – Harvey Dent",
+  "I'm sorry, Dave. I'm afraid I can't do that. – HAL 9000",
+  "I can do this all day. – Captain America",
+  "Not all treasure is silver and gold. – Jack Sparrow",
+  "I have no special talents. I am only passionately curious. – Albert Einstein",
+  "There is no spoon. – The Matrix",
+  "I've made a huge mistake. – Gob Bluth",
+  "Never tell me the odds. – Han Solo",
+  "Your scientists were so preoccupied with whether they could, they didn’t stop to think if they should. – Ian Malcolm",
+  "I'm not locked in here with you. You're locked in here with me. – Rorschach",
+  "The reward for good work is more work. – Office Truth",
+  "Always be yourself. Unless you can be Batman. Then be Batman. – Internet Wisdom",
+  "Burn the land, boil the sea. You can’t take the sky from me. – Firefly",
+  "404: Motivation not found.",
+  "A person is smart. People are dumb, panicky, dangerous animals. – K",
+  "A wizard is never late, nor is he early. He arrives precisely when he means to. – Gandalf",
+  "Never underestimate the power of stupid people in large groups. – George Carlin",
+  "Sometimes I pretend to be normal. But it gets boring. So I go back to being me. – Anonymous",
+  "To boldly go where no one has gone before. – Star Trek",
+  "Your lack of planning is not my emergency. – Office Wisdom",
+  "We value your input. Translation: We already made the decision.",
+  "We’ve always done it this way. – Last words of any company",
+  "If I wanted to do busywork, I’d go back to school. – Anonymous",
+  "I'm not lazy. I'm just on energy-saving mode.",
+  "Leadership is just blaming someone else with more confidence. – Anonymous",
+  "You don't pay me enough to care this hard. – Under-paid Employee",
+  "If you think I’m quiet, it’s because I’m silently judging your workflow. – Anonymous",
+  "We’ll circle back to that. – Translation: Never happening",
+  "Let's touch base offline. – Code for 'I don’t want witnesses.'",
+  "I'm not difficult. I just don't tolerate nonsense.",
+  "If everything is a priority, nothing is. – Time Management 101",
+  "I can’t change the laws of physics! – Scotty",
+  "Fool me once, shame on you. Fool me twice, shame on me. – Scotty",
+  "The more they overthink the plumbing, the easier it is to stop up the drain. – Scotty",
+  "You’ve got to use the right tool for the right job. – Scotty",
+  "How long will it really take? – Captain Kirk / That depends, do you want it done right or fast? – Scotty",
+  "I always exaggerate my estimates. How else am I supposed to maintain my reputation as a miracle worker? – Scotty",
+  "Even the right tool can be the wrong tool if you use it the wrong way. – Scotty",
+  "Aye, and if my grandmother had wheels, she’d be a wagon. – Scotty"
 ];
+
 
 function generateRandomMessage() {
   const random = quotes[Math.floor(Math.random() * quotes.length)];
